@@ -8,8 +8,10 @@ class SPODPUBLIC_CTRL_Main extends OW_ActionController
         OW::getDocument()->getMasterPage()->setTemplate(OW::getPluginManager()->getPlugin('spodpublic')->getRootDir() . 'master_pages/general.html');
 
         OW::getDocument()->addScript(OW::getPluginManager()->getPlugin('spodpublic')->getStaticJsUrl() . 'masonry.pkgd.min.js', 'text/javascript');
+        OW::getDocument()->addScript(OW::getPluginManager()->getPlugin('spodpublic')->getStaticJsUrl() . 'public_room.js', 'text/javascript');
 
         $this->assign('components_url', SPODPR_COMPONENTS_URL);
+        $this->assign('rooms', SPODPUBLIC_BOL_Service::getInstance()->getAgora());
     }
 
 }

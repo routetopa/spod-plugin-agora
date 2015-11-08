@@ -61,6 +61,23 @@
 
     });
 
+    function addRoom(event)
+    {
+        previewFloatBox.close();
+        var room = createRoom(event);
+        $('.grid').prepend(room).masonry('reloadItems').masonry('layout');
+    }
+
+    function createRoom(event)
+    {
+        var room = document.createElement('div');
+        room.setAttribute('id', event.id);
+        room.setAttribute('class', 'grid-item grid-item-w20 grid-item-h200 grid-item-c4');
+        room.innerHTML = event.body;
+        return room;
+    }
+
+
 </script>
 {/literal}
 
@@ -93,7 +110,13 @@
             <template is="dom-bind">
                 <neon-animated-pages id="pages" selected="0" style="height: 100vh; width: 100vw;">
 
-                    <animated-grid-controllet on-tile-click="_onTileClick"></animated-grid-controllet>
+                    <animated-grid-controllet on-tile-click="_onTileClick">
+                        {foreach $rooms as $room}
+                            <div id="{$room->id}" class="grid-item grid-item-w20 grid-item-h200 grid-item-c4">
+                                {$room->body}
+                            </div>
+                        {/foreach}
+                    </animated-grid-controllet>
 
                     <fullsize-page-with-card id="fullsize-card" hero-id="hero" on-click="_onFullsizeClick">
                     </fullsize-page-with-card>
@@ -104,7 +127,7 @@
         </paper-scroll-header-panel>
 
         {literal}
-            <paper-fab icon="add" onclick=""></paper-fab>
+            <paper-fab icon="add" onclick="SPODPUBLICROOM.addRoom()"></paper-fab>
         {/literal}
 
     </div>

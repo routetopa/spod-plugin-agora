@@ -26,6 +26,26 @@ class SPODPUBLIC_BOL_Service
         return self::$classInstance;
     }
 
+    public function getAgora()
+    {
+        return SPODPUBLIC_BOL_PublicRoomDao::getInstance()->findAll();
+    }
+
+    public function addPrivateRoom($ownerId, $subject, $body)
+    {
+        $pr = new SPODPUBLIC_BOL_PublicRoom();
+        $pr->ownerId   = $ownerId;
+        $pr->subject   = $subject;
+        $pr->body      = $body;
+        $pr->views     = 0;
+        $pr->status    = 'approved';
+        $pr->privacy   = 'everybody';
+
+        SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($pr);
+
+        return $pr->id;
+    }
+
 
 
 }

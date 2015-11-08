@@ -1,0 +1,37 @@
+{style}
+{literal}
+/*body .floatbox_header
+{
+display: none;
+}
+
+body .floatbox_bottom
+{
+display: none;
+}
+
+body .floatbox_body
+{
+padding: 0px 0px 0px 0px;
+}*/
+{/literal}
+{/style}
+
+<div class="ow_superwide ow_automargin">
+    {form name='PublicRoomCreatorForm'}
+
+    <table class="ow_table_1 ow_form">
+        <tr class="ow_alt2 ow_tr_first">
+            <td class="ow_label">Subject</td>
+            <td class="ow_value">{input name='subject'}</td>
+            <td class="ow_desc ow_small"></td>
+        </tr>
+        <tr class="ow_alt1">
+            <td class="ow_label">Body</td>
+            <td class="ow_value">{input name='body'}</td>
+            <td class="ow_desc ow_small"></td>
+        </tr>
+    </table>
+    <div class="clearfix ow_stdmargin"><div class="ow_right">{submit name='submit' class='ow_ic_new'}</div></div>
+    {/form}
+</div>
