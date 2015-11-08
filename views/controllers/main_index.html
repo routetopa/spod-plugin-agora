@@ -26,12 +26,22 @@
 
 {literal}
 <style is="custom-style">
+
     paper-toolbar.toolbar-main
     {
         --paper-toolbar-background:#2196F3;
         -moz-box-shadow: 0 0 20px 5px #999;
         -webkit-box-shadow: 0 0 20px 5px #999;
     }
+
+    paper-fab
+    {
+        position: absolute;
+        bottom: 25px;
+        right: 50px;
+        --paper-fab-background:#2196F3;
+    }
+
 </style>
 
 <script type="text/javascript">
@@ -92,6 +102,10 @@
             </template>
 
         </paper-scroll-header-panel>
+
+        {literal}
+            <paper-fab icon="add" onclick=""></paper-fab>
+        {/literal}
 
     </div>
 
