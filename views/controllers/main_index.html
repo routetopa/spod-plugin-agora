@@ -51,12 +51,15 @@
        var scope = document.querySelector('template[is="dom-bind"]');
 
         scope._onTileClick = function(event) {
+            $("#add_room_button").hide();
             this.$['fullsize-card'].color      = event.detail.data.color;
             this.$['fullsize-card'].publicRoom = event.detail.data.id;
             this.$.pages.selected = 1;
         };
 
         scope._onFullsizeClick = function(event) {
+            $("#add_room_button").show();
+            this.$['fullsize-card'].publicRoom = undefined;
             this.$.pages.selected = 0;
         };
 
@@ -120,7 +123,7 @@
         <paper-scroll-header-panel class="flex" fixed>
 
             <template is="dom-bind">
-                <neon-animated-pages id="pages" selected="0" style="height: 100vh; width: 100vw;">
+                <neon-animated-pages id="pages" selected="0" style="height: 100%; width: 100%;">
 
                     <animated-grid-controllet on-tile-click="_onTileClick">
                         {foreach $rooms as $room}
@@ -140,7 +143,7 @@
         </paper-scroll-header-panel>
 
         {literal}
-            <paper-fab icon="add" onclick="SPODPUBLICROOM.addRoom()"></paper-fab>
+            <paper-fab id="add_room_button" icon="add" onclick="SPODPUBLICROOM.addRoom()"></paper-fab>
         {/literal}
 
     </div>
