@@ -39,9 +39,19 @@ class SPODPUBLIC_CTRL_Test extends OW_ActionController
         $this->addComponent('rate', $topicRates);*/
 
         $normalized_nodes_ids = null;
+        $original_nodes_ids   = null;
         for($i=0;$i < count(SPODPUBLIC_CTRL_Test::$nodes); $i++) {
             $normalized_nodes_ids[SPODPUBLIC_CTRL_Test::$nodes[$i][0]] = $i;
+            $original_nodes_ids[$i] = SPODPUBLIC_CTRL_Test::$nodes[$i][0];
         }
+
+        $js = UTIL_JsGenerator::composeJsString('
+                SPODPUBLIC.original_nodes_ids = {$components_url};
+            ', array(
+            'components_url' => $original_nodes_ids
+        ));
+
+        OW::getDocument()->addOnloadScript($js);
 
         $json_graph = '{"nodes": [{"id": ' . $normalized_nodes_ids[SPODPUBLIC_CTRL_Test::$nodes[0][0]] .',"name": "' . SPODPUBLIC_CTRL_Test::$nodes[0][1] .'","fixed": true,"x": 200,"y": 200,"color": "#519c76", "r" : 30},';
 
