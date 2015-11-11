@@ -18,6 +18,8 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
             OW::getDocument()->addScript(OW::getPluginManager()->getPlugin('spodpublic')->getStaticJsUrl() . 'perfect-scrollbar.jquery.js');
 
             $public_room_id = $params['prId'];
+            $public_room = SPODPUBLIC_BOL_Service::getInstance()->getPublicRoomById($public_room_id);
+            $this->assign('public_room', $public_room);
 
             //comment and rate
             $commentsParams = new BASE_CommentsParams('spodpublic', SPODPR_BOL_Service::ENTITY_TYPE);
@@ -32,7 +34,7 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
             $commentsParams->level = 0;
             $commentsParams->nodeId = 0;
 
-            array_push(SPODPUBLIC_CTRL_PublicRoom::$nodes, array(10101, 'Sbiricuda Forum', 0));
+            array_push(SPODPUBLIC_CTRL_PublicRoom::$nodes, array($public_room_id, $public_room->subject, 0));
 
             $commentCmp = new SPODPUBLIC_CMP_Comments($commentsParams);
             $this->addComponent('comments', $commentCmp);

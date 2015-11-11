@@ -31,6 +31,13 @@ class SPODPUBLIC_BOL_Service
         return SPODPUBLIC_BOL_PublicRoomDao::getInstance()->findAll();
     }
 
+    public function getPublicRoomById($id)
+    {
+        $example = new OW_Example();
+        $example->andFieldEqual('id', $id);
+        return SPODPUBLIC_BOL_PublicRoomDao::getInstance()->findObjectByExample($example);
+    }
+
     public function addPrivateRoom($ownerId, $subject, $body)
     {
         $pr = new SPODPUBLIC_BOL_PublicRoom();

@@ -5,9 +5,6 @@
 <link rel="import" href="{$components_url}bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="{$components_url}bower_components/iron-flex-layout/iron-flex-layout.html">
 
-<!--<div id="topic_title">
-   <h1 class="ow_stdmargin ow_ic_script">Sbiricudaaaa topic | Forum </h1>
-</div>-->
 <style is="custom-style">
 
     paper-toolbar.toolbar-main
@@ -83,7 +80,7 @@
 
 <paper-header-panel>
     <paper-toolbar class="toolbar-main">
-        <div class="title"><h2>{$public_room.title}</h2></div>
+        <div class="title"><h2>{$public_room->subject}</h2></div>
         <paper-icon-button paper-drawer-toggle icon="language" onClick="slideGraphPanel()"></paper-icon-button>
     </paper-toolbar>
 </paper-header-panel>
@@ -92,6 +89,7 @@
 
         <paper-material id="topic_container" class="layout vertical justified">
             <div>
+                {$public_room->body}
             </div>
             {if !empty($comments)}
             <div class="q-comments" style="padding-left: 60px;">
