@@ -26,29 +26,6 @@ class SPODPUBLIC_BOL_Service
         return self::$classInstance;
     }
 
-    //ACOMMENT - abuse comment
-    public function getAbuseCommentList()
-    {
-        return SPODPUBLIC_BOL_AcommentDao::getInstance()->findAll();
-    }
-
-    public function addAbuseComment( $cid )
-    {
-        $acomment            = new SPODPUBLIC_BOL_Acomment;
-        $acomment->commentId = $cid;
-
-        return SPODPUBLIC_BOL_AcommentDao::getInstance()->save($acomment);
-
-    }
-
-    public function deleteAbuseComment( $cid )
-    {
-        $example = new OW_Example();
-        $example->andFieldEqual('commentId', $cid);
-
-        return SPODPUBLIC_BOL_AcommentDao::getInstance()->deleteByExample($example);
-    }
-
 
 
 }

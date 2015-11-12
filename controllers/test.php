@@ -11,7 +11,7 @@ class SPODPUBLIC_CTRL_Test extends OW_ActionController
 
         //comment and rate
         $commentsParams = new BASE_CommentsParams('spodpublic', SPODPR_BOL_Service::ENTITY_TYPE);
-        $commentsParams->setEntityId(10101);
+        $commentsParams->setEntityId(111111);
         $commentsParams->setDisplayType(BASE_CommentsParams::DISPLAY_TYPE_WITH_LOAD_LIST);
         $commentsParams->setCommentCountOnPage(5);
         $commentsParams->setOwnerId((OW::getUser()->getId()));
@@ -22,7 +22,7 @@ class SPODPUBLIC_CTRL_Test extends OW_ActionController
         $commentsParams->level = 0;
         $commentsParams->nodeId = 0;
 
-        array_push(SPODPUBLIC_CTRL_Test::$nodes, array(10101, 'Sbiricuda Forum', 0));
+        array_push(SPODPUBLIC_CTRL_Test::$nodes, array(111111, 'Sbiricuda Forum', 0));
 
         $commentCmp = new SPODPUBLIC_CMP_Comments($commentsParams);
         $this->addComponent('comments', $commentCmp);
