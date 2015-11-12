@@ -17,11 +17,8 @@
             <div class="ow_comments_item_info">
                 <span class="{if !empty($comment.cnxAction)}ow_comments_date_hover {/if}ow_comments_date ow_nowrap ow_tiny ow_remark">{$comment.date}</span>
                 <div class="ow_comments_item_header"><a href="{$comment.profileUrl}">{$comment.displayName}</a></div>
-                {if $comment.abuse}
-                <div class="ow_comments_content ow_smallmargin" style="border-style: groove; border-width: 5px;border-color: red;">
-                {else}
+
                 <div class="ow_comments_content ow_smallmargin">
-                {/if}
                     <a name="{$comment.commentId}"></a>
                     {if !empty($comment.previewMaxChar)}
                     {$comment.content|more:$comment.previewMaxChar}
