@@ -23,6 +23,11 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
             $public_room = SPODPUBLIC_BOL_Service::getInstance()->getPublicRoomById($public_room_id);
             $this->assign('public_room', $public_room);
 
+            /* ODE */
+            if(OW::getPluginManager()->isPluginActive('spodpr'))
+                $this->addComponent('private_room', new SPODPR_CMP_PrivateRoomCard('ow_attachment_btn'));
+            /* ODE */
+
             //comment and rate
             $commentsParams = new BASE_CommentsParams('spodpublic', SPODPR_BOL_Service::ENTITY_TYPE);
             $commentsParams->setEntityId($public_room_id);

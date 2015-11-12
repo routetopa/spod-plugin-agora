@@ -53,11 +53,12 @@
     .q-comments{
         padding-left: 30px;
         width: 90%;
-
     }
-
-
 </style>
+
+{style}
+    #button_container { display: none; }
+{/style}
 {literal}
 <script>
 
@@ -124,3 +125,11 @@
             <graph-datalet data='{$graphData}'></graph-datalet>
         </paper-material>
 </div>
+
+<!-- ODE PRIVATE-ROOM -->
+<div>
+    {if isset($private_room)}
+    {$private_room}
+    {/if}
+</div>
+<!-- ODE PRIVATE-ROOM -->
