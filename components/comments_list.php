@@ -179,8 +179,10 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                 $commentsParams->setShowEmptyList(false);
                 $commentsParams->level = $this->params->level + 1;
 
+
+
                 array_push(SPODPUBLIC_CTRL_Test::$nodes, array($value->getId(), $value->getMessage(), $this->params->level));
-                array_push(SPODPUBLIC_CTRL_Test::$links, array($this->params->getEntityId(), $value->getId()));
+                array_push(SPODPUBLIC_CTRL_Test::$links, array($this->params->getEntityId(), $value->getId(), $this->params->level));
 
                 $this->addComponent('nestedComments' . $value->getId(), new SPODPUBLIC_CMP_Comments($commentsParams));
 
