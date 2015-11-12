@@ -213,8 +213,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                 'date'        => UTIL_DateTime::formatDate($value->getCreateStamp()),
                 'userId'      => $value->getUserId(),
                 'commentId'   => $value->getId(),
-                'avatar'      => $userAvatarArrayList[$value->getUserId()],
-                'abuse'       => ($this->checkCommentIdIfAbuse($value->getId())) ? true : false
+                'avatar'      => $userAvatarArrayList[$value->getUserId()]
             );
 
             $contentAdd = '';
@@ -235,17 +234,6 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
 
         return $arrayToAssign;
     }
-
-    private function checkCommentIdIfAbuse($cid){
-    	$acomments = SPODPUBLIC_BOL_Service::getInstance()->getAbuseCommentList();
-		foreach($acomments as $ac){
-			if($ac->commentId == $cid){
-				return  true;
-			}
-		}
-    	return false;
-    }
-	
 }
 
 ?>
