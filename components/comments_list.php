@@ -167,7 +167,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
         foreach ( $commentList as $value )
         {
             /*Add nasted level*/
-            if($this->params-level <= 1) {
+            if($this->params->level <= 1) {
                 //nasted comment
                 $commentsParams = new BASE_CommentsParams('spodpublic', SPODPR_BOL_Service::ENTITY_TYPE);
                 $commentsParams->setEntityId($value->getId());
