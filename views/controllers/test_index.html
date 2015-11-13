@@ -44,6 +44,24 @@
 </style>
 {literal}
 <script>
+
+    var last_selected_element = null;
+    window.addEventListener('graph-datalet_node-clicked', function(e){
+        //alert(e.detail.node.id);
+        if(last_selected_element != null){
+            last_selected_element.css('background', 'red');
+        }
+
+        var curr_element = $("[name='178']");
+
+        $(last_selected_element).css('background', 'red');
+
+        var value = curr_element.offset().top;
+        $("#topic_container").scrollTop(value);
+
+        last_selected_element = curr_element;
+    });
+
     $(document).ready(function () {
         //$('#topic_container').perfectScrollbar();
     });
