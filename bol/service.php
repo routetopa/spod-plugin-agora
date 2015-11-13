@@ -45,6 +45,8 @@ class SPODPUBLIC_BOL_Service
         $pr->subject   = $subject;
         $pr->body      = $body;
         $pr->views     = 0;
+        $pr->comments  = 0;
+        $pr->opendata  = 0;
         $pr->status    = 'approved';
         $pr->privacy   = 'everybody';
 
@@ -53,6 +55,10 @@ class SPODPUBLIC_BOL_Service
         return $pr->id;
     }
 
-
-
+    public function addStat($id, $stat)
+    {
+        $pr = $this->getPublicRoomById($id);
+        $pr->$stat += 1;
+        SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($pr);
+    }
 }

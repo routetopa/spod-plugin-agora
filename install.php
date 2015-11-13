@@ -9,6 +9,8 @@ CREATE TABLE `' . OW_DB_PREFIX . 'spod_public_room` (
   `subject` text,
   `body` text,
   `views` int(11) DEFAULT 0,
+  `comments` int(11) DEFAULT 0,
+  `opendata` int(11) DEFAULT 0,
   `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` enum("approval","approved","blocked") NOT NULL DEFAULT "approved",
   `privacy` varchar(50) NOT NULL DEFAULT "everybody",
