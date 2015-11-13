@@ -54,6 +54,7 @@
             $("#add_room_button").hide();
             this.$['fullsize-card'].color      = event.detail.data.color;
             this.$['fullsize-card'].publicRoom = event.detail.data.id;
+            ODE.publicRoom = event.detail.data.id;
             this.$.pages.selected = 1;
         };
 
