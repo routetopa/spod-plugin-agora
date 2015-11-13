@@ -180,8 +180,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                 $commentsParams->level = $this->params->level + 1;
 
 
-
-                array_push(SPODPUBLIC_CTRL_Test::$nodes, array($value->getId(), $value->getMessage(), $this->params->level));
+                array_push(SPODPUBLIC_CTRL_Test::$nodes, array($value->getId(), BOL_UserService::getInstance()->getDisplayName($value->getUserId()), $this->params->level));
                 array_push(SPODPUBLIC_CTRL_Test::$links, array($this->params->getEntityId(), $value->getId(), $this->params->level));
 
                 $this->addComponent('nestedComments' . $value->getId(), new SPODPUBLIC_CMP_Comments($commentsParams));
@@ -189,12 +188,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                 OW::getDocument()->addOnloadScript(
                     "$(document).ready(function(){
                         $('#spod_public_room_nested_comment_show_" . $value->getId() . "').click(function(){
-                              if($('#nc_" . $value->getId() . "').css('display') == 'none')
-                              {
-                                 $('#nc_" . $value->getId() . "').css('display', 'block');
-                              }else{
-                                 $('#nc_" . $value->getId() . "').css('display', 'none');
-                              }
+                              $('#nc_" . $value->getId() . "').toggle('fade', {direction: 'top'}, 500);
                            });
                     });"
                 );
