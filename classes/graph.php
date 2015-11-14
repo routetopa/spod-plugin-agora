@@ -93,7 +93,7 @@ class SPODPUBLIC_CLASS_Graph
             }
 
             array_push($this->graph->nodes, $node);
-            $this->normalizedNodeIds[SPODPUBLIC_BOL_Service::getInstance()->getEntityId($nodes[$i]->id)["id"]] = $node->id;
+            @$this->normalizedNodeIds[SPODPUBLIC_BOL_Service::getInstance()->getEntityId($nodes[$i]->id)["id"]] = $node->id;
 
             $link = new Link($this->normalizedNodeIds[intval($nodes[$i]->commentEntityId)], intval($node->id));
 
