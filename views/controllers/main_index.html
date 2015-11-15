@@ -45,7 +45,6 @@
 </style>
 
 <script type="text/javascript">
-
     $(document).ready(function () {
 
        var scope = document.querySelector('template[is="dom-bind"]');
@@ -92,8 +91,6 @@
 
         return room;
     }
-
-
 </script>
 {/literal}
 
@@ -130,21 +127,22 @@
                         {foreach $rooms as $room}
                             <div id="{$room->id}" class="grid-item
 
-                                    {if $room->opendata >= $openDataMedian}
+                                    {if $room->opendata > $openDataMedian}
                                         grid-item-w40
                                     {else}
                                         grid-item-w20
                                     {/if}
 
-                                    {if $room->comments >= commentsMedian}
+                                    {if $room->comments > $commentsMedian}
                                         grid-item-h400
                                     {else}
                                         grid-item-h200
                                     {/if}
+                                    " style="background-color:#{$room->color}">
 
-                                     grid-item-c4">
-                                <div class="room-body">{$room->body}</div>
-                                <div class="room-subject">{$room->subject}</div>
+                                <div class="room-body"><span>{$room->body}</span></div>
+                                <div class="room-subject"><span>{$room->subject}</span></div>
+                                <div class="room-timestamp">{$room->timestamp}</div>
                             </div>
                         {/foreach}
                     </animated-grid-controllet>

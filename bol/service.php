@@ -28,7 +28,10 @@ class SPODPUBLIC_BOL_Service
 
     public function getAgora()
     {
-        return SPODPUBLIC_BOL_PublicRoomDao::getInstance()->findAll();
+        //return SPODPUBLIC_BOL_PublicRoomDao::getInstance()->findAll();
+        $example = new OW_Example();
+        $example->setOrder('timestamp DESC');
+        return SPODPUBLIC_BOL_PublicRoomDao::getInstance()->findListByExample($example);
     }
 
     public function getPublicRoomById($id)
