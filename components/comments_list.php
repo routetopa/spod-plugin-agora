@@ -226,7 +226,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
 
         }
 
-        return $arrayToAssign;
+        return (isset($arrayToAssign)) ? $arrayToAssign : array();
     }
 }
 

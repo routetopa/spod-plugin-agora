@@ -28,7 +28,7 @@
     }
 
     #graph_container{
-        width: 50%;
+        width: 48%;
         display: none;
     }
 
@@ -49,17 +49,20 @@
     window.addEventListener('graph-datalet_node-clicked', function(e){
         //alert(e.detail.node.id);
         if(last_selected_element != null){
-            last_selected_element.css('background', 'transparent');
+            last_selected_element.css('box-shadow', 'none');
+            last_selected_element.css('font-weight', 'normal');
         }
 
         var id = SPODPUBLICROOM.original_nodes_ids[e.detail.node.id];
 
         var curr_element = $("#comment_" + id);
+        $(curr_element).css('box-shadow', ' 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)');
+        $(curr_element).css('font-weight', 'bold');
 
-        $(curr_element).css('background', 'red');
+        $('div[id^="nc_"]').css('display', 'none');
+        $(curr_element).parents('div[id^="nc_"]').css('display', 'block');
 
-        var value = $(curr_element).offset().top;
-        $("#topic_container").scrollTop(value);
+        $("#topic_container").scrollTop($(curr_element).offset().top);
 
         last_selected_element = curr_element;
     });
