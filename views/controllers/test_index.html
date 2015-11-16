@@ -53,6 +53,8 @@
             last_selected_element.css('font-weight', 'normal');
         }
 
+        if(e.detail.node.id == 0) return;
+
         var id = SPODPUBLICROOM.original_nodes_ids[e.detail.node.id];
 
         var curr_element = $("#comment_" + id);

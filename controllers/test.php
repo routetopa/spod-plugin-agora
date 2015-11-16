@@ -53,9 +53,11 @@ class SPODPUBLIC_CTRL_Test extends OW_ActionController
         $json_graph = '{"nodes": [{"id": ' . $normalized_nodes_ids[SPODPUBLIC_CTRL_Test::$nodes[0][0]] .',"name": "' . SPODPUBLIC_CTRL_Test::$nodes[0][1] .'","fixed": true,"x": 200,"y": 200,"color": "#519c76", "r" : 30},';
 
         for($i=1; $i < count(SPODPUBLIC_CTRL_Test::$nodes); $i++){
-            $json_graph .= '{"id": ' . $normalized_nodes_ids[SPODPUBLIC_CTRL_Test::$nodes[$i][0]] .',"name": "' . SPODPUBLIC_CTRL_Test::$nodes[$i][1].'"';
+            $json_graph .= '{"id": ' . $normalized_nodes_ids[SPODPUBLIC_CTRL_Test::$nodes[$i][0]] .',"name": "' . str_replace("'",'',SPODPUBLIC_CTRL_Test::$nodes[$i][1]).'"';
 
-            switch(SPODPUBLIC_CTRL_Test::$nodes[$i][2]){
+            $json_graph .= ',"content": "'. str_replace("'",'',SPODPUBLIC_CTRL_Test::$nodes[$i][2]) .'"';
+
+            switch(SPODPUBLIC_CTRL_Test::$nodes[$i][3]){
                 case 0:
                     $json_graph .= ',"color": "#ff1e1e", "r" : 20';
                     break;
