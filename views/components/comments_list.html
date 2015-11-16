@@ -9,7 +9,7 @@
         <div class="ow_nocontent">{text key="base+comment_no_comments"}</div>
         {else}
         {foreach from=$comments item='comment'}
-        <div class="ow_comments_item clearfix" name="comment_{$comment.commentId}">
+        <div class="ow_comments_item clearfix" id="comment_{$comment.commentId}">
             <div class="cnx_action" style="display: none">{$comment.cnxAction}</div>
             <div class="ow_comments_item_picture">
                 {decorator name='avatar_item' data=$comment.avatar}
