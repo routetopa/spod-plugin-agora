@@ -9,7 +9,7 @@
         <div class="ow_nocontent">{text key="base+comment_no_comments"}</div>
         {else}
         {foreach from=$comments item='comment'}
-        <div class="ow_comments_item clearfix">
+        <div class="ow_comments_item clearfix" name="comment_{$comment.commentId}">
             <div class="cnx_action" style="display: none">{$comment.cnxAction}</div>
             <div class="ow_comments_item_picture">
                 {decorator name='avatar_item' data=$comment.avatar}
@@ -19,7 +19,7 @@
                 <div class="ow_comments_item_header"><a href="{$comment.profileUrl}">{$comment.displayName}</a></div>
 
                 <div class="ow_comments_content ow_smallmargin">
-                    <a name="{$comment.commentId}"></a>
+                    <!--<a name="{$comment.commentId}"></a>-->
                     {if !empty($comment.previewMaxChar)}
                     {$comment.content|more:$comment.previewMaxChar}
                     {else}

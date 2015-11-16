@@ -49,12 +49,14 @@
     window.addEventListener('graph-datalet_node-clicked', function(e){
         //alert(e.detail.node.id);
         if(last_selected_element != null){
-            last_selected_element.css('background', 'red');
+            last_selected_element.css('background', 'transparent');
         }
 
-        var curr_element = $("[name='178']");
+        var id = SPODPUBLIC.original_nodes_ids[e.detail.node.id];
 
-        $(last_selected_element).css('background', 'red');
+        var curr_element = $("[name='comment_178']");
+
+        $(curr_element).css('background', 'red');
 
         var value = curr_element.offset().top;
         $("#topic_container").scrollTop(value);
