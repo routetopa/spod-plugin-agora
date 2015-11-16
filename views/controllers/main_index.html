@@ -51,15 +51,11 @@
        var scope = document.querySelector('template[is="dom-bind"]');
 
         scope._onTileClick = function(event) {
-            $("#add_room_button").hide();
-            this.$['fullsize-card'].color      = event.detail.data.color;
-            this.$['fullsize-card'].publicRoom = event.detail.data.id;
+            this.$['fullsize-card'].color = event.detail.data.color;
             this.$.pages.selected = 1;
         };
 
         scope._onFullsizeClick = function(event) {
-            $("#add_room_button").show();
-            this.$['fullsize-card'].publicRoom = undefined;
             this.$.pages.selected = 0;
         };
 
@@ -77,18 +73,7 @@
         var room = document.createElement('div');
         room.setAttribute('id', event.id);
         room.setAttribute('class', 'grid-item grid-item-w20 grid-item-h200 grid-item-c4');
-
-        var roomBody = document.createElement('div');
-        roomBody.setAttribute('class', 'room-body');
-        roomBody.innerHTML = event.body;
-
-        var  roomSubject = document.createElement('div');
-        roomSubject.setAttribute('class', 'room-subject');
-        roomSubject.innerHTML = event.subject;
-
-        room.appendChild(roomBody);
-        room.appendChild(roomSubject);
-
+        room.innerHTML = event.body;
         return room;
     }
 
@@ -123,19 +108,18 @@
         <paper-scroll-header-panel class="flex" fixed>
 
             <template is="dom-bind">
-                <neon-animated-pages id="pages" selected="0" style="height: 100%; width: 100%;">
+                <neon-animated-pages id="pages" selected="0" style="height: 100vh; width: 100vw;">
 
                     <animated-grid-controllet on-tile-click="_onTileClick">
                         {foreach $rooms as $room}
                             <div id="{$room->id}" class="grid-item grid-item-w20 grid-item-h200 grid-item-c4">
-                                <div class="room-body">{$room->body}</div>
-                                <div class="room-subject">{$room->subject}</div>
+                                {$room->body}
                             </div>
                         {/foreach}
                     </animated-grid-controllet>
 
-                    <fullsize-page-with-card-controllet id="fullsize-card" hero-id="hero" on-click="_onFullsizeClick">
-                    </fullsize-page-with-card-controllet>
+                    <fullsize-page-with-card id="fullsize-card" hero-id="hero" on-click="_onFullsizeClick">
+                    </fullsize-page-with-card>
 
                 </neon-animated-pages>
             </template>
@@ -143,7 +127,7 @@
         </paper-scroll-header-panel>
 
         {literal}
-            <paper-fab id="add_room_button" icon="add" onclick="SPODPUBLICROOM.addRoom()"></paper-fab>
+            <paper-fab icon="add" onclick="SPODPUBLICROOM.addRoom()"></paper-fab>
         {/literal}
 
     </div>

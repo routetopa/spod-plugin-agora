@@ -28,9 +28,7 @@ class SPODPUBLIC_BOL_Service
 
     public function getAgora()
     {
-        $example = new OW_Example();
-        $example->setOrder('timestamp DESC');
-        return SPODPUBLIC_BOL_PublicRoomDao::getInstance()->findListByExample($example);
+        return SPODPUBLIC_BOL_PublicRoomDao::getInstance()->findAll();
     }
 
     public function addPrivateRoom($ownerId, $subject, $body)
