@@ -12,6 +12,8 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
 
         if ( isset($params['prId']) )
         {
+            OW::getDocument()->addStyleSheet(OW::getPluginManager()->getPlugin('spodpublic')->getStaticCssUrl() . 'perfect-scrollbar.min.css');
+
             OW::getDocument()->addScript(OW::getPluginManager()->getPlugin('spodpublic')->getStaticJsUrl() . 'commentsList.js');
             OW::getDocument()->addScript(OW::getPluginManager()->getPlugin('spodpublic')->getStaticJsUrl() . 'public_room.js');
             OW::getDocument()->addScript(OW::getPluginManager()->getPlugin('spodpublic')->getStaticJsUrl() . 'jquery-ui.min.js');

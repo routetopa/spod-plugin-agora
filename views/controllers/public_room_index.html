@@ -17,15 +17,16 @@
         --paper-fab-background:#2196F3;
     }
     paper-header-panel{
-        height: 10vh;;
+        height: 12vh;;
     }
 
-    .title h2{
+    .title h3{
         color: #ffffff;
     }
 
     #graph_container{
         width: 48%;
+        height: 90vh;
         display: none;
     }
 
@@ -35,6 +36,24 @@
         overflow-y: auto;
         height: 90vh;
         width: 100%;
+        margin-left: 30px;
+    }
+
+    #pr_body{
+        font-family: 'Roboto', sans-serif;
+        display: inline-block;
+        color: #6c6c6c;
+        font-weight: bolder;
+        font-size: 20px;
+        margin: 30px;
+        padding: 50px;
+        font-style: italic;
+    }
+
+    .q-comments{
+        padding-left: 30px;
+        width: 90%;
+
     }
 
 
@@ -44,9 +63,8 @@
 
     var last_selected_element = null;
     window.addEventListener('graph-datalet_node-clicked', function(e){
-        //alert(e.detail.node.id);
         if(last_selected_element != null){
-            last_selected_element.css('box-shadow', 'none');
+            last_selected_element.css('border', 'none');
             last_selected_element.css('font-weight', 'normal');
         }
 
@@ -55,7 +73,7 @@
         var id = SPODPUBLICROOM.original_nodes_ids[e.detail.node.id];
 
         var curr_element = $("#comment_" + id);
-        $(curr_element).css('box-shadow', ' 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)');
+        $(curr_element).css('border', '1px solid #000000');
         $(curr_element).css('font-weight', 'bold');
 
         $('div[id^="nc_"]').css('display', 'none');
@@ -67,7 +85,7 @@
     });
 
     $(document).ready(function () {
-        //$('#topic_container').perfectScrollbar();
+        $('#topic_container').perfectScrollbar();
     });
 
     slideGraphPanel = function(){
@@ -80,27 +98,29 @@
 
 <paper-header-panel>
     <paper-toolbar class="toolbar-main">
-        <div class="title"><h2>{$public_room->subject}</h2></div>
+        <div class="title"><h3>{$public_room->subject}</h3></div>
         <paper-icon-button paper-drawer-toggle icon="language" onClick="slideGraphPanel()"></paper-icon-button>
     </paper-toolbar>
 </paper-header-panel>
 
-<div class="layout horizontal">
-
+<div class="layout horizontal" style="padding-top: 50px; padding-right: 20px;">
         <paper-material id="topic_container" class="layout vertical justified">
-            <div>
+            <paper-material elevation="2" id="pr_body">
                 {$public_room->body}
-            </div>
+            </paper-material>
             {if !empty($comments)}
-            <div class="q-comments" style="padding-left: 60px;">
+            <div class="q-comments">
                 {$comments}
             </div>
             {/if}
         </paper-material>
 
-        <paper-material elevation="3" animated id="graph_container">
+        <paper-material elevation="1" animated id="graph_container">
+            <paper-toolbar class="toolbar-main">
+                <paper-icon-button paper-drawer-toggle icon="assessment" onClick=""></paper-icon-button>
+                <paper-icon-button paper-drawer-toggle icon="speaker-notes" onClick=""></paper-icon-button>
+            </paper-toolbar>
             <link rel="import" href="{$components_url}datalets/graph-datalet/graph-datalet.html">
             <graph-datalet data='{$graphData}'></graph-datalet>
         </paper-material>
-
 </div>
