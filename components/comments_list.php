@@ -153,9 +153,19 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
     }
 
     protected function getEntityLevel($id){
-        $comment = BOL_CommentService::getInstance()->findComment($id);
+        /*$comment = BOL_CommentService::getInstance()->findComment($id);
         $level = 1;
         while($comment = BOL_CommentService::getInstance()->findComment($comment->getCommentEntityId())) $level++;
+        return $level;*/
+
+        $comment = BOL_CommentService::getInstance()->findComment($id);
+        $level = 0;
+        while($comment)
+        {
+            $entity = BOL_CommentEntityDao::getInstance()->findById($comment->getCommentEntityId());
+            $comment = BOL_CommentService::getInstance()->findComment($entity->entityId);
+            $level++;
+        }
         return $level;
 
     }

@@ -130,7 +130,9 @@
                     data = JSON.parse(data);
                     if(data.status == "ok"){
                         $("#graph_content").html('<graph-datalet data=\'' + data.graph + '\'></graph-datalet>');
-
+                        $("#toolbar-graph-title").html('Datalet graph');
+                        $("#datalet_graph").css('border-bottom-style','solid');
+                        $("#comment_graph").css('border-bottom-style','none');
                     }
                 }
         );
@@ -147,7 +149,9 @@
                     data = JSON.parse(data);
                     if(data.status == "ok"){
                         $("#graph_content").html("<graph-datalet data='" + data.graph + "'></graph-datalet>");
-
+                        $("#toolbar-graph-title").html('Comments graph');
+                        $("#comment_graph").css('border-bottom-style','solid');
+                        $("#datalet_graph").css('border-bottom-style','none');
                     }
                 }
         );
@@ -157,6 +161,8 @@
     $(document).ready(function () {
         $('#topic_container').perfectScrollbar();
         $('#graph_content').perfectScrollbar();
+
+        commentGraphShow();
 
     });
 </script>
@@ -186,6 +192,7 @@
             <paper-toolbar class="toolbar-graph">
                 <paper-icon-button id="datalet_graph" paper-drawer-toggle icon="assessment" onClick="dataletGraphShow()"></paper-icon-button>
                 <paper-icon-button id="comment_graph" paper-drawer-toggle icon="speaker-notes" onClick="commentGraphShow()"></paper-icon-button>
+                <h5 id="toolbar-graph-title" style="color: #ffffff;margin-left: 30px;">Comments graph</h5>
             </paper-toolbar>
             <div id="graph_content">
             </div>
