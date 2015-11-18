@@ -152,6 +152,14 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
         $e->setDataProp('cnxAction', empty($cAction) ? '' : $cAction->render());
     }
 
+    protected function getEntityLevel($id){
+        $comment = BOL_CommentService::getInstance()->findComment($id);
+        $level = 1;
+        while($comment = BOL_CommentService::getInstance()->findComment($comment->getCommentEntityId())) $level++;
+        return $level;
+
+    }
+
     protected function processList( $commentList )
     {
 
@@ -168,6 +176,8 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
         foreach ( $commentList as $value )
         {
             /*Add nasted level*/
+            if(!isset($this->params->level)) $this->params->level = $this->getEntityLevel($value->getId());
+
             if($this->params->level <= 2) {
                 //nasted comment
                 $commentsParams = new BASE_CommentsParams('spodpublic', SPODPR_BOL_Service::ENTITY_TYPE);
@@ -181,7 +191,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                 $commentsParams->level = $this->params->level + 1;
 
 
-                array_push(SPODPUBLIC_CTRL_PublicRoom::$commentNodes, array($value->getId(),
+               /* array_push(SPODPUBLIC_CTRL_PublicRoom::$commentNodes, array($value->getId(),
                                                                             BOL_UserService::getInstance()->getDisplayName($value->getUserId()),
                                                                             $value->getMessage(),
                                                                             $this->params->level));
@@ -200,7 +210,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                         array_push(SPODPUBLIC_CTRL_PublicRoom::$dataletLinks, array($this->params->getEntityId(),$value->getId(),
                             $this->params->level));
                     }
-                }
+                }*/
 
                 $this->addComponent('nestedComments' . $value->getId(), new SPODPUBLIC_CMP_Comments($commentsParams));
 

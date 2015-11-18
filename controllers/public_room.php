@@ -123,7 +123,7 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
             $this->assign('commentGraphData', json_encode($json_graph));*/
 
             //Create comment graph
-            array_unshift(SPODPUBLIC_CTRL_PublicRoom::$commentNodes, array($this->public_room->id, $this->public_room->subject, 0));
+            /*array_unshift(SPODPUBLIC_CTRL_PublicRoom::$commentNodes, array($this->public_room->id, $this->public_room->subject, 0));
             $commentGraphData = $this->createGraph(SPODPUBLIC_CTRL_PublicRoom::$commentNodes, SPODPUBLIC_CTRL_PublicRoom::$commentLinks);
 
             $this->assign('commentGraphData', $commentGraphData[1]);
@@ -150,6 +150,17 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
                 'public_room_id'             => $this->public_room->id
             ));
 
+            OW::getDocument()->addOnloadScript($js);*/
+
+            $this->assign('dataletGraphData', $dataletGraphData[1]);
+
+            $js = UTIL_JsGenerator::composeJsString('
+                    SPODPUBLICROOM.get_graph_url              = {$get_graph_url};
+                    SPODPUBLICROOM.public_room_id             = {$public_room_id};
+                ', array(
+                'get_graph_url'              => OW::getRouter()->urlFor('SPODPUBLIC_CTRL_Ajax', 'getGraph'),
+                'public_room_id'             => $this->public_room->id
+            ));
             OW::getDocument()->addOnloadScript($js);
 
             //add deep component url

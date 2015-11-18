@@ -43,6 +43,8 @@ class SPODPUBLIC_CTRL_Ajax extends OW_ActionController
 
             array_push($this->graph->nodes, $node);
 
+            $this->normalizedNodeIds[intval($pr->id)] = 0;
+
             $this->analyzeCommentsTree(BOL_CommentService::getInstance()->findFullCommentList(SPODPR_BOL_Service::ENTITY_TYPE, $id), 0, $_REQUEST['type']);
 
             echo json_encode(array("status"        => "ok",
@@ -81,7 +83,7 @@ class SPODPUBLIC_CTRL_Ajax extends OW_ActionController
 
             }else {
                 if (OW::getPluginManager()->isPluginActive('spodpr')) {
-                    $datalet = ODE_BOL_Service::getInstance()->getDataletByPostId($nodes[$i]->id, "comment");
+                    $datalet = ODE_BOL_Service::getInstance()->getDataletByPostId($nodes[$i]->id, "public-room");
                     if (count($datalet) > 0) {
                         $node = new Node(count($this->graph->nodes) + 1,
                                                $datalet["component"],
@@ -107,25 +109,24 @@ class SPODPUBLIC_CTRL_Ajax extends OW_ActionController
             }
 
             array_push($this->graph->nodes, $node);
+            $this->normalizedNodeIds[$nodes[$i]->id] = $node->id;
 
-            $id = $this->findNodeIdByOriginalId($nodes[$i]->commentEntityId);
-            if($id == null){
-                $link = new Link(intval($id), intval($node->id));
+            $link = new Link($this->normalizedNodeIds[intval($nodes[$i]->commentEntityId)], intval($node->id));
 
-                switch ($level) {
-                    case 0:
-                        $link->value = 50;
-                        break;
-                    case 1:
-                        $link->value = 20;
-                        break;
-                    case 2:
-                        $link->value = 5;
-                        break;
-                }
-
-                array_push($this->graph->links, $link);
+            switch ($level) {
+                case 0:
+                    $link->value = 50;
+                    break;
+                case 1:
+                    $link->value = 20;
+                    break;
+                case 2:
+                    $link->value = 5;
+                    break;
             }
+
+            array_push($this->graph->links, $link);
+
 
             $this->analyzeCommentsTree(BOL_CommentService::getInstance()->findFullCommentList(SPODPR_BOL_Service::ENTITY_TYPE, $nodes[$i]->id), $level + 1, $type);
         }
