@@ -61,4 +61,14 @@ class SPODPUBLIC_BOL_Service
         $pr->$stat += 1;
         SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($pr);
     }
+
+    public function getEntityId($id){
+
+        $dbo = OW::getDbo();
+
+        $query = "SELECT * FROM ow_base_comment_entity WHERE entityId = " . $id . ";";
+
+        return $dbo->queryForRow($query);
+
+    }
 }

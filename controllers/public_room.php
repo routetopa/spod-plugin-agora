@@ -36,7 +36,7 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
             SPODPUBLIC_BOL_Service::getInstance()->addStat($this->public_room->id, 'views');
 
             //comment and rate
-            $commentsParams = new BASE_CommentsParams('spodpublic', SPODPR_BOL_Service::ENTITY_TYPE);
+            $commentsParams = new BASE_CommentsParams('spodpublic', SPODPUBLIC_BOL_Service::ENTITY_TYPE);
             $commentsParams->setEntityId($public_room_id);
             $commentsParams->setDisplayType(BASE_CommentsParams::DISPLAY_TYPE_WITH_LOAD_LIST);
             $commentsParams->setCommentCountOnPage(5);
@@ -152,7 +152,7 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
 
             OW::getDocument()->addOnloadScript($js);*/
 
-            $this->assign('dataletGraphData', $dataletGraphData[1]);
+            //$this->assign('dataletGraphData', $dataletGraphData[1]);
 
             $js = UTIL_JsGenerator::composeJsString('
                     SPODPUBLICROOM.get_graph_url              = {$get_graph_url};

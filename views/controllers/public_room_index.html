@@ -114,25 +114,17 @@
         last_selected_element = curr_element;
     });
 
-    $(document).ready(function () {
-        $('#topic_container').perfectScrollbar();
-        $('#graph_content').perfectScrollbar();
-
-        /*commentGraphShow();*/
-
-    });
-
     slideGraphPanel = function(){
         $('#graph_container').toggle('slide', {direction: 'right'}, 300, function(){
             $('#topic_container').css('width' , ($('#graph_container').css('display') == 'none') ? '100%' : '50%');
         });
-    }
+    };
 
     dataletGraphShow = function(){
         $.post( SPODPUBLICROOM.get_graph_url,
                 {
-                   id : SPODPUBLICROOM.public_room_id,
-                   type : "datalet"
+                    id : SPODPUBLICROOM.public_room_id,
+                    type : "datalet"
                 },
                 function(data, status){
                     data = JSON.parse(data);
@@ -142,15 +134,14 @@
                     }
                 }
         );
-
-    }
+    };
 
     commentGraphShow = function(){
 
         $.post( SPODPUBLICROOM.get_graph_url,
                 {
-                   id : SPODPUBLICROOM.public_room_id,
-                   type : "comment"
+                    id : SPODPUBLICROOM.public_room_id,
+                    type : "comment"
                 },
                 function(data, status){
                     data = JSON.parse(data);
@@ -162,6 +153,12 @@
         );
 
     }
+
+    $(document).ready(function () {
+        $('#topic_container').perfectScrollbar();
+        $('#graph_content').perfectScrollbar();
+
+    });
 </script>
 {/literal}
 
@@ -187,11 +184,10 @@
 
         <paper-material elevation="1" animated id="graph_container">
             <paper-toolbar class="toolbar-graph">
-                <paper-icon-button paper-drawer-toggle icon="assessment" onClick="dataletGraphShow()"></paper-icon-button>
-                <paper-icon-button paper-drawer-toggle icon="speaker-notes" onClick="commentGraphShow()"></paper-icon-button>
+                <paper-icon-button id="datalet_graph" paper-drawer-toggle icon="assessment" onClick="dataletGraphShow()"></paper-icon-button>
+                <paper-icon-button id="comment_graph" paper-drawer-toggle icon="speaker-notes" onClick="commentGraphShow()"></paper-icon-button>
             </paper-toolbar>
             <div id="graph_content">
-                <!--<graph-datalet data='{$commentGraphData}'></graph-datalet>-->
             </div>
         </paper-material>
 </div>

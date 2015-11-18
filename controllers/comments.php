@@ -19,7 +19,7 @@ class SPODPUBLIC_CTRL_Comments extends OW_ActionController
         $this->commentService = BOL_CommentService::getInstance();
     }
 
-    public function addComment()
+    /*public function addComment()
     {
         $errorMessage = false;
         $isMobile = !empty($_POST['isMobile']) && (bool) $_POST['isMobile'];
@@ -100,7 +100,7 @@ class SPODPUBLIC_CTRL_Comments extends OW_ActionController
                 )
             )
         );
-    }
+    }*/
 
     public function getCommentList()
     {
