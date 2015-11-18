@@ -32,7 +32,7 @@ class SPODPUBLIC_CMP_Comments extends BASE_CMP_Comments
             $jsParams['loadMoreCount'] = $this->params->getLoadMoreCount();
             $jsParams['countOnPage'] = $this->params->getCommentCountOnPage();
             $jsParams['uid'] = $this->id;
-            $jsParams['addUrl'] = OW::getRouter()->urlFor('BASE_CTRL_Comments', 'addComment');
+            $jsParams['addUrl'] = OW::getRouter()->urlFor('SPODPUBLIC_CTRL_Comments', 'addComment');
             $jsParams['displayType'] = $this->params->getDisplayType();
             $jsParams['textAreaId'] = $taId;
             $jsParams['attchId'] = $attchId;

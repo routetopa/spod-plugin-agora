@@ -64,6 +64,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
             $staticDataArray = array(
                 'respondUrl'      => OW::getRouter()->urlFor('SPODPUBLIC_CTRL_Comments', 'getCommentList'),//when page button is being pressed
                 'delUrl'          => OW::getRouter()->urlFor('SPODPUBLIC_CTRL_Comments', 'deleteComment'),
+                'addUrl'          => OW::getRouter()->urlFor('SPODPUBLIC_CTRL_Comments', 'addComment'),
                 'delAtchUrl'      => OW::getRouter()->urlFor('SPODPUBLIC_CTRL_Comments', 'deleteCommentAtatchment'),
                 'delConfirmMsg'   => OW::getLanguage()->text('base', 'comment_delete_confirm_message'),
                 'preloaderImgUrl' => OW::getThemeManager()->getCurrentTheme()->getStaticImagesUrl() . 'ajax_preloader_button.gif'
@@ -180,13 +181,26 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                 $commentsParams->level = $this->params->level + 1;
 
 
-                array_push(SPODPUBLIC_CTRL_PublicRoom::$nodes, array($value->getId(),
-                                                               BOL_UserService::getInstance()->getDisplayName($value->getUserId()),
-                                                               $value->getMessage(),
-                                                               $this->params->level));
+                array_push(SPODPUBLIC_CTRL_PublicRoom::$commentNodes, array($value->getId(),
+                                                                            BOL_UserService::getInstance()->getDisplayName($value->getUserId()),
+                                                                            $value->getMessage(),
+                                                                            $this->params->level));
 
-                array_push(SPODPUBLIC_CTRL_PublicRoom::$links, array($this->params->getEntityId(),
-                                                               $value->getId(), $this->params->level));
+                array_push(SPODPUBLIC_CTRL_PublicRoom::$commentLinks, array($this->params->getEntityId(),$value->getId(),
+                                                                            $this->params->level));
+
+                if(OW::getPluginManager()->isPluginActive('spodpr')){
+                    $datalet = ODE_BOL_Service::getInstance()->getDataletByPostId($value->getId(),"comment");
+                    if(count($datalet) > 0){
+                        array_push(SPODPUBLIC_CTRL_PublicRoom::$dataletNodes, array($value->getId(),
+                                                                                    $datalet["component"],
+                                                                                    $value->getMessage(),
+                                                                                    $this->params->level));
+
+                        array_push(SPODPUBLIC_CTRL_PublicRoom::$dataletLinks, array($this->params->getEntityId(),$value->getId(),
+                            $this->params->level));
+                    }
+                }
 
                 $this->addComponent('nestedComments' . $value->getId(), new SPODPUBLIC_CMP_Comments($commentsParams));
 

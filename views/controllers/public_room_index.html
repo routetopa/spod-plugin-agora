@@ -5,6 +5,8 @@
 <link rel="import" href="{$components_url}bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="{$components_url}bower_components/iron-flex-layout/iron-flex-layout.html">
 
+<link rel="import" href="{$components_url}datalets/graph-datalet/graph-datalet.html">
+
 <style is="custom-style">
 
     paper-toolbar.toolbar-main
@@ -12,6 +14,14 @@
         --paper-toolbar-background:#2196F3;
         -moz-box-shadow: 0 0 20px 5px #999;
         -webkit-box-shadow: 0 0 20px 5px #999;
+        z-index : 100;
+    }
+    paper-toolbar.title-header{
+        --paper-toolbar-background:#2196F3;
+        -moz-box-shadow: 0 0 20px 5px #999;
+        -webkit-box-shadow: 0 0 20px 5px #999;
+        margin-bottom: 10px;
+        height: 50px;
     }
     paper-fab{
         --paper-fab-background:#2196F3;
@@ -24,17 +34,34 @@
         color: #ffffff;
     }
 
+    paper-toolbar.toolbar-graph
+    {
+        --paper-toolbar-background:#2196F3;
+        -moz-box-shadow: 0 0 20px 5px #999;
+        -webkit-box-shadow: 0 0 20px 5px #999;
+        height: 50px;
+        z-index: 100;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
     #graph_container{
+        margin-top: 25px;
         width: 48%;
-        height: 90vh;
         display: none;
+
+    }
+
+    #graph_content{
+        position: relative;
+        overflow: auto;
+        height: 80vh;
     }
 
     #topic_container{
         position: relative;
-        overflow-x: hidden;
-        overflow-y: auto;
-        height: 90vh;
+        overflow: auto;
+        height: 93vh;
         width: 100%;
         margin-left: 30px;
     }
@@ -46,8 +73,11 @@
         font-weight: bolder;
         font-size: 20px;
         margin: 30px;
-        padding: 50px;
+        padding-bottom: 50px;
+        padding-right: 10px;
+        padding-left: 10px;
         font-style: italic;
+        margin-top: 25px;
     }
 
     .q-comments{
@@ -59,6 +89,7 @@
 {style}
     #button_container { display: none; }
 {/style}
+
 {literal}
 <script>
 
@@ -71,9 +102,7 @@
 
         if(e.detail.node.id == 0) return;
 
-        var id = SPODPUBLICROOM.original_nodes_ids[e.detail.node.id];
-
-        var curr_element = $("#comment_" + id);
+        var curr_element = $("#comment_" + e.detail.node.originalId);
         $(curr_element).css('border', '1px solid #000000');
         $(curr_element).css('font-weight', 'bold');
 
@@ -87,12 +116,51 @@
 
     $(document).ready(function () {
         $('#topic_container').perfectScrollbar();
+        $('#graph_content').perfectScrollbar();
+
+        /*commentGraphShow();*/
+
     });
 
     slideGraphPanel = function(){
         $('#graph_container').toggle('slide', {direction: 'right'}, 300, function(){
             $('#topic_container').css('width' , ($('#graph_container').css('display') == 'none') ? '100%' : '50%');
         });
+    }
+
+    dataletGraphShow = function(){
+        $.post( SPODPUBLICROOM.get_graph_url,
+                {
+                   id : SPODPUBLICROOM.public_room_id,
+                   type : "datalet"
+                },
+                function(data, status){
+                    data = JSON.parse(data);
+                    if(data.status == "ok"){
+                        $("#graph_content").html('<graph-datalet data=\'' + data.graph + '\'></graph-datalet>');
+
+                    }
+                }
+        );
+
+    }
+
+    commentGraphShow = function(){
+
+        $.post( SPODPUBLICROOM.get_graph_url,
+                {
+                   id : SPODPUBLICROOM.public_room_id,
+                   type : "comment"
+                },
+                function(data, status){
+                    data = JSON.parse(data);
+                    if(data.status == "ok"){
+                        $("#graph_content").html("<graph-datalet data='" + data.graph + "'></graph-datalet>");
+
+                    }
+                }
+        );
+
     }
 </script>
 {/literal}
@@ -104,9 +172,10 @@
     </paper-toolbar>
 </paper-header-panel>
 
-<div class="layout horizontal" style="padding-top: 50px; padding-right: 20px;">
+<div class="layout horizontal">
         <paper-material id="topic_container" class="layout vertical justified">
-            <paper-material elevation="2" id="pr_body">
+            <paper-material elevation="0" id="pr_body">
+                <paper-toolbar class="title-header"><h5 style="color:#ffffff;">About this topic</h5></paper-toolbar>
                 {$public_room->body}
             </paper-material>
             {if !empty($comments)}
@@ -117,12 +186,13 @@
         </paper-material>
 
         <paper-material elevation="1" animated id="graph_container">
-            <paper-toolbar class="toolbar-main">
-                <paper-icon-button paper-drawer-toggle icon="assessment" onClick=""></paper-icon-button>
-                <paper-icon-button paper-drawer-toggle icon="speaker-notes" onClick=""></paper-icon-button>
+            <paper-toolbar class="toolbar-graph">
+                <paper-icon-button paper-drawer-toggle icon="assessment" onClick="dataletGraphShow()"></paper-icon-button>
+                <paper-icon-button paper-drawer-toggle icon="speaker-notes" onClick="commentGraphShow()"></paper-icon-button>
             </paper-toolbar>
-            <link rel="import" href="{$components_url}datalets/graph-datalet/graph-datalet.html">
-            <graph-datalet data='{$graphData}'></graph-datalet>
+            <div id="graph_content">
+                <!--<graph-datalet data='{$commentGraphData}'></graph-datalet>-->
+            </div>
         </paper-material>
 </div>
 
