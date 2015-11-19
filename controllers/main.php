@@ -27,6 +27,8 @@ class SPODPUBLIC_CTRL_Main extends OW_ActionController
 
         $this->assign('components_url', SPODPR_COMPONENTS_URL);
         $this->assign('rooms', $this->setColor($timeSortedAgora, $max));
+
+        $this->assign('userPublicRooms', SPODPUBLIC_BOL_Service::getInstance()->getPublicRoomsByOwner(OW::getUser()->getId()));
     }
 
     private function setColor($a, $max)

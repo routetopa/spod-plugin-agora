@@ -23,6 +23,8 @@
 <link rel="import" href="{$components_url}bower_components/paper-styles/paper-styles.html">
 <link rel="import" href="{$components_url}bower_components/neon-animation/neon-animations.html">
 
+<link rel="import" href="{$components_url}bower_components/polymer-element-catalog/app/elements/app-sidebar/app-sidebar.html">
+
 
 {literal}
 <style is="custom-style">
@@ -102,10 +104,18 @@
             <div class="title">Options</div>
         </paper-toolbar>
 
-        <paper-menu selected="0">
-            <!--<paper-item>Item 1</paper-item>
-                <paper-item>Item 2</paper-item>-->
-        </paper-menu>
+        <app-sidebar drawer>
+            <paper-menu selected="0">
+                {foreach $userPublicRooms as $userRoom}
+                    <paper-item>
+                        <!--<iron-icon icon="warning"></iron-icon>-->
+                        <paper-item-body two-lines>
+                            <div>{$userRoom->subject}</div>
+                        </paper-item-body>
+                    </paper-item>
+                {/foreach}
+            </paper-menu>
+        </app-sidebar>
 
     </div>
 

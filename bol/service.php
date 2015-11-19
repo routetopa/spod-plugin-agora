@@ -41,6 +41,14 @@ class SPODPUBLIC_BOL_Service
         return SPODPUBLIC_BOL_PublicRoomDao::getInstance()->findObjectByExample($example);
     }
 
+    public function getPublicRoomsByOwner($ownerId)
+    {
+        $example = new OW_Example();
+        $example->andFieldEqual('ownerId', $ownerId);
+        $example->setOrder('timestamp DESC');
+        return SPODPUBLIC_BOL_PublicRoomDao::getInstance()->findListByExample($example);
+    }
+
     public function addPrivateRoom($ownerId, $subject, $body)
     {
         $pr = new SPODPUBLIC_BOL_PublicRoom();
