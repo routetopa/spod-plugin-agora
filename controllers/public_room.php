@@ -24,6 +24,9 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
             OW::getDocument()->addScript(OW::getPluginManager()->getPlugin('spodpublic')->getStaticJsUrl() . 'jquery-ui.min.js');
             OW::getDocument()->addScript(OW::getPluginManager()->getPlugin('spodpublic')->getStaticJsUrl() . 'perfect-scrollbar.jquery.js');
 
+            //add deep component url
+            $this->assign('components_url', SPODPR_COMPONENTS_URL);
+
             $public_room_id = $params['prId'];
             $this->public_room = SPODPUBLIC_BOL_Service::getInstance()->getPublicRoomById($public_room_id);
             $this->assign('public_room', $this->public_room);
@@ -58,10 +61,8 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
                 'get_graph_url'              => OW::getRouter()->urlFor('SPODPUBLIC_CTRL_Ajax', 'getGraph'),
                 'public_room_id'             => $this->public_room->id
             ));
-            OW::getDocument()->addOnloadScript($js);
 
-            //add deep component url
-            $this->assign('components_url', SPODPR_COMPONENTS_URL);
+            OW::getDocument()->addOnloadScript($js);
         }
     }
 

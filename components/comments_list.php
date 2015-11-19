@@ -228,6 +228,12 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                     "$(document).ready(function(){
                         $('#spod_public_room_nested_comment_show_" . $value->getId() . "').click(function(){
                               $('#nc_" . $value->getId() . "').toggle('fade', {direction: 'top'}, 500);
+                              var d = $('#nc_" . $value->getId() . "').css('display');
+                              if($('#spod_public_room_nested_comment_show_" . $value->getId() . "').css('background-position') == '-38px -38px'){
+                                 $('#spod_public_room_nested_comment_show_" . $value->getId() . "').css('background-position', '-38px 0px');
+                              }else{
+                                 $('#spod_public_room_nested_comment_show_" . $value->getId() . "').css('background-position', '-38px -38px');
+                              }
                            });
                     });"
                 );

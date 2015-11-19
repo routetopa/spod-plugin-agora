@@ -21,13 +21,13 @@
         -moz-box-shadow: 0 0 20px 5px #999;
         -webkit-box-shadow: 0 0 20px 5px #999;
         margin-bottom: 10px;
-        height: 50px;
+        height: 30px;
     }
     paper-fab{
         --paper-fab-background:#2196F3;
     }
     paper-header-panel{
-        height: 12vh;;
+        /*height: 8vh;;*/
     }
 
     .title h3{
@@ -39,10 +39,14 @@
         --paper-toolbar-background:#2196F3;
         -moz-box-shadow: 0 0 20px 5px #999;
         -webkit-box-shadow: 0 0 20px 5px #999;
-        height: 50px;
+        height: 35px;
         z-index: 100;
         margin-left: 10px;
         margin-right: 10px;
+    }
+
+    ::content paper-toolbar div#topBar {
+        height: 40px;
     }
 
     #graph_container{
@@ -155,16 +159,18 @@
                     }
                 }
         );
-
     }
 
     $(document).ready(function () {
         $('#topic_container').perfectScrollbar();
         $('#graph_content').perfectScrollbar();
-
-        commentGraphShow();
-
     });
+
+    $(window).load(function() {
+        commentGraphShow();
+        slideGraphPanel();
+    });
+
 </script>
 {/literal}
 
@@ -178,7 +184,7 @@
 <div class="layout horizontal">
         <paper-material id="topic_container" class="layout vertical justified">
             <paper-material elevation="0" id="pr_body">
-                <paper-toolbar class="title-header"><h5 style="color:#ffffff;">About this topic</h5></paper-toolbar>
+                <paper-toolbar class="title-header"><h6 style="color:#ffffff;">About this topic</h6></paper-toolbar>
                 {$public_room->body}
             </paper-material>
             {if !empty($comments)}
