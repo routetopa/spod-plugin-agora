@@ -47,6 +47,8 @@ class SPODPUBLIC_CTRL_Main extends OW_ActionController
     {
         $count = count($a);
 
+        if ($count == 0) return;
+
         if ($count%2) {
             return $a[($count+1)/2]->$value;
         } else {

@@ -1,0 +1,75 @@
+<style>
+    .delete
+    {
+        display: block;
+        height: 10px;
+        width: 10px;
+        background: url('{$themeImagesUrl}ic_delete_gray.svg') no-repeat center;
+    }
+</style>
+
+{literal}
+<script type="text/javascript">
+    function addRow(event)
+    {
+        $('input[name=dataset]').val("");
+        $('input[name=comment]').val("");
+        $("#suggestion_table tr:last").after('<tr><td>'+event.comment+'</td><td>'
+                +event.dataset+'</td></tr>');
+    }
+
+    function deleteRow(el, suggestionId)
+    {
+        el.parentElement.parentElement.remove();
+        $.ajax({
+            type: 'post',
+            url: SPODPUBLICROOM.ajax_remove_suggestion,
+            data: {publicRoomId : suggestionId},
+            dataType: 'JSON',
+            success: function(data){
+                console.log(data);
+            },
+            error: function( XMLHttpRequest, textStatus, errorThrown ){
+                OW.error(textStatus);
+            },
+            complete: function(){}
+        });
+    }
+</script>
+{/literal}
+
+<div class="ow_superwide ow_automargin">
+
+    {form name='PublicRoomSuggestionForm'}
+    <table class="ow_table_1 ow_form">
+        <tr class="ow_alt2 ow_tr_first">
+            <td class="ow_label">Dataset</td>
+            <td class="ow_value">{input name='dataset'}</td>
+            <td class="ow_desc ow_small"></td>
+        </tr>
+        <tr class="ow_alt2 ow_tr_first">
+            <td class="ow_label">Comment</td>
+            <td class="ow_value">{input name='comment'}</td>
+            <td class="ow_desc ow_small"></td>
+        </tr>
+    </table>
+    <div class="clearfix ow_stdmargin"><div class="ow_right">{submit name='submit' class='ow_ic_new'}</div></div>
+    {/form}
+
+    <table class="ow_table_1" id="suggestion_table">
+        <tr>
+            <th>Comment</th>
+            <th>Dataset</th>
+        </tr>
+        {foreach $suggestions as $suggestion}
+        <tr class="ow_alt2 ow_tr_first">
+            <td class="ow_label">{$suggestion->comment}</td>
+            <td class="ow_value">{$suggestion->dataset}</td>
+            <td class="ow_value">
+                <a class="delete" href="javascript://" data-id="" onclick="deleteRow(this, {{$suggestion->id}})"></a>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+
+</div>

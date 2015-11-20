@@ -3,13 +3,35 @@
 
 class SPODPUBLIC_CTRL_Ajax extends OW_ActionController
 {
-    private $graph;
-    private $normalizedNodeIds;
+    public function addPublicRoomSuggestion()
+    {
+        SPODPUBLIC_BOL_Service::getInstance()->addPublicRoomSuggestion(
+            OW::getUser()->getId(),
+            $_REQUEST['publicRoomId'],
+            $_REQUEST['dataset'],
+            $_REQUEST['comment']
+        );
 
+        echo json_encode(array("status" => "ok",
+            "dataset" => $_REQUEST['dataset'],
+            "comment" => $_REQUEST['comment']));
+        exit;
+    }
+
+    public function removePublicRoomSuggestion()
+    {
+        SPODPUBLIC_BOL_Service::getInstance()->removePublicRoomSuggestion(
+            OW::getUser()->getId(),
+            $_REQUEST['publicRoomId']
+        );
+
+        echo json_encode(array("status" => "ok"));
+        exit;
+    }
 
     public function addPublicRoom()
     {
-        $id = SPODPUBLIC_BOL_Service::getInstance()->addPrivateRoom(OW::getUser()->getId(),
+        $id = SPODPUBLIC_BOL_Service::getInstance()->addPublicRoom(OW::getUser()->getId(),
             $_REQUEST['subject'],
             $_REQUEST['body']);
 

@@ -15,6 +15,16 @@ CREATE TABLE `' . OW_DB_PREFIX . 'spod_public_room` (
   `status` enum("approval","approved","blocked") NOT NULL DEFAULT "approved",
   `privacy` varchar(50) NOT NULL DEFAULT "everybody",
   PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+
+DROP TABLE IF EXISTS `' . OW_DB_PREFIX . 'spod_public_room_suggestion`;
+CREATE TABLE `' . OW_DB_PREFIX . 'spod_public_room_suggestion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ownerId` int(11) NOT NULL,
+  `publicRoomId` int(11) NOT NULL,
+  `dataset` text,
+  `comment` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;';
 
 OW::getDbo()->query($sql);

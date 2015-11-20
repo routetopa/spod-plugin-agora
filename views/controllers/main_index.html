@@ -105,9 +105,9 @@
         </paper-toolbar>
 
         <app-sidebar drawer>
-            <paper-menu selected="0">
+            <paper-menu>
                 {foreach $userPublicRooms as $userRoom}
-                    <paper-item>
+                    <paper-item onclick="SPODPUBLICROOM.handleSuggestedDataset({$userRoom->id})">
                         <!--<iron-icon icon="warning"></iron-icon>-->
                         <paper-item-body two-lines>
                             <div>{$userRoom->subject}</div>
