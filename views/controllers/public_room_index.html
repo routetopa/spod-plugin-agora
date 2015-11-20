@@ -129,7 +129,7 @@
         $.post( SPODPUBLICROOM.get_graph_url,
                 {
                     id : SPODPUBLICROOM.public_room_id,
-                    type : "datalet"
+                    type : "datalets"
                 },
                 function(data, status){
                     data = JSON.parse(data);
@@ -138,6 +138,7 @@
                         $("#toolbar-graph-title").html('Datalet graph');
                         $("#datalet_graph").css('border-bottom-style','solid');
                         $("#comment_graph").css('border-bottom-style','none');
+                        $("#user_graph").css('border-bottom-style','none');
                     }
                 }
         );
@@ -148,7 +149,7 @@
         $.post( SPODPUBLICROOM.get_graph_url,
                 {
                     id : SPODPUBLICROOM.public_room_id,
-                    type : "comment"
+                    type : "comments"
                 },
                 function(data, status){
                     data = JSON.parse(data);
@@ -156,6 +157,27 @@
                         $("#graph_content").html("<graph-datalet data='" + data.graph + "'></graph-datalet>");
                         $("#toolbar-graph-title").html('Comments graph');
                         $("#comment_graph").css('border-bottom-style','solid');
+                        $("#datalet_graph").css('border-bottom-style','none');
+                        $("#user_graph").css('border-bottom-style','none');
+                    }
+                }
+        );
+    }
+
+    usersGraphShow = function(){
+
+        $.post( SPODPUBLICROOM.get_graph_url,
+                {
+                    id : SPODPUBLICROOM.public_room_id,
+                    type : "users"
+                },
+                function(data, status){
+                    data = JSON.parse(data);
+                    if(data.status == "ok"){
+                        $("#graph_content").html("<graph-datalet data='" + data.graph + "'></graph-datalet>");
+                        $("#toolbar-graph-title").html('Users graph');
+                        $("#user_graph").css('border-bottom-style','solid');
+                        $("#comment_graph").css('border-bottom-style','none');
                         $("#datalet_graph").css('border-bottom-style','none');
                     }
                 }
@@ -199,6 +221,7 @@
             <paper-toolbar class="toolbar-graph">
                 <paper-icon-button id="datalet_graph" paper-drawer-toggle icon="assessment" onClick="dataletGraphShow()"></paper-icon-button>
                 <paper-icon-button id="comment_graph" paper-drawer-toggle icon="speaker-notes" onClick="commentGraphShow()"></paper-icon-button>
+                <paper-icon-button id="user_graph" paper-drawer-toggle icon="account-circle" onClick="usersGraphShow()"></paper-icon-button>
                 <h5 id="toolbar-graph-title" style="color: #ffffff;margin-left: 30px;">Comments graph</h5>
             </paper-toolbar>
             <div id="graph_content">
