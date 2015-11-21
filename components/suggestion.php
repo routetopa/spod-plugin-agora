@@ -51,13 +51,14 @@ class SPODPUBLIC_CMP_Suggestion extends OW_Component
 
         });', array());
 
+        OW::getDocument()->addOnloadScript($js);
+
         $js = UTIL_JsGenerator::composeJsString('
             SPODPUBLICROOM.ajax_remove_suggestion = {$ajax_remove_suggestion}', array(
             'ajax_remove_suggestion' => OW::getRouter()->urlFor('SPODPUBLIC_CTRL_Ajax', 'removePublicRoomSuggestion')
         ));
 
         OW::getDocument()->addOnloadScript($js);
-        OW::getDocument()->addOnloadScript( $js );
 
     }
 }

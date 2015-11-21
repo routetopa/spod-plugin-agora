@@ -5,7 +5,7 @@ class SPODPUBLIC_CTRL_Ajax extends OW_ActionController
 {
     public function addPublicRoomSuggestion()
     {
-        SPODPUBLIC_BOL_Service::getInstance()->addPublicRoomSuggestion(
+        $id = SPODPUBLIC_BOL_Service::getInstance()->addPublicRoomSuggestion(
             OW::getUser()->getId(),
             $_REQUEST['publicRoomId'],
             $_REQUEST['dataset'],
@@ -14,7 +14,8 @@ class SPODPUBLIC_CTRL_Ajax extends OW_ActionController
 
         echo json_encode(array("status" => "ok",
             "dataset" => $_REQUEST['dataset'],
-            "comment" => $_REQUEST['comment']));
+            "comment" => $_REQUEST['comment'],
+            "id" => $id));
         exit;
     }
 

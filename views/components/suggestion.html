@@ -15,7 +15,8 @@
         $('input[name=dataset]').val("");
         $('input[name=comment]').val("");
         $("#suggestion_table tr:last").after('<tr><td>'+event.comment+'</td><td>'
-                +event.dataset+'</td></tr>');
+                +event.dataset+'</td>' +
+                '<td><a class="delete" href="javascript://" data-id="" onclick="deleteRow(this,'+event.id+')"></a></td></tr>');
     }
 
     function deleteRow(el, suggestionId)

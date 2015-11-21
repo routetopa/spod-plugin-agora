@@ -12,7 +12,6 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
 
     public function index(array $params)
     {
-
         OW::getDocument()->getMasterPage()->setTemplate(OW::getPluginManager()->getPlugin('spodpublic')->getRootDir() . 'master_pages/empty.html');
 
         if ( isset($params['prId']) )
@@ -57,13 +56,14 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
             $js = UTIL_JsGenerator::composeJsString('
                     SPODPUBLICROOM.get_graph_url              = {$get_graph_url};
                     SPODPUBLICROOM.public_room_id             = {$public_room_id};
+                    SPODPUBLICROOM.suggested_datasets         = {$suggested_datasets};
                 ', array(
                 'get_graph_url'              => OW::getRouter()->urlFor('SPODPUBLIC_CTRL_Ajax', 'getGraph'),
-                'public_room_id'             => $this->public_room->id
+                'public_room_id'             => $this->public_room->id,
+                'suggested_datasets'         => SPODPUBLIC_BOL_Service::getInstance()->getJsPublicRoomSuggestionByIdAndOwner($public_room_id,OW::getUser()->getId())
             ));
 
             OW::getDocument()->addOnloadScript($js);
         }
     }
-
 }

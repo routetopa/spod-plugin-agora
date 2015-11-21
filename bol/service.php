@@ -59,6 +59,21 @@ class SPODPUBLIC_BOL_Service
         return SPODPUBLIC_BOL_PublicRoomSuggestionDao::getInstance()->findListByExample($example);
     }
 
+    public function getJsPublicRoomSuggestionByIdAndOwner($publicRoomId, $ownerId)
+    {
+        $s = $this->getPublicRoomSuggestionByIdAndOwner($publicRoomId, $ownerId);
+        $a = array();
+
+        foreach($s as $suggestion)
+        {
+            array_push($a, array("name" => $suggestion->comment,
+                "url" => $suggestion->dataset,
+                "description" => ""));
+        }
+
+        return json_encode($a);
+    }
+
     public function getEntityId($id)
     {
         $dbo = OW::getDbo();
@@ -75,8 +90,8 @@ class SPODPUBLIC_BOL_Service
         $publicRoomSuggestion->publicRoomId = intval($publicRoomId);
         $publicRoomSuggestion->dataset      = $dataset;
         $publicRoomSuggestion->comment      = $comment;
-
         SPODPUBLIC_BOL_PublicRoomSuggestionDao::getInstance()->save($publicRoomSuggestion);
+        return $publicRoomSuggestion->id;
     }
 
     public function removePublicRoomSuggestion($ownerId, $id)
@@ -98,9 +113,7 @@ class SPODPUBLIC_BOL_Service
         $pr->opendata  = 0;
         $pr->status    = 'approved';
         $pr->privacy   = 'everybody';
-
         SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($pr);
-
         return $pr->id;
     }
 
