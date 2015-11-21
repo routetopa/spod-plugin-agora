@@ -6,10 +6,10 @@ error_reporting(-1);
 
 class SPODPUBLIC_CMP_Comments extends BASE_CMP_Comments
 {
-	public function initForm()
+    public function initForm()
     {
-    	//OW::getDocument()->addOnloadScript("alert(\"".UTIL_Url::selfUrl()."\");");
-		
+        //OW::getDocument()->addOnloadScript("alert(\"".UTIL_Url::selfUrl()."\");");
+
         $jsParams = array(
             'entityType'     => $this->params->getEntityType(),
             'entityId'       => $this->params->getEntityId(),
@@ -76,7 +76,7 @@ class SPODPUBLIC_CMP_Comments extends BASE_CMP_Comments
         // add comment list cmp
         $this->addComponent('commentList', new SPODPUBLIC_CMP_CommentsList($this->params, $this->id));
     }
-	
-} 
+
+}
 
 ?>

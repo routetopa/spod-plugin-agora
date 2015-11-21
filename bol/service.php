@@ -26,9 +26,14 @@ class SPODPUBLIC_BOL_Service
         return self::$classInstance;
     }
 
+    // READER
+
     public function getAgora()
     {
-        return SPODPUBLIC_BOL_PublicRoomDao::getInstance()->findAll();
+        //return SPODPUBLIC_BOL_PublicRoomDao::getInstance()->findAll();
+        $example = new OW_Example();
+        $example->setOrder('timestamp DESC');
+        return SPODPUBLIC_BOL_PublicRoomDao::getInstance()->findListByExample($example);
     }
 
     public function getPublicRoomById($id)
@@ -38,7 +43,51 @@ class SPODPUBLIC_BOL_Service
         return SPODPUBLIC_BOL_PublicRoomDao::getInstance()->findObjectByExample($example);
     }
 
-    public function addPrivateRoom($ownerId, $subject, $body)
+    public function getPublicRoomsByOwner($ownerId)
+    {
+        $example = new OW_Example();
+        $example->andFieldEqual('ownerId', $ownerId);
+        $example->setOrder('timestamp DESC');
+        return SPODPUBLIC_BOL_PublicRoomDao::getInstance()->findListByExample($example);
+    }
+
+    public function getPublicRoomSuggestionByIdAndOwner($publicRoomId, $ownerId)
+    {
+        $example = new OW_Example();
+        $example->andFieldEqual('ownerId', intval($ownerId));
+        $example->andFieldEqual('publicRoomId', intval($publicRoomId));
+        return SPODPUBLIC_BOL_PublicRoomSuggestionDao::getInstance()->findListByExample($example);
+    }
+
+    public function getEntityId($id)
+    {
+        $dbo = OW::getDbo();
+        $query = "SELECT * FROM ow_base_comment_entity WHERE entityId = " . $id . ";";
+        return $dbo->queryForRow($query);
+    }
+
+    // WRITER
+
+    public function addPublicRoomSuggestion($ownewId, $publicRoomId, $dataset, $comment)
+    {
+        $publicRoomSuggestion = new SPODPUBLIC_BOL_PublicRoomSuggestion();
+        $publicRoomSuggestion->ownerId      = intval($ownewId);
+        $publicRoomSuggestion->publicRoomId = intval($publicRoomId);
+        $publicRoomSuggestion->dataset      = $dataset;
+        $publicRoomSuggestion->comment      = $comment;
+
+        SPODPUBLIC_BOL_PublicRoomSuggestionDao::getInstance()->save($publicRoomSuggestion);
+    }
+
+    public function removePublicRoomSuggestion($ownerId, $id)
+    {
+        $ex = new OW_Example();
+        $ex->andFieldEqual('ownerId', $ownerId);
+        $ex->andFieldEqual('id', $id);
+        SPODPUBLIC_BOL_PublicRoomSuggestionDao::getInstance()->deleteByExample($ex);
+    }
+
+    public function addPublicRoom($ownerId, $subject, $body)
     {
         $pr = new SPODPUBLIC_BOL_PublicRoom();
         $pr->ownerId   = $ownerId;
@@ -60,15 +109,5 @@ class SPODPUBLIC_BOL_Service
         $pr = $this->getPublicRoomById($id);
         $pr->$stat += 1;
         SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($pr);
-    }
-
-    public function getEntityId($id){
-
-        $dbo = OW::getDbo();
-
-        $query = "SELECT * FROM ow_base_comment_entity WHERE entityId = " . $id . ";";
-
-        return $dbo->queryForRow($query);
-
     }
 }

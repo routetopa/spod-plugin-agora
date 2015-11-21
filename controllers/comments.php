@@ -66,7 +66,7 @@ class SPODPUBLIC_CTRL_Comments extends OW_ActionController
         }
 
         $comment = $this->commentService->addComment($params->getEntityType(), $params->getEntityId(), $params->getPluginKey(), OW::getUser()->getId(), $commentText, $attachment);
-        
+
         // trigger event comment add
         $event = new OW_Event('base_add_comment', array(
             'entityType' => $params->getEntityType(),
@@ -135,7 +135,7 @@ class SPODPUBLIC_CTRL_Comments extends OW_ActionController
         {
             $this->commentService->deleteCommentEntity($commentEntity->getId());
         }
-        
+
         $event = new OW_Event('base_delete_comment', array(
             'entityType' => $commentEntity->getEntityType(),
             'entityId' => $commentEntity->getEntityId(),
@@ -270,5 +270,5 @@ class SPODPUBLIC_CTRL_Comments extends OW_ActionController
 
         return $params;
     }
-    
+
 }

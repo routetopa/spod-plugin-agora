@@ -23,54 +23,54 @@ class SPODPUBLIC_CLASS_Graph
 
     public function getGraph($id, $type){
 
-            $id = intval($id);
-            $pr = SPODPUBLIC_BOL_Service::getInstance()->getPublicRoomById($id);
+        $id = intval($id);
+        $pr = SPODPUBLIC_BOL_Service::getInstance()->getPublicRoomById($id);
 
-            $this->graph =  new stdClass;
-            $this->graph->nodes = array();
-            $this->graph->links = array();
+        $this->graph =  new stdClass;
+        $this->graph->nodes = array();
+        $this->graph->links = array();
 
-            $node = new Node(0, $pr->subject, intval(SPODPUBLIC_BOL_Service::getInstance()->getEntityId($id)["id"]));
-            $node->fixed = true;
-            $node->color = "#519c76";
-            $node->x = 200;
-            $node->y = 200;
+        $node = new Node(0, $pr->subject, intval(SPODPUBLIC_BOL_Service::getInstance()->getEntityId($id)["id"]));
+        $node->fixed = true;
+        $node->color = "#519c76";
+        $node->x = 200;
+        $node->y = 200;
 
-            array_push($this->graph->nodes, $node);
+        array_push($this->graph->nodes, $node);
 
-            //$this->analyzeCommentsTree(BOL_CommentService::getInstance()->findFullCommentList(SPODPUBLIC_BOL_Service::ENTITY_TYPE, $id), 0, $type);
+        //$this->analyzeCommentsTree(BOL_CommentService::getInstance()->findFullCommentList(SPODPUBLIC_BOL_Service::ENTITY_TYPE, $id), 0, $type);
 
-            switch($type)
-            {
-                case "comments":
-                    $this->normalizedNodeIds = array();
-                    $this->normalizedNodeIds[$node->originalId] = 0;
+        switch($type)
+        {
+            case "comments":
+                $this->normalizedNodeIds = array();
+                $this->normalizedNodeIds[$node->originalId] = 0;
 
-                    $root =  new Node($id, "", 0);
-                    $root->type = "comment";
+                $root =  new Node($id, "", 0);
+                $root->type = "comment";
 
-                    $node->r = MIN_SIZE  * sqrt($this->getCommentsGraph(null, $root, 0));
-                    break;
-                case "datalets":
-                    $this->datasetsMap = array();
+                $node->r = MIN_SIZE  * sqrt($this->getCommentsGraph(null, $root, 0));
+                break;
+            case "datalets":
+                $this->datasetsMap = array();
 
-                    $root =  new Node($id, "", 0);
-                    $root->type = "datalet";
+                $root =  new Node($id, "", 0);
+                $root->type = "datalet";
 
-                    $node->r = MIN_SIZE  * sqrt($this->getDataletsGraph($node, $root, 0));
-                    break;
-                case "users":
-                    $this->graph->nodes = array();
-                    $this->usersMap = array();
+                $node->r = MIN_SIZE  * sqrt($this->getDataletsGraph($node, $root, 0));
+                break;
+            case "users":
+                $this->graph->nodes = array();
+                $this->usersMap = array();
 
-                    $root =  new Node($id, "", 0);
-                    $root->type = "user";
+                $root =  new Node($id, "", 0);
+                $root->type = "user";
 
-                    $this->getUsersGraph(null, $root, 0);
-                    break;
-            }
+                $this->getUsersGraph(null, $root, 0);
+                break;
+        }
 
-            return $this->graph;
+        return $this->graph;
     }
 
     private function getUsersGraph($father, $curr_comment, $level)
@@ -172,8 +172,8 @@ class SPODPUBLIC_CLASS_Graph
         $r = 0;
         for ($i = 0; $i < count($comments); $i++)
             $r += $this->getDataletsGraph($curr_father,
-                                          $comments[$i],
-                                          $level + 1);
+                $comments[$i],
+                $level + 1);
 
         $node->r = MIN_SIZE *((count($comments)==0)? 1 : sqrt($r));
         return  (count($comments)==0)? 1 : $r + 1;
@@ -183,8 +183,8 @@ class SPODPUBLIC_CLASS_Graph
     {
         $comments = BOL_CommentService::getInstance()->findFullCommentList(SPODPUBLIC_BOL_Service::ENTITY_TYPE, $curr_comment->id);
         $node = new Node(count($this->graph->nodes),
-                         @BOL_UserService::getInstance()->getDisplayName($curr_comment->userId),
-                         intval($curr_comment->id));
+            @BOL_UserService::getInstance()->getDisplayName($curr_comment->userId),
+            intval($curr_comment->id));
 
         @$node->content = $curr_comment->message;
         switch ($level) {
@@ -222,8 +222,8 @@ class SPODPUBLIC_CLASS_Graph
         $r = 0;
         for ($i = 0; $i < count($comments); $i++)
             $r += $this->getCommentsGraph(($level > 0) ? $node : $father,
-                                          $comments[$i],
-                                          $level + 1);
+                $comments[$i],
+                $level + 1);
 
         $node->r = MIN_SIZE *((count($comments)==0)? 1 : sqrt($r));
         return  (count($comments)==0)? 1 : $r + 1;

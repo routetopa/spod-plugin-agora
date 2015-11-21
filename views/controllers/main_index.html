@@ -23,6 +23,8 @@
 <link rel="import" href="{$components_url}bower_components/paper-styles/paper-styles.html">
 <link rel="import" href="{$components_url}bower_components/neon-animation/neon-animations.html">
 
+<link rel="import" href="{$components_url}bower_components/polymer-element-catalog/app/elements/app-sidebar/app-sidebar.html">
+
 
 {literal}
 <style is="custom-style">
@@ -45,7 +47,6 @@
 </style>
 
 <script type="text/javascript">
-
     $(document).ready(function () {
 
        var scope = document.querySelector('template[is="dom-bind"]');
@@ -92,8 +93,6 @@
 
         return room;
     }
-
-
 </script>
 {/literal}
 
@@ -105,10 +104,18 @@
             <div class="title">Options</div>
         </paper-toolbar>
 
-        <paper-menu selected="0">
-            <!--<paper-item>Item 1</paper-item>
-                <paper-item>Item 2</paper-item>-->
-        </paper-menu>
+        <app-sidebar drawer>
+            <paper-menu>
+                {foreach $userPublicRooms as $userRoom}
+                    <paper-item onclick="SPODPUBLICROOM.handleSuggestedDataset({$userRoom->id})">
+                        <!--<iron-icon icon="warning"></iron-icon>-->
+                        <paper-item-body two-lines>
+                            <div>{$userRoom->subject}</div>
+                        </paper-item-body>
+                    </paper-item>
+                {/foreach}
+            </paper-menu>
+        </app-sidebar>
 
     </div>
 
@@ -116,7 +123,7 @@
 
         <paper-toolbar class="toolbar-main">
             <paper-icon-button paper-drawer-toggle icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Public Room</div>
+            <div class="title">Agora</div>
             <search-panel-controllet right-direction="true"></search-panel-controllet>
             <!--<paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>-->
         </paper-toolbar>
@@ -130,21 +137,23 @@
                         {foreach $rooms as $room}
                             <div id="{$room->id}" class="grid-item
 
-                                    {if $room->opendata >= $openDataMedian}
+                                    {if $room->opendata > $openDataMedian}
                                         grid-item-w40
                                     {else}
                                         grid-item-w20
                                     {/if}
 
-                                    {if $room->comments >= commentsMedian}
+                                    {if $room->comments > $commentsMedian}
                                         grid-item-h400
                                     {else}
                                         grid-item-h200
                                     {/if}
+                                    "
+                                    style="background-color:#{$room->color}">
 
-                                     grid-item-c4">
-                                <div class="room-body">{$room->body}</div>
-                                <div class="room-subject">{$room->subject}</div>
+                                <div class="room-body"><span>{$room->body}</span></div>
+                                <div class="room-subject"><span>{$room->subject}</span></div>
+                                <div class="room-timestamp">{$room->timestamp}</div>
                             </div>
                         {/foreach}
                     </animated-grid-controllet>

@@ -92,7 +92,7 @@
 </style>
 
 {style}
-    #button_container { display: none; }
+#button_container { display: none; }
 {/style}
 
 {literal}
@@ -205,28 +205,28 @@
 </paper-header-panel>
 
 <div class="layout horizontal">
-        <paper-material id="topic_container" class="layout vertical justified">
-            <paper-material elevation="0" id="pr_body">
-                <paper-toolbar class="title-header"><h6 style="color:#ffffff;">About this topic</h6></paper-toolbar>
-                {$public_room->body}
-            </paper-material>
-            {if !empty($comments)}
-            <div class="q-comments">
-                {$comments}
-            </div>
-            {/if}
+    <paper-material id="topic_container" class="layout vertical justified">
+        <paper-material elevation="0" id="pr_body">
+            <paper-toolbar class="title-header"><h6 style="color:#ffffff;">About this topic</h6></paper-toolbar>
+            {$public_room->body}
         </paper-material>
+        {if !empty($comments)}
+        <div class="q-comments">
+            {$comments}
+        </div>
+        {/if}
+    </paper-material>
 
-        <paper-material elevation="1" animated id="graph_container">
-            <paper-toolbar class="toolbar-graph">
-                <paper-icon-button id="datalet_graph" paper-drawer-toggle icon="assessment" onClick="dataletGraphShow()"></paper-icon-button>
-                <paper-icon-button id="comment_graph" paper-drawer-toggle icon="speaker-notes" onClick="commentGraphShow()"></paper-icon-button>
-                <paper-icon-button id="user_graph" paper-drawer-toggle icon="account-circle" onClick="usersGraphShow()"></paper-icon-button>
-                <h5 id="toolbar-graph-title" style="color: #ffffff;margin-left: 30px;">Comments graph</h5>
-            </paper-toolbar>
-            <div id="graph_content">
-            </div>
-        </paper-material>
+    <paper-material elevation="1" animated id="graph_container">
+        <paper-toolbar class="toolbar-graph">
+            <paper-icon-button id="datalet_graph" paper-drawer-toggle icon="assessment" onClick="dataletGraphShow()"></paper-icon-button>
+            <paper-icon-button id="comment_graph" paper-drawer-toggle icon="speaker-notes" onClick="commentGraphShow()"></paper-icon-button>
+            <paper-icon-button id="user_graph" paper-drawer-toggle icon="account-circle" onClick="usersGraphShow()"></paper-icon-button>
+            <h5 id="toolbar-graph-title" style="color: #ffffff;margin-left: 30px;">Comments graph</h5>
+        </paper-toolbar>
+        <div id="graph_content">
+        </div>
+    </paper-material>
 </div>
 
 <!-- ODE PRIVATE-ROOM -->

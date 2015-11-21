@@ -6,10 +6,10 @@ error_reporting(-1);
 
 class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
 {
-	protected $actionArr = array('comments' => array(), 'users' => array(), 'abuses' => array(), 'remove_abuses' => array());
+    protected $actionArr = array('comments' => array(), 'users' => array(), 'abuses' => array(), 'remove_abuses' => array());
 
-	
-	protected function init()
+
+    protected function init()
     {
         if ( $this->commentCount === 0 && $this->params->getShowEmptyList() )
         {
@@ -23,7 +23,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
             $commentList = array();
         }
         else if ( in_array($this->params->getDisplayType(), array(BASE_CommentsParams::DISPLAY_TYPE_WITH_LOAD_LIST, BASE_CommentsParams::DISPLAY_TYPE_WITH_LOAD_LIST_MINI)) )
-        {	
+        {
             $commentList = empty($this->batchData['commentsList']) ? $this->commentService->findCommentList($this->params->getEntityType(), $this->params->getEntityId(), 1, $this->params->getInitialCommentsCount()) : $this->batchData['commentsList'];
             $commentList = array_reverse($commentList);
             $countToLoad = $this->commentCount - $this->params->getInitialCommentsCount();
@@ -99,9 +99,9 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
              window.owCommentListCmps.items['$this->id'].init();"
         );
     }
-	
-	
-	public function itemHandler( BASE_CLASS_EventProcessCommentItem $e )
+
+
+    public function itemHandler( BASE_CLASS_EventProcessCommentItem $e )
     {
         $language = OW::getLanguage();
 
@@ -201,26 +201,26 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                 $commentsParams->level = $this->params->level + 1;
 
 
-               /* array_push(SPODPUBLIC_CTRL_PublicRoom::$commentNodes, array($value->getId(),
-                                                                            BOL_UserService::getInstance()->getDisplayName($value->getUserId()),
-                                                                            $value->getMessage(),
-                                                                            $this->params->level));
+                /* array_push(SPODPUBLIC_CTRL_PublicRoom::$commentNodes, array($value->getId(),
+                                                                             BOL_UserService::getInstance()->getDisplayName($value->getUserId()),
+                                                                             $value->getMessage(),
+                                                                             $this->params->level));
 
-                array_push(SPODPUBLIC_CTRL_PublicRoom::$commentLinks, array($this->params->getEntityId(),$value->getId(),
-                                                                            $this->params->level));
+                 array_push(SPODPUBLIC_CTRL_PublicRoom::$commentLinks, array($this->params->getEntityId(),$value->getId(),
+                                                                             $this->params->level));
 
-                if(OW::getPluginManager()->isPluginActive('spodpr')){
-                    $datalet = ODE_BOL_Service::getInstance()->getDataletByPostId($value->getId(),"comment");
-                    if(count($datalet) > 0){
-                        array_push(SPODPUBLIC_CTRL_PublicRoom::$dataletNodes, array($value->getId(),
-                                                                                    $datalet["component"],
-                                                                                    $value->getMessage(),
-                                                                                    $this->params->level));
+                 if(OW::getPluginManager()->isPluginActive('spodpr')){
+                     $datalet = ODE_BOL_Service::getInstance()->getDataletByPostId($value->getId(),"comment");
+                     if(count($datalet) > 0){
+                         array_push(SPODPUBLIC_CTRL_PublicRoom::$dataletNodes, array($value->getId(),
+                                                                                     $datalet["component"],
+                                                                                     $value->getMessage(),
+                                                                                     $this->params->level));
 
-                        array_push(SPODPUBLIC_CTRL_PublicRoom::$dataletLinks, array($this->params->getEntityId(),$value->getId(),
-                            $this->params->level));
-                    }
-                }*/
+                         array_push(SPODPUBLIC_CTRL_PublicRoom::$dataletLinks, array($this->params->getEntityId(),$value->getId(),
+                             $this->params->level));
+                     }
+                 }*/
 
                 $this->addComponent('nestedComments' . $value->getId(), new SPODPUBLIC_CMP_Comments($commentsParams));
 
@@ -247,7 +247,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
             $cmItemArray = array(
                 'displayName' => $userAvatarArrayList[$value->getUserId()]['title'],
                 'avatarUrl'   => $userAvatarArrayList[$value->getUserId()]['src'],
-                'profileUrl'  => $userAvatarArrayList[$value->getUserId()]['url'], 
+                'profileUrl'  => $userAvatarArrayList[$value->getUserId()]['url'],
                 'content'     => $value->getMessage(),
                 'date'        => UTIL_DateTime::formatDate($value->getCreateStamp()),
                 'userId'      => $value->getUserId(),
