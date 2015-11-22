@@ -54,7 +54,7 @@ class SPODPUBLIC_BOL_Service
     public function getPublicRoomSuggestionByIdAndOwner($publicRoomId, $ownerId)
     {
         $example = new OW_Example();
-        $example->andFieldEqual('ownerId', intval($ownerId));
+        //$example->andFieldEqual('ownerId', intval($ownerId));
         $example->andFieldEqual('publicRoomId', intval($publicRoomId));
         return SPODPUBLIC_BOL_PublicRoomSuggestionDao::getInstance()->findListByExample($example);
     }
