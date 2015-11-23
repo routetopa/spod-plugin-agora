@@ -183,10 +183,10 @@ class SPODPUBLIC_CLASS_Graph
     {
         $comments = BOL_CommentService::getInstance()->findFullCommentList(SPODPUBLIC_BOL_Service::ENTITY_TYPE, $curr_comment->id);
         $node = new Node(count($this->graph->nodes),
-                         BOL_UserService::getInstance()->getDisplayName($curr_comment->userId),
+                         @BOL_UserService::getInstance()->getDisplayName($curr_comment->userId),
                          intval($curr_comment->id));
 
-        $node->content = $curr_comment->message;
+        @$node->content = $curr_comment->message;
         switch ($level) {
             case 1:
                 $node->color = "#ff1e1e";
@@ -203,7 +203,7 @@ class SPODPUBLIC_CLASS_Graph
         }
 
         if($level > 0) array_push($this->graph->nodes, $node);
-        $link = new Link(intval($father->id), intval($node->id));
+        @$link = new Link(intval($father->id), intval($node->id));
 
         switch ($level) {
             case 1:
