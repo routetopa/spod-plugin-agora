@@ -5,11 +5,6 @@ SPODPUBLICROOM.addRoom = function()
     previewFloatBox = OW.ajaxFloatBox('SPODPUBLIC_CMP_PublicRoomCreator', {} , {width:'45%', height:'35vh', iconClass: 'ow_ic_add', title: ''});
 };
 
-SPODPUBLICROOM.handleSuggestedDataset= function(publicRoomId)
-{
-    previewFloatBox = OW.ajaxFloatBox('SPODPUBLIC_CMP_Suggestion', {publicRoom : publicRoomId} , {width:'45%', height:'35vh', iconClass: 'ow_ic_add', title: ''});
-};
-
 ODE.addOdeOnComment = function()
 {
     var ta = $('.ow_comments_input textarea');

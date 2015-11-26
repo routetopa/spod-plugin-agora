@@ -11,19 +11,9 @@ CREATE TABLE `' . OW_DB_PREFIX . 'spod_public_room` (
   `views` int(11) DEFAULT 0,
   `comments` int(11) DEFAULT 0,
   `opendata` int(11) DEFAULT 0,
-  `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` enum("approval","approved","blocked") NOT NULL DEFAULT "approved",
   `privacy` varchar(50) NOT NULL DEFAULT "everybody",
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
-
-DROP TABLE IF EXISTS `' . OW_DB_PREFIX . 'spod_public_room_suggestion`;
-CREATE TABLE `' . OW_DB_PREFIX . 'spod_public_room_suggestion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ownerId` int(11) NOT NULL,
-  `publicRoomId` int(11) NOT NULL,
-  `dataset` text,
-  `comment` text,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;';
 

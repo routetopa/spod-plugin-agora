@@ -15,6 +15,7 @@
         -moz-box-shadow: 0 0 20px 5px #999;
         -webkit-box-shadow: 0 0 20px 5px #999;
         z-index : 100;
+        height: 40px;
     }
     paper-toolbar.title-header{
         --paper-toolbar-background:#2196F3;
@@ -30,7 +31,7 @@
         /*height: 8vh;;*/
     }
 
-    .title h3{
+    .title h4{
         color: #ffffff;
     }
 
@@ -46,7 +47,7 @@
     }
 
     ::content paper-toolbar div#topBar {
-        height: 40px;
+        height: 35px;
     }
 
     #graph_container{
@@ -128,7 +129,7 @@
         $.post( SPODPUBLICROOM.get_graph_url,
                 {
                     id : SPODPUBLICROOM.public_room_id,
-                    type : "datalet"
+                    type : "datalets"
                 },
                 function(data, status){
                     data = JSON.parse(data);
@@ -137,6 +138,7 @@
                         $("#toolbar-graph-title").html('Datalet graph');
                         $("#datalet_graph").css('border-bottom-style','solid');
                         $("#comment_graph").css('border-bottom-style','none');
+                        $("#user_graph").css('border-bottom-style','none');
                     }
                 }
         );
@@ -147,7 +149,7 @@
         $.post( SPODPUBLICROOM.get_graph_url,
                 {
                     id : SPODPUBLICROOM.public_room_id,
-                    type : "comment"
+                    type : "comments"
                 },
                 function(data, status){
                     data = JSON.parse(data);
@@ -155,6 +157,27 @@
                         $("#graph_content").html("<graph-datalet data='" + data.graph + "'></graph-datalet>");
                         $("#toolbar-graph-title").html('Comments graph');
                         $("#comment_graph").css('border-bottom-style','solid');
+                        $("#datalet_graph").css('border-bottom-style','none');
+                        $("#user_graph").css('border-bottom-style','none');
+                    }
+                }
+        );
+    }
+
+    usersGraphShow = function(){
+
+        $.post( SPODPUBLICROOM.get_graph_url,
+                {
+                    id : SPODPUBLICROOM.public_room_id,
+                    type : "users"
+                },
+                function(data, status){
+                    data = JSON.parse(data);
+                    if(data.status == "ok"){
+                        $("#graph_content").html("<graph-datalet data='" + data.graph + "'></graph-datalet>");
+                        $("#toolbar-graph-title").html('Users graph');
+                        $("#user_graph").css('border-bottom-style','solid');
+                        $("#comment_graph").css('border-bottom-style','none');
                         $("#datalet_graph").css('border-bottom-style','none');
                     }
                 }
@@ -176,7 +199,7 @@
 
 <paper-header-panel>
     <paper-toolbar class="toolbar-main">
-        <div class="title"><h3>{$public_room->subject}</h3></div>
+        <div class="title"><h4>{$public_room->subject}</h4></div>
         <paper-icon-button paper-drawer-toggle icon="language" onClick="slideGraphPanel()"></paper-icon-button>
     </paper-toolbar>
 </paper-header-panel>
@@ -198,6 +221,7 @@
             <paper-toolbar class="toolbar-graph">
                 <paper-icon-button id="datalet_graph" paper-drawer-toggle icon="assessment" onClick="dataletGraphShow()"></paper-icon-button>
                 <paper-icon-button id="comment_graph" paper-drawer-toggle icon="speaker-notes" onClick="commentGraphShow()"></paper-icon-button>
+                <paper-icon-button id="user_graph" paper-drawer-toggle icon="account-circle" onClick="usersGraphShow()"></paper-icon-button>
                 <h5 id="toolbar-graph-title" style="color: #ffffff;margin-left: 30px;">Comments graph</h5>
             </paper-toolbar>
             <div id="graph_content">
