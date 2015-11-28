@@ -27,7 +27,7 @@ ODE.addOdeOnComment = function()
         odeElem.click(function (e) {
             ODE.pluginPreview = 'public-room';
             ODE.commentTarget = e.target;
-            previewFloatBox = OW.ajaxFloatBox('ODE_CMP_Preview', {text:'testo'} , {width:'90%', height:'65vh', iconClass:'ow_ic_lens', title:''});
+            previewFloatBox = OW.ajaxFloatBox('ODE_CMP_Preview', {text:'testo'} , {width:'90%', height:'90vh', iconClass:'ow_ic_lens', title:''});
         });
 
         // Add PRIVATE_ROOM on Comment
