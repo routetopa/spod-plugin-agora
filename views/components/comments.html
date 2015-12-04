@@ -17,9 +17,13 @@
                             {if !empty($attch)}<a href="javascript://" class="image" id="{$buttonContId}">{/if}
 
                         </a>
+
+                        <paper-fab mini icon="thumbs-up-down" class="sentiment-button" id="comment_sentiment_{$commentId}" sentiment="1"></paper-fab>
+
                         </div>
                     </span>
                     <textarea id="{$taId}" class="comments_fake_autoclick invitation">{text key='base+comment_form_element_invitation_text'}</textarea>
+
                 </div>
             </div>
         </div>

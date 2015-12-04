@@ -25,6 +25,15 @@ CREATE TABLE `' . OW_DB_PREFIX . 'spod_public_room_suggestion` (
   `dataset` text,
   `comment` text,
   PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+
+DROP TABLE IF EXISTS `' . OW_DB_PREFIX . 'spod_public_room_comment_sentiment`;
+CREATE TABLE `' . OW_DB_PREFIX . 'spod_public_room_comment_sentiment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `publicRoomId` int(11) NOT NULL,
+  `sentiment` smallint,
+  `commentId` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;';
 
 OW::getDbo()->query($sql);

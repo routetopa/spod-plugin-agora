@@ -81,6 +81,13 @@ class SPODPUBLIC_BOL_Service
         return $dbo->queryForRow($query);
     }
 
+    public function getCommentSentiment($commentId)
+    {
+        $example = new OW_Example();
+        $example->andFieldEqual('commentId', $commentId);
+        return SPODPUBLIC_BOL_PublicRoomCommentSentimentDao::getInstance()->findObjectByExample($example);
+    }
+
     // WRITER
 
     public function addPublicRoomSuggestion($ownewId, $publicRoomId, $dataset, $comment)
@@ -123,4 +130,15 @@ class SPODPUBLIC_BOL_Service
         $pr->$stat += 1;
         SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($pr);
     }
+
+    public function addCommentSentiment($publicRoom, $commentId, $sentiment)
+    {
+        $sent = new SPODPUBLIC_BOL_PublicRoomCommentSentiment();
+        $sent->commentId = $commentId;
+        $sent->publicRoomId = $publicRoom;
+        $sent->sentiment = $sentiment;
+
+        SPODPUBLIC_BOL_PublicRoomCommentSentimentDao::getInstance()->save($sent);
+    }
+
 }

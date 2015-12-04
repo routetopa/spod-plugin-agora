@@ -67,6 +67,7 @@ class SPODPUBLIC_CMP_Comments extends BASE_CMP_Comments
             $this->assign('formCmp', true);
             $this->assign('taId', $taId);
             $this->assign('attchId', $attchId);
+            $this->assign('commentId', $this->params->getEntityId());
         }
 
         OW::getDocument()->addOnloadScript("new OwComments(" . json_encode($jsParams) . ");");
