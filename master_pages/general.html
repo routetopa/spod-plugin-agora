@@ -1,47 +1,10 @@
 <div class="site">
 
-    <div id="header">
-        <div class="ow_menu_fullpage">
-            <div class="ow_menu_fullpage_wrap">{$main_menu}</div>
-        </div>
-        <div class="clearfix" style="
-        background-color: #2196F3;">
-            <a class="ow_logo ow_left" href="{$siteUrl}"></a>
-            <div class="ow_nav_btn"></div>
-            <div class="ow_console_right">
-                {component class='BASE_CMP_Console'}
-            </div>
-            <div class="ow_menu_wrap">{component class='BASE_CMP_MainMenu' responsive=true}</div>
-        </div>
-        {*if isset($imageControlValues.headerImage.src)}
-        <div class="ow_header">
-            <img class="ow_header_img" src="{$imageControlValues.headerImage.src}" />
-            <div class="ow_header_pic"><img class="ow_header_img" src="{$themeImagesUrl}header.jpg" /></div>
-        </div>
-        {/if*}
-    </div>
-
     <div id="content" class="site-content">
         <div class="relative-content">
             {$content}
         </div>
     </div>
-
-    <!--<div id="footer">
-        <div class="ow_footer">
-            <div class="ow_canvas">
-                <div class="ow_page clearfix">
-                    {$bottom_menu}
-                    <div class="ow_copyright">
-                        {text key='base+copyright'}
-                    </div>
-                    <div style="float:right;padding-bottom: 30px;">
-                        {$bottomPoweredByLink}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>-->
 
 </div>
 

@@ -123,8 +123,21 @@
 
         <paper-toolbar class="toolbar-main">
             <paper-icon-button paper-drawer-toggle icon="menu" on-tap="menuAction"></paper-icon-button>
-            <div class="title">Agora</div>
-            <search-panel-controllet right-direction="true"></search-panel-controllet>
+
+            <!--<div class="title">Agora</div>-->
+
+            <div class="clearfix" style="background-color:#2196F3;">
+                <a class="ow_logo ow_left" href="{$siteUrl}"></a>
+                <div class="ow_nav_btn"></div>
+                <div class="ow_console_right">
+                    {$console}
+                </div>
+                <div class="ow_menu_wrap">{component class='BASE_CMP_MainMenu' responsive=true}</div>
+            </div>
+
+
+
+            <!--<search-panel-controllet right-direction="true"></search-panel-controllet>-->
             <!--<paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>-->
         </paper-toolbar>
 
