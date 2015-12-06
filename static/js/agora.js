@@ -42,6 +42,5 @@ ODE.addOdeOnComment = function()
                 document.getElementById('share_from_private_room').dispatchEvent(new Event('animated-button-container-controllet_open-window'));
             });
         }
-
     });
 };
