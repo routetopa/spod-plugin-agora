@@ -27,6 +27,13 @@
     paper-fab{
         --paper-fab-background:#2196F3;
     }
+    paper-fab.show_datalet{
+        --iron-icon-height: 18px;
+        --iron-icon-width:  18px;
+        height: 22px;
+        width:  22px;
+    }
+
     paper-header-panel{
         /*height: 8vh;;*/
     }
@@ -100,7 +107,9 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
 {literal}
 <script>
 
+    var selected_graph        = null;
     var last_selected_element = null;
+
     window.addEventListener('graph-datalet_node-clicked', function(e){
         if(last_selected_element != null){
             last_selected_element.css('border', 'none');
@@ -128,6 +137,7 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
     };
 
     dataletGraphShow = function(){
+        selected_graph = "datalet";
         $.post( SPODPUBLICROOM.get_graph_url,
                 {
                     id : SPODPUBLICROOM.public_room_id,
@@ -147,7 +157,7 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
     };
 
     commentGraphShow = function(){
-
+        selected_graph = "comment";
         $.post( SPODPUBLICROOM.get_graph_url,
                 {
                     id : SPODPUBLICROOM.public_room_id,
@@ -167,7 +177,7 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
     }
 
     usersGraphShow = function(){
-
+        selected_graph = "users";
         $.post( SPODPUBLICROOM.get_graph_url,
                 {
                     id : SPODPUBLICROOM.public_room_id,
@@ -184,11 +194,39 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
                     }
                 }
         );
-    }
+    };
 
     $(document).ready(function () {
         $('#topic_container').perfectScrollbar();
         $('#graph_content').perfectScrollbar();
+
+        OW.bind('base.comment_added', function(e){
+            switch(selected_graph){
+                case "comment":
+                    commentGraphShow();
+                    break;
+                case "datalet":
+                    dataletGraphShow();
+                    break;
+                case "users":
+                    usersGraphShow();
+                    break;
+            }
+        });
+
+        OW.bind('base.comment_delete', function(e){
+            switch(selected_graph){
+                case "comment":
+                    commentGraphShow();
+                    break;
+                case "datalet":
+                    dataletGraphShow();
+                    break;
+                case "users":
+                    usersGraphShow();
+                    break;
+            }
+        });
     });
 
     $(window).load(function() {

@@ -23,6 +23,8 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
             OW::getDocument()->addScript(OW::getPluginManager()->getPlugin('spodpublic')->getStaticJsUrl() . 'jquery-ui.min.js');
             OW::getDocument()->addScript(OW::getPluginManager()->getPlugin('spodpublic')->getStaticJsUrl() . 'perfect-scrollbar.jquery.js');
 
+            SPODPUBLIC_CLASS_EventHandler::getInstance()->init();
+
             //add deep component url
             $this->assign('components_url', SPODPR_COMPONENTS_URL);
 
