@@ -162,7 +162,7 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
                 function(data, status){
                     data = JSON.parse(data);
                     if(data.status == "ok"){
-                        $("#graph_content").html('<graph-datalet data=\'' + data.graph + '\'></graph-datalet>');
+                        $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight - 40 - 35) +"' data='" + data.graph + "'></graph-datalet>");
                         $("#toolbar-graph-title").html('Datalet graph');
                         $("#datalet_graph").css('border-bottom-style','solid');
                         $("#comment_graph").css('border-bottom-style','none');
@@ -182,7 +182,7 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
                 function(data, status){
                     data = JSON.parse(data);
                     if(data.status == "ok"){
-                        $("#graph_content").html("<graph-datalet data='" + data.graph + "'></graph-datalet>");
+                        $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight - 40 - 35) +"' data='" + data.graph + "'></graph-datalet>");
                         $("#toolbar-graph-title").html('Comments graph');
                         $("#comment_graph").css('border-bottom-style','solid');
                         $("#datalet_graph").css('border-bottom-style','none');
@@ -202,7 +202,7 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
                 function(data, status){
                     data = JSON.parse(data);
                     if(data.status == "ok"){
-                        $("#graph_content").html("<graph-datalet data='" + data.graph + "'></graph-datalet>");
+                        $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight - 40 - 35) +"' data='" + data.graph + "'></graph-datalet>");
                         $("#toolbar-graph-title").html('Users graph');
                         $("#user_graph").css('border-bottom-style','solid');
                         $("#comment_graph").css('border-bottom-style','none');

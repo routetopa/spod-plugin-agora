@@ -11,6 +11,8 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
 	
 	protected function init()
     {
+        SPODPUBLIC_CLASS_EventHandler::getInstance()->init();
+        
         if ( $this->commentCount === 0 && $this->params->getShowEmptyList() )
         {
             $this->assign('noComments', true);
@@ -98,6 +100,8 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
             "window.owCommentListCmps.items['$this->id'] = new SpodpublicCommentsList($jsParams);
              window.owCommentListCmps.items['$this->id'].init();"
         );
+
+
     }
 	
 	

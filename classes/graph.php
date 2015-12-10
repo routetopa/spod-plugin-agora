@@ -31,10 +31,10 @@ class SPODPUBLIC_CLASS_Graph
             $this->graph->links = array();
 
             $node = new Node(0, $pr->subject, intval(SPODPUBLIC_BOL_Service::getInstance()->getEntityId($id)["id"]));
-            $node->fixed = true;
-            $node->color = "#519c76";
+            $node->color = "#FFBB78";
+            /*$node->fixed = true;
             $node->x = 200;
-            $node->y = 200;
+            $node->y = 200;*/
 
             array_push($this->graph->nodes, $node);
 
@@ -119,6 +119,7 @@ class SPODPUBLIC_CLASS_Graph
         $curr_father = $father;
         if (OW::getPluginManager()->isPluginActive('spodpr')) {
             $datalet = ODE_BOL_Service::getInstance()->getDataletByPostId($curr_comment->id, "public-room");
+            $sentiment = SPODPUBLIC_BOL_Service::getInstance()->getCommentSentiment($curr_comment->id);
             if (count($datalet) > 0) {
 
                 $node = new Node(count($this->graph->nodes),
@@ -133,7 +134,17 @@ class SPODPUBLIC_CLASS_Graph
 
                 for($j=0; $j < count( $this->datasetsMap[$url]); $j++){
                     $link = new Link($node->id,  $this->datasetsMap[$url][$j]);
-                    //$link->value = 70;
+                    switch($sentiment->sentiment){
+                        case 1:
+                            $link->color = "#A7B1B7";
+                            break;
+                        case 2:
+                            $link->color = "#60df20";
+                            break;
+                        case 3:
+                            $link->color = "#FF1E1E";
+                            break;
+                    }
                     array_push($this->graph->links, $link);
                 }
 
@@ -146,13 +157,13 @@ class SPODPUBLIC_CLASS_Graph
                 $node->content = $curr_comment->message;
                 switch ($level) {
                     case 1:
-                        $node->color = "#ff1e1e";
+                        $node->color = "#2196F3";
                         break;
                     case 2:
-                        $node->color = "#3399cc";
+                        $node->color = "#346db7";
                         break;
                     case 3:
-                        $node->color = "#a7a1a1";
+                        $node->color = "#90b2e0";
                         break;
                 }
 
@@ -184,18 +195,20 @@ class SPODPUBLIC_CLASS_Graph
                          @BOL_UserService::getInstance()->getDisplayName($curr_comment->userId),
                          intval($curr_comment->id));
 
+        $sentiment = SPODPUBLIC_BOL_Service::getInstance()->getCommentSentiment($curr_comment->id);
+
         @$node->content = $curr_comment->message;
         switch ($level) {
             case 1:
-                $node->color = "#ff1e1e";
+                $node->color = "#2196F3";
                 $node->r = 30;
                 break;
             case 2:
-                $node->color = "#3399cc";
+                $node->color = "#346db7";
                 $node->r = 20;
                 break;
             case 3:
-                $node->color = "#a7a1a1";
+                $node->color = "#90b2e0";
                 $node->r = 10;
                 break;
         }
@@ -212,6 +225,18 @@ class SPODPUBLIC_CLASS_Graph
                 break;
             case 3:
                 $link->value = 1;
+                break;
+        }
+
+        switch($sentiment->sentiment){
+            case 1:
+                $link->color = "#A7B1B7";
+                break;
+            case 2:
+                $link->color = "#60df20";
+                break;
+            case 3:
+                $link->color = "#FF1E1E";
                 break;
         }
 
@@ -249,6 +274,7 @@ class Link{
     public $source;
     public $target;
     public $value;
+    public $color;
 
     function __construct($source, $target){
         $this->source = $source;
