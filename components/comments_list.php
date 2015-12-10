@@ -100,8 +100,6 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
             "window.owCommentListCmps.items['$this->id'] = new SpodpublicCommentsList($jsParams);
              window.owCommentListCmps.items['$this->id'].init();"
         );
-
-
     }
 	
 	

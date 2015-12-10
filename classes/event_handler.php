@@ -36,7 +36,16 @@ class SPODPUBLIC_CLASS_EventHandler{
             OW::getDocument()->addOnloadScript('
                $("#comment_bar_' . $id . '").append("<paper-fab mini class=\'show_datalet\' icon=\'assessment\' style=\'float:left;\' id=\'show_datalet_comment_' . $id .'\'></paper-fab>");
                $("#show_datalet_comment_' . $id .'").click(function(){
-                     $("#datalet_placeholder_' . $id . '_comment").toggle(\'fade\', {direction: \'top\'}, 500);
+                     $("#datalet_placeholder_' . $id . '_comment").toggle(\'fade\',
+                                                                          {direction: \'top\'},
+                                                                          function(){
+                                                                             if($("#datalet_placeholder_' . $id . '_comment").css(\'display\') == \'none\')
+                                                                                $("#show_datalet_comment_' . $id . '").css(\'background\', \'#2196F3\');
+                                                                             else
+                                                                                $("#show_datalet_comment_' . $id . '").css(\'background\', \'#5B646A\');
+                                                                          },
+                                                                          500);
+                     $("#topic_container").scrollTop($(\'#datalet_placeholder_' . $id . '_comment\').offset().top);
                });
             ');
         }
