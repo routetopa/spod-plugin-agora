@@ -58,17 +58,6 @@
         color: #ffffff;
     }
 
-    paper-toolbar.toolbar-graph
-    {
-        --paper-toolbar-background:#2196F3;
-        -moz-box-shadow: 0 0 20px 5px #999;
-        -webkit-box-shadow: 0 0 20px 5px #999;
-        height: 35px;
-        z-index: 100;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-
     ::content paper-toolbar div#topBar {
         height: 35px;
     }
@@ -101,7 +90,6 @@
         font-weight: bolder;
         font-size: 20px;
         margin: 30px;
-        padding-bottom: 50px;
         padding-right: 10px;
         padding-left: 10px;
         font-style: italic;
@@ -111,6 +99,16 @@
     .q-comments{
         padding-left: 30px;
         width: 90%;
+        font-size: 14px;
+    }
+
+    #graphs_buttons_panel{
+        display: none;
+    }
+
+    #toolbar-graph-title{
+        color: #ffffff;
+        margin-left: 30px;
     }
 </style>
 
@@ -139,9 +137,13 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
         $(curr_element).css('font-weight', 'bold');
 
         $('div[id^="nc_"]').css('display', 'none');
+
+        $('div[id^="datalet_placeholder_"]').css('display', 'none');
+        $('.show_datalet').css('background', '#2196F3');
+
         $(curr_element).parents('div[id^="nc_"]').css('display', 'block');
 
-        $("#topic_container").scrollTop($(curr_element).offset().top);
+        $("#topic_container").scrollTop($(curr_element).offset().top - 50);
 
         last_selected_element = curr_element;
     });
@@ -149,6 +151,7 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
     slideGraphPanel = function(){
         $('#graph_container').toggle('slide', {direction: 'right'}, 300, function(){
             $('#topic_container').css('width' , ($('#graph_container').css('display') == 'none') ? '100%' : '50%');
+            $('#graphs_buttons_panel').toggle('slide', {direction: 'right'}, 300);
         });
     };
 
@@ -162,8 +165,8 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
                 function(data, status){
                     data = JSON.parse(data);
                     if(data.status == "ok"){
-                        $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight - 40 - 35) +"' data='" + data.graph + "'></graph-datalet>");
-                        $("#toolbar-graph-title").html('Datalet graph');
+                        $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight) +"' data='" + data.graph + "'></graph-datalet>");
+                        $("#toolbar-graph-title").html('Datalets graph');
                         $("#datalet_graph").css('border-bottom-style','solid');
                         $("#comment_graph").css('border-bottom-style','none');
                         $("#user_graph").css('border-bottom-style','none');
@@ -182,7 +185,7 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
                 function(data, status){
                     data = JSON.parse(data);
                     if(data.status == "ok"){
-                        $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight - 40 - 35) +"' data='" + data.graph + "'></graph-datalet>");
+                        $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight) +"' data='" + data.graph + "'></graph-datalet>");
                         $("#toolbar-graph-title").html('Comments graph');
                         $("#comment_graph").css('border-bottom-style','solid');
                         $("#datalet_graph").css('border-bottom-style','none');
@@ -202,7 +205,7 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
                 function(data, status){
                     data = JSON.parse(data);
                     if(data.status == "ok"){
-                        $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight - 40 - 35) +"' data='" + data.graph + "'></graph-datalet>");
+                        $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight) +"' data='" + data.graph + "'></graph-datalet>");
                         $("#toolbar-graph-title").html('Users graph');
                         $("#user_graph").css('border-bottom-style','solid');
                         $("#comment_graph").css('border-bottom-style','none');
@@ -275,6 +278,12 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
 <paper-header-panel>
     <paper-toolbar class="toolbar-main">
         <div class="title"><h4>{$public_room->subject}</h4></div>
+        <div id="graphs_buttons_panel">
+            <paper-icon-button id="datalet_graph" paper-drawer-toggle icon="assessment" onClick="dataletGraphShow()"></paper-icon-button>
+            <paper-icon-button id="comment_graph" paper-drawer-toggle icon="speaker-notes" onClick="commentGraphShow()"></paper-icon-button>
+            <paper-icon-button id="user_graph" paper-drawer-toggle icon="account-circle" onClick="usersGraphShow()"></paper-icon-button>
+        </div>
+        <h5 id="toolbar-graph-title">Comments graph</h5>
         <paper-icon-button paper-drawer-toggle icon="language" onClick="slideGraphPanel()"></paper-icon-button>
     </paper-toolbar>
 </paper-header-panel>
@@ -293,12 +302,6 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
     </paper-material>
 
     <paper-material elevation="1" animated id="graph_container">
-        <paper-toolbar class="toolbar-graph">
-            <paper-icon-button id="datalet_graph" paper-drawer-toggle icon="assessment" onClick="dataletGraphShow()"></paper-icon-button>
-            <paper-icon-button id="comment_graph" paper-drawer-toggle icon="speaker-notes" onClick="commentGraphShow()"></paper-icon-button>
-            <paper-icon-button id="user_graph" paper-drawer-toggle icon="account-circle" onClick="usersGraphShow()"></paper-icon-button>
-            <h5 id="toolbar-graph-title" style="color: #ffffff;margin-left: 30px;">Comments graph</h5>
-        </paper-toolbar>
         <div id="graph_content">
         </div>
     </paper-material>

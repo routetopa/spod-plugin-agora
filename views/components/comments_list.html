@@ -1,3 +1,30 @@
+<style is="custom-style">
+
+    paper-fab.sentiment_badge{
+        --paper-fab-background:#e8e8e8;
+        --iron-icon-height: 14px;
+        --iron-icon-width: 14px;
+        height: 16px;
+        width: 16px;
+        position: absolute;
+        top: 8px;
+        left: 42px;
+        z-index: 1;
+    }
+
+    .sentiment_badge_neutral{
+        color: #A7B1B7;
+    }
+
+    .sentiment_badge_agree{
+        color: #60df20;
+    }
+
+    .sentiment_badge_disagree{
+        color: #FF1E1E;
+    }
+</style>
+
 <div id="{$cmpContext}">
     <div class="ow_comments_list">
         {if !empty($countToLoad) && $countToLoad > 0}
@@ -12,6 +39,16 @@
         <div class="ow_comments_item clearfix" id="comment_{$comment.commentId}">
             <div class="cnx_action" style="display: none">{$comment.cnxAction}</div>
             <div class="ow_comments_item_picture">
+                {capture assign=csentiment}commentSentiment{$comment.commentId}{/capture}
+                {if ${$csentiment} == 1}
+                   <paper-fab mini id="comment_sentiment_{$comment.commentId}" icon="thumbs-up-down" class="sentiment_badge sentiment_badge_neutral"></paper-fab>
+                {/if}
+                {if ${$csentiment} == 2}
+                   <paper-fab mini id="comment_sentiment_{$comment.commentId}" icon="thumb-up" class="sentiment_badge sentiment_badge_agree"></paper-fab>
+                {/if}
+                {if ${$csentiment} == 3}
+                   <paper-fab mini id="comment_sentiment_{$comment.commentId}" icon="thumb-down" class="sentiment_badge sentiment_badge_disagree"></paper-fab>
+                {/if}
                 {decorator name='avatar_item' data=$comment.avatar}
             </div>
             <div class="ow_comments_item_info">
@@ -29,7 +66,7 @@
             </div>
 
             {capture assign=clevel}commentsLevel{$comment.commentId}{/capture}
-            {if ${$clevel} <= 2}
+            {if ${$clevel} < 2}
             <div class="spod_public_bottom_bar" style="margin-left: 60px;">
                 <div class="spod_public_bottom_bar_control" style="padding-left: 20px; height: 27px;">
                     <div class="ow_miniic_control" style="width: 100%;padding-top: 5px;" id="comment_bar_{$comment.commentId}">

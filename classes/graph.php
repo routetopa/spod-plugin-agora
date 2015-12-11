@@ -134,16 +134,19 @@ class SPODPUBLIC_CLASS_Graph
 
                 for($j=0; $j < count( $this->datasetsMap[$url]); $j++){
                     $link = new Link($node->id,  $this->datasetsMap[$url][$j]);
-                    switch($sentiment->sentiment){
-                        case 1:
-                            $link->color = "#A7B1B7";
-                            break;
-                        case 2:
-                            $link->color = "#60df20";
-                            break;
-                        case 3:
-                            $link->color = "#FF1E1E";
-                            break;
+
+                    if(!empty($sentiment->sentiment)) {
+                        switch ($sentiment->sentiment) {
+                            case 1:
+                                $link->color = "#A7B1B7";
+                                break;
+                            case 2:
+                                $link->color = "#60df20";
+                                break;
+                            case 3:
+                                $link->color = "#FF1E1E";
+                                break;
+                        }
                     }
                     array_push($this->graph->links, $link);
                 }
@@ -228,16 +231,18 @@ class SPODPUBLIC_CLASS_Graph
                 break;
         }
 
-        switch($sentiment->sentiment){
-            case 1:
-                $link->color = "#A7B1B7";
-                break;
-            case 2:
-                $link->color = "#60df20";
-                break;
-            case 3:
-                $link->color = "#FF1E1E";
-                break;
+        if(!empty($sentiment->sentiment)) {
+            switch ($sentiment->sentiment) {
+                case 1:
+                    $link->color = "#A7B1B7";
+                    break;
+                case 2:
+                    $link->color = "#60df20";
+                    break;
+                case 3:
+                    $link->color = "#FF1E1E";
+                    break;
+            }
         }
 
         if($level > 0) array_push($this->graph->links, $link);

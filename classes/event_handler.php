@@ -45,7 +45,7 @@ class SPODPUBLIC_CLASS_EventHandler{
                                                                                 $("#show_datalet_comment_' . $id . '").css(\'background\', \'#5B646A\');
                                                                           },
                                                                           500);
-                     $("#topic_container").scrollTop($(\'#datalet_placeholder_' . $id . '_comment\').offset().top);
+                     $("#topic_container").scrollTop($(\'#datalet_placeholder_' . $id . '_comment\').offset().top - 50);
                });
             ');
         }
