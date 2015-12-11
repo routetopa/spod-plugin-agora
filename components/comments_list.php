@@ -218,7 +218,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                     });"
                 );
 
-                $this->assign('commentSentiment' . $value->getId(), SPODPUBLIC_BOL_Service::getInstance()->getCommentSentiment($value->getId())->sentiment);
+                @$this->assign('commentSentiment' . $value->getId(), SPODPUBLIC_BOL_Service::getInstance()->getCommentSentiment($value->getId())->sentiment);
                 $this->assign('commentsCount' . $value->getId(), BOL_CommentService::getInstance()->findCommentCount(SPODPUBLIC_BOL_Service::ENTITY_TYPE, $value->getId()));
                 $this->assign('commentsLevel' . $value->getId(), $this->params->level);
             }
