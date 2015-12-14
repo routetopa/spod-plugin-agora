@@ -1,5 +1,12 @@
 <?php
 define('MIN_SIZE', 4);
+define('ROOTNODECOLOR', '#FFBB78');
+define('L1NODECOLOR','#2196F3');
+define('L2NODECOLOR','#346db7');
+define('L3NODECOLOR','#90b2e0');
+define('AGREEEDGECOLOR','#60df20');
+define('DISAGREEEDGECOLOR','#FF1E1E');
+define('NEUTRALEDGECOLOR','#A7B1B7');
 
 class SPODPUBLIC_CLASS_Graph
 {
@@ -31,7 +38,7 @@ class SPODPUBLIC_CLASS_Graph
             $this->graph->links = array();
 
             $node = new Node(0, $pr->subject, intval(SPODPUBLIC_BOL_Service::getInstance()->getEntityId($id)["id"]));
-            $node->color = "#FFBB78";
+            $node->color = ROOTNODECOLOR;
             /*$node->fixed = true;
             $node->x = 200;
             $node->y = 200;*/
@@ -138,13 +145,13 @@ class SPODPUBLIC_CLASS_Graph
                     if(!empty($sentiment->sentiment)) {
                         switch ($sentiment->sentiment) {
                             case 1:
-                                $link->color = "#A7B1B7";
+                                $link->color = NEUTRALEDGECOLOR;
                                 break;
                             case 2:
-                                $link->color = "#60df20";
+                                $link->color = AGREEEDGECOLOR;
                                 break;
                             case 3:
-                                $link->color = "#FF1E1E";
+                                $link->color = DISAGREEEDGECOLOR;
                                 break;
                         }
                     }
@@ -160,13 +167,13 @@ class SPODPUBLIC_CLASS_Graph
                 $node->content = $curr_comment->message;
                 switch ($level) {
                     case 1:
-                        $node->color = "#2196F3";
+                        $node->color = L1NODECOLOR;
                         break;
                     case 2:
-                        $node->color = "#346db7";
+                        $node->color = L2NODECOLOR;
                         break;
                     case 3:
-                        $node->color = "#90b2e0";
+                        $node->color = L3NODECOLOR;
                         break;
                 }
 
@@ -203,15 +210,15 @@ class SPODPUBLIC_CLASS_Graph
         @$node->content = $curr_comment->message;
         switch ($level) {
             case 1:
-                $node->color = "#2196F3";
+                $node->color = L1NODECOLOR;
                 $node->r = 30;
                 break;
             case 2:
-                $node->color = "#346db7";
+                $node->color = L2NODECOLOR;
                 $node->r = 20;
                 break;
             case 3:
-                $node->color = "#90b2e0";
+                $node->color = L3NODECOLOR;
                 $node->r = 10;
                 break;
         }
@@ -234,13 +241,13 @@ class SPODPUBLIC_CLASS_Graph
         if(!empty($sentiment->sentiment)) {
             switch ($sentiment->sentiment) {
                 case 1:
-                    $link->color = "#A7B1B7";
+                    $link->color = NEUTRALEDGECOLOR;
                     break;
                 case 2:
-                    $link->color = "#60df20";
+                    $link->color = AGREEEDGECOLOR;
                     break;
                 case 3:
-                    $link->color = "#FF1E1E";
+                    $link->color = DISAGREEEDGECOLOR;
                     break;
             }
         }
