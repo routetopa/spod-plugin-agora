@@ -15,6 +15,7 @@ class SPODPUBLIC_CLASS_Graph
     private $normalizedNodeIds;
     private $datasetsMap;
     private $usersMap;
+    private $linksMap;
 
     private static $classInstance;
 
@@ -38,6 +39,7 @@ class SPODPUBLIC_CLASS_Graph
             $this->graph->links = array();
 
             $node = new Node(0, $pr->subject, intval(SPODPUBLIC_BOL_Service::getInstance()->getEntityId($id)["id"]));
+            $node->content = $pr->body;
             $node->color = ROOTNODECOLOR;
             /*$node->fixed = true;
             $node->x = 200;
@@ -54,7 +56,7 @@ class SPODPUBLIC_CLASS_Graph
                     $root =  new Node($id, "", 0);
                     $root->type = "comment";
 
-                    $node->r = MIN_SIZE  * sqrt($this->getCommentsGraph(null, $root, 0));
+                    $node->r = MIN_SIZE  * sqrt($this->getCommentsGraph($node, $root, 0));
                     break;
                 case "datalets":
                     $this->datasetsMap = array();
@@ -67,6 +69,7 @@ class SPODPUBLIC_CLASS_Graph
                 case "users":
                     $this->graph->nodes = array();
                     $this->usersMap = array();
+                    $this->linksMap = array();
 
                     $root =  new Node($id, "", 0);
                     $root->type = "user";
@@ -83,7 +86,8 @@ class SPODPUBLIC_CLASS_Graph
         $comments = BOL_CommentService::getInstance()->findFullCommentList(SPODPUBLIC_BOL_Service::ENTITY_TYPE, $curr_comment->id);
 
         @$user = BOL_UserService::getInstance()->getDisplayName($curr_comment->userId);
-        $user_img = "http://192.168.164.128/ow_static/themes/rtpa_matter/images/no-avatar-big.png";//BOL_AvatarService::getInstance()->findByUserId($curr_node->userId);
+        $avatar = BOL_AvatarService::getInstance()->getDataForUserAvatars(array($curr_comment->userId));
+        $user_img = $avatar[$curr_comment->userId]['src'];//"http://192.168.164.128/ow_static/themes/rtpa_matter/images/no-avatar-big.png";
 
 
         $node = null;
@@ -93,9 +97,12 @@ class SPODPUBLIC_CLASS_Graph
                     $user,
                     intval($curr_comment->id));
 
-                $node->type  = "user";
-                $node->r     = MIN_SIZE * 4;
-                $node->image = $user_img;
+                $node->type     = "user";
+                $node->userId  = $curr_comment->userId;
+                $node->r        = MIN_SIZE * 4;
+                $node->image    = $user_img;
+                $node->content  = $curr_comment->message;
+                $node->color    = "#ff1e1e";
                 array_push($this->graph->nodes, $node);
 
                 $this->usersMap[$user] = $node;
@@ -103,14 +110,16 @@ class SPODPUBLIC_CLASS_Graph
             $node = $this->usersMap[$user];
             //$this->usersMap[$user]->r++ ;
 
-            if ($father != null && $this->usersMap[$father->name] != null) {
+            if ($father != null && $this->usersMap[$father->name] != null && $father->userId != $curr_comment->userId && !isset($this->linksMap[$node->id."-".$this->usersMap[$father->name]->id]) ) {
                 $link = new Link($node->id, $this->usersMap[$father->name]->id);
+                $link->size = 0;
                 array_push($this->graph->links, $link);
+                $this->linksMap[$node->id."-".$this->usersMap[$father->name]->id] = $link;
             }
 
-            $node->content = $curr_comment->message;
-            $node->color = "#ff1e1e";
-
+            if(isset($this->linksMap[$node->id."-".$this->usersMap[$father->name]->id])){
+                $this->linksMap[$node->id."-".$this->usersMap[$father->name]->id]->size += 2;
+            }
         }
         $r = 0;
         for ($i = 0; $i < count($comments); $i++)
@@ -129,13 +138,38 @@ class SPODPUBLIC_CLASS_Graph
             $sentiment = SPODPUBLIC_BOL_Service::getInstance()->getCommentSentiment($curr_comment->id);
             if (count($datalet) > 0) {
 
+                $params = json_decode($datalet["params"]);
+
+
+                if(!empty($params->title))
+                   $nodeName = $params->title;
+                else if (!empty($params->description))
+                      $nodeName = $params->description;
+                     else
+                         $nodeName = substr($curr_comment->message,0,10). "...";
+
+
                 $node = new Node(count($this->graph->nodes),
-                    $datalet["component"],
-                    intval($curr_comment->id));
+                                 $nodeName,
+                                 intval($curr_comment->id));
+
+                $node->content = strip_tags($curr_comment->message)."<br><br><b>".parse_url($params->{'data-url'})['host']."</b>";
+
+                switch ($level) {
+                    case 1:
+                        $node->color = L1NODECOLOR;
+                        break;
+                    case 2:
+                        $node->color = L2NODECOLOR;
+                        break;
+                    case 3:
+                        $node->color = L3NODECOLOR;
+                        break;
+                }
 
                 $node->type = "datalet";
 
-                $url = json_decode($datalet["params"])->{'data-url'};
+                $url = $params->{'data-url'};
                 @$this->datasetsMap[$url] = ($this->datasetsMap[$url] == null) ? array() : $this->datasetsMap[$url];
                 array_push($this->datasetsMap[$url], $node->id);
 
@@ -163,19 +197,6 @@ class SPODPUBLIC_CLASS_Graph
                 array_push($this->graph->links, $link);
 
                 $curr_father = $node;
-
-                $node->content = $curr_comment->message;
-                switch ($level) {
-                    case 1:
-                        $node->color = L1NODECOLOR;
-                        break;
-                    case 2:
-                        $node->color = L2NODECOLOR;
-                        break;
-                    case 3:
-                        $node->color = L3NODECOLOR;
-                        break;
-                }
 
             }else{
                 $node = new Node(count($this->graph->nodes),
@@ -207,7 +228,9 @@ class SPODPUBLIC_CLASS_Graph
 
         $sentiment = SPODPUBLIC_BOL_Service::getInstance()->getCommentSentiment($curr_comment->id);
 
+        @$node->level = $level;
         @$node->content = $curr_comment->message;
+        @$node->father  = $father;
         switch ($level) {
             case 1:
                 $node->color = L1NODECOLOR;
@@ -223,7 +246,6 @@ class SPODPUBLIC_CLASS_Graph
                 break;
         }
 
-        if($level > 0) array_push($this->graph->nodes, $node);
         @$link = new Link(intval($father->id), intval($node->id));
 
         switch ($level) {
@@ -239,6 +261,7 @@ class SPODPUBLIC_CLASS_Graph
         }
 
         if(!empty($sentiment->sentiment)) {
+            $node->sentiment = $sentiment->sentiment;
             switch ($sentiment->sentiment) {
                 case 1:
                     $link->color = NEUTRALEDGECOLOR;
@@ -252,7 +275,10 @@ class SPODPUBLIC_CLASS_Graph
             }
         }
 
-        if($level > 0) array_push($this->graph->links, $link);
+        if($level > 0){
+            array_push($this->graph->nodes, $node);
+            array_push($this->graph->links, $link);
+        }
 
         $r = 0;
         for ($i = 0; $i < count($comments); $i++)
@@ -274,6 +300,10 @@ class Node{
     public $r;
     public $type;
     public $image;
+    public $sentiment;
+    public $level;
+    public $father;
+    public $userId;
 
     function __construct($id, $name, $originalId){
         $this->id         = $id;
@@ -287,6 +317,7 @@ class Link{
     public $target;
     public $value;
     public $color;
+    public $size;
 
     function __construct($source, $target){
         $this->source = $source;
