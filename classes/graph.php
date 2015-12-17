@@ -117,7 +117,7 @@ class SPODPUBLIC_CLASS_Graph
                 $this->linksMap[$node->id."-".$this->usersMap[$father->name]->id] = $link;
             }
 
-            if(isset($this->linksMap[$node->id."-".$this->usersMap[$father->name]->id])){
+            if(@isset($this->linksMap[$node->id."-".$this->usersMap[$father->name]->id])){
                 $this->linksMap[$node->id."-".$this->usersMap[$father->name]->id]->size += 2;
             }
         }
