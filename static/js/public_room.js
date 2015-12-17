@@ -47,6 +47,7 @@ dataletGraphShow = function(){
                 $("#datalet_graph").css('border-bottom-style','solid');
                 $("#comment_graph").css('border-bottom-style','none');
                 $("#user_graph").css('border-bottom-style','none');
+                $("#opinion_graph").css('border-bottom-style','none');
             }
         }
     );
@@ -67,6 +68,7 @@ commentGraphShow = function(){
                 $("#comment_graph").css('border-bottom-style','solid');
                 $("#datalet_graph").css('border-bottom-style','none');
                 $("#user_graph").css('border-bottom-style','none');
+                $("#opinion_graph").css('border-bottom-style','none');
             }
         }
     );
@@ -85,6 +87,28 @@ usersGraphShow = function(){
                 $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight) +"' data='" + data.graph + "'></graph-datalet>");
                 $("#toolbar-graph-title").html('Users graph');
                 $("#user_graph").css('border-bottom-style','solid');
+                $("#comment_graph").css('border-bottom-style','none');
+                $("#datalet_graph").css('border-bottom-style','none');
+                $("#opinion_graph").css('border-bottom-style','none');
+            }
+        }
+    );
+};
+
+opinionsGraphShow = function(){
+    selected_graph = "opinions";
+    $.post( SPODPUBLICROOM.get_graph_url,
+        {
+            id : SPODPUBLICROOM.public_room_id,
+            type : "comments"
+        },
+        function(data, status){
+            data = JSON.parse(data);
+            if(data.status == "ok"){
+                $("#graph_content").html("<graph-with-clustering-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight) +"' graph='" + data.graph + "'></graph-with-clustering-datalet>");
+                $("#toolbar-graph-title").html('Opinions graph');
+                $("#opinion_graph").css('border-bottom-style','solid');
+                $("#user_graph").css('border-bottom-style','none');
                 $("#comment_graph").css('border-bottom-style','none');
                 $("#datalet_graph").css('border-bottom-style','none');
             }
@@ -107,6 +131,9 @@ $(document).ready(function () {
             case "users":
                 usersGraphShow();
                 break;
+            case "opinions":
+                opinionsGraphShow();
+                break;
         }
     });
 
@@ -120,6 +147,9 @@ $(document).ready(function () {
                 break;
             case "users":
                 usersGraphShow();
+                break;
+            case "opinions":
+                opinionsGraphShow();
                 break;
         }
     });

@@ -6,6 +6,7 @@
 <link rel="import" href="{$components_url}bower_components/iron-flex-layout/iron-flex-layout.html">
 
 <link rel="import" href="{$components_url}datalets/graph-datalet/graph-datalet.html">
+<link rel="import" href="{$components_url}datalets/graph-datalet/graph-with-clustering-datalet.html">
 <link rel="import" href="{$components_url}bower_components/paper-fab-transitions/paper-fab-speed-dial.html">
 
 <style is="custom-style">
@@ -123,6 +124,7 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
     <paper-toolbar class="toolbar-main">
         <div class="title"><h4>{$public_room->subject}</h4></div>
         <div id="graphs_buttons_panel">
+            <paper-icon-button id="opinion_graph" paper-drawer-toggle icon="thumbs-up-down" onClick="opinionsGraphShow()"></paper-icon-button>
             <paper-icon-button id="datalet_graph" paper-drawer-toggle icon="assessment" onClick="dataletGraphShow()"></paper-icon-button>
             <paper-icon-button id="comment_graph" paper-drawer-toggle icon="speaker-notes" onClick="commentGraphShow()"></paper-icon-button>
             <paper-icon-button id="user_graph" paper-drawer-toggle icon="account-circle" onClick="usersGraphShow()"></paper-icon-button>

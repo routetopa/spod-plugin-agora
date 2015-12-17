@@ -155,16 +155,9 @@ class SPODPUBLIC_CLASS_Graph
 
                 $node->content = strip_tags($curr_comment->message)."<br><br><b>".parse_url($params->{'data-url'})['host']."</b>";
 
-                switch ($level) {
-                    case 1:
-                        $node->color = L1NODECOLOR;
-                        break;
-                    case 2:
-                        $node->color = L2NODECOLOR;
-                        break;
-                    case 3:
-                        $node->color = L3NODECOLOR;
-                        break;
+
+                if(!empty($sentiment->sentiment)) {
+                    $node->sentiment = $sentiment->sentiment;
                 }
 
                 $node->type = "datalet";
@@ -175,20 +168,6 @@ class SPODPUBLIC_CLASS_Graph
 
                 for($j=0; $j < count( $this->datasetsMap[$url]); $j++){
                     $link = new Link($node->id,  $this->datasetsMap[$url][$j]);
-
-                    if(!empty($sentiment->sentiment)) {
-                        switch ($sentiment->sentiment) {
-                            case 1:
-                                $link->color = NEUTRALEDGECOLOR;
-                                break;
-                            case 2:
-                                $link->color = AGREEEDGECOLOR;
-                                break;
-                            case 3:
-                                $link->color = DISAGREEEDGECOLOR;
-                                break;
-                        }
-                    }
                     array_push($this->graph->links, $link);
                 }
 
