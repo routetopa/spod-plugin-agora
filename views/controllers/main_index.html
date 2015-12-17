@@ -69,8 +69,20 @@
             this.$['fullsize-card'].publicRoom = undefined;
             this.$.pages.selected = 0;
         };
-
     });
+
+    function test()
+    {
+        var match = window.location.hash.match(/\/[0-9]*/g);
+        if(match)
+        {
+            $("#add_room_button").hide();
+            $("#fullsize-card")[0].color = "#FF0000";
+            $("#fullsize-card")[0].publicRoom = 1;
+            ODE.publicRoom = 1;
+            $("#pages")[0].selected = 1;
+        }
+    }
 
     function addRoom(event)
     {
@@ -128,9 +140,7 @@
 
         <paper-toolbar class="toolbar-main">
             <paper-icon-button paper-drawer-toggle icon="menu" on-tap="menuAction"></paper-icon-button>
-
             <!--<div class="title">Agora</div>-->
-
             <div class="clearfix" style="background-color:#2196F3;">
                 <a class="ow_logo ow_left" href="{$siteUrl}"></a>
                 <div class="ow_nav_btn"></div>
@@ -139,9 +149,6 @@
                 </div>
                 <div class="ow_menu_wrap">{component class='BASE_CMP_MainMenu' responsive=true}</div>
             </div>
-
-
-
             <!--<search-panel-controllet right-direction="true"></search-panel-controllet>-->
             <!--<paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>-->
         </paper-toolbar>
