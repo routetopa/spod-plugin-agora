@@ -69,20 +69,21 @@
             this.$['fullsize-card'].publicRoom = undefined;
             this.$.pages.selected = 0;
         };
-    });
 
-    function test()
-    {
-        var match = window.location.hash.match(/\/[0-9]*/g);
-        if(match)
-        {
-            $("#add_room_button").hide();
-            $("#fullsize-card")[0].color = "#FF0000";
-            $("#fullsize-card")[0].publicRoom = 1;
-            ODE.publicRoom = 1;
-            $("#pages")[0].selected = 1;
-        }
-    }
+        window.addEventListener('fullsize-page-with-card-controllet_attached', function(){
+            var match = window.location.hash.match(/\/[0-9]*/g);
+            if(match)
+            {
+                var roomId = match[0].replace("/","");
+                $("#add_room_button").hide();
+                $("#fullsize-card")[0].color = $("#"+roomId).css('background-color');
+                $("#fullsize-card")[0].publicRoom = roomId;
+                ODE.publicRoom = roomId;
+                $("#pages")[0].selected = 1;
+            }
+        });
+
+    });
 
     function addRoom(event)
     {
