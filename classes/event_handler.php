@@ -27,7 +27,7 @@ class SPODPUBLIC_CLASS_EventHandler{
         $comment = $event->getItem();
         $id = $comment->getId();
 
-        OW::getDocument()->addOnloadScript('$("#datalet_placeholder_' . $id . '_comment").css("display", "none");');
+        /*OW::getDocument()->addOnloadScript('$("#datalet_placeholder_' . $id . '_comment").css("display", "none");');
 
         $datalet = ODE_BOL_Service::getInstance()->getDataletByPostIdWhereArray($id, array("comment", "public-room"));
 
@@ -48,7 +48,7 @@ class SPODPUBLIC_CLASS_EventHandler{
                      $("#topic_container").scrollTop($(\'#datalet_placeholder_' . $id . '_comment\').offset().top - 50);
                });
             ');
-        }
+        }*/
     }
 
 }
