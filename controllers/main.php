@@ -15,7 +15,7 @@ class SPODPUBLIC_CTRL_Main extends OW_ActionController
         $agora = SPODPUBLIC_BOL_Service::getInstance()->getAgora();
         $timeSortedAgora = $agora;
 
-        $max = $this->getMax($agora);
+        $max = $this->getMaxSetUsername($agora);
 
         $this->field = "opendata";
         usort($agora, array($this, "compare"));
@@ -39,8 +39,9 @@ class SPODPUBLIC_CTRL_Main extends OW_ActionController
         foreach($a as $item)
         {
             $step = floor((100*$item->views)/$max);
-            $item->color = $this->getColor($step);
-            $item->timestamp = date('j F Y h:i',strtotime($item->timestamp));
+            $item->color      = $this->getColor($step);
+            $item->colorStep  = ($step > 49) ? "many" : "few";
+            $item->timestamp  = date('j F Y h:i',strtotime($item->timestamp));
         }
 
         return $a;
@@ -67,11 +68,13 @@ class SPODPUBLIC_CTRL_Main extends OW_ActionController
             return ($a->$field < $b->$field) ? -1:1;
     }
 
-    private function getMax($a)
+    private function getMaxSetUsername($a)
     {
         $max = 0;
         foreach($a as $item)
         {
+            $item->owner = BOL_UserService::getInstance()->getUserName($item->ownerId);
+
             if($item->views > $max)
                 $max = $item->views;
         }
