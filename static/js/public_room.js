@@ -16,6 +16,7 @@ window.addEventListener('graph-datalet_node-clicked', function(e){
     $('div[id^="nc_"]').css('display', 'none');
 
     $('div[id^="datalet_placeholder_"]').css('display', 'none');
+    $('div[id^="datalet_placeholder_' + e.detail.node.originalId + '"]' ).css('display', 'block');
     $('.show_datalet').css('background', '#2196F3');
 
     $(curr_element).parents('div[id^="nc_"]').css('display', 'block');
@@ -42,7 +43,7 @@ dataletGraphShow = function(){
         function(data, status){
             data = JSON.parse(data);
             if(data.status == "ok"){
-                $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight) +"' data='" + data.graph + "'></graph-datalet>");
+                $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight) +"' graph='" + data.graph + "'></graph-datalet>");
                 $("#toolbar-graph-title").html('Datalets graph');
                 $("#datalet_graph").css('border-bottom-style','solid');
                 $("#comment_graph").css('border-bottom-style','none');
@@ -63,7 +64,7 @@ commentGraphShow = function(){
         function(data, status){
             data = JSON.parse(data);
             if(data.status == "ok"){
-                $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight) +"' data='" + data.graph + "'></graph-datalet>");
+                $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight) +"' graph='" + data.graph + "'></graph-datalet>");
                 $("#toolbar-graph-title").html('Comments graph');
                 $("#comment_graph").css('border-bottom-style','solid');
                 $("#datalet_graph").css('border-bottom-style','none');
@@ -84,7 +85,7 @@ usersGraphShow = function(){
         function(data, status){
             data = JSON.parse(data);
             if(data.status == "ok"){
-                $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight) +"' data='" + data.graph + "'></graph-datalet>");
+                $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight) +"' graph='" + data.graph + "'></graph-datalet>");
                 $("#toolbar-graph-title").html('Users graph');
                 $("#user_graph").css('border-bottom-style','solid');
                 $("#comment_graph").css('border-bottom-style','none');
@@ -116,42 +117,33 @@ opinionsGraphShow = function(){
     );
 };
 
+selectGraph = function() {
+    switch(selected_graph){
+        case "comment":
+            commentGraphShow();
+            break;
+        case "datalet":
+            dataletGraphShow();
+            break;
+        case "users":
+            usersGraphShow();
+            break;
+        case "opinions":
+            opinionsGraphShow();
+            break;
+    }
+};
+
 $(document).ready(function () {
     $('#topic_container').perfectScrollbar();
     $('#graph_content').perfectScrollbar();
 
     OW.bind('base.comment_added', function(e){
-        switch(selected_graph){
-            case "comment":
-                commentGraphShow();
-                break;
-            case "datalet":
-                dataletGraphShow();
-                break;
-            case "users":
-                usersGraphShow();
-                break;
-            case "opinions":
-                opinionsGraphShow();
-                break;
-        }
+       selectGraph();
     });
 
     OW.bind('base.comment_delete', function(e){
-        switch(selected_graph){
-            case "comment":
-                commentGraphShow();
-                break;
-            case "datalet":
-                dataletGraphShow();
-                break;
-            case "users":
-                usersGraphShow();
-                break;
-            case "opinions":
-                opinionsGraphShow();
-                break;
-        }
+        selectGraph();
     });
 
     $(".sentiment-button").live("click", function()
@@ -171,6 +163,24 @@ $(document).ready(function () {
                 $(this).attr('sentiment', '1');
                 break;
         }
+    });
+
+    $(".ow_comments_item_info").live("mouseover", function(){
+        try {
+            if (selected_graph != "opinions")
+                document.querySelector('graph-datalet').fire("graph-datalet_on-node-hover", {"id": $(this).attr("id").split("_")[1]});
+            else
+                document.querySelector('graph-with-clustering-datalet').fire("graph-datalet_on-node-hover", {"id": $(this).attr("id").split("_")[1]});
+        }catch(e){}
+    });
+
+    $(".ow_comments_item_info").live("mouseout", function(){
+        try {
+            if (selected_graph != "opinions")
+                document.querySelector('graph-datalet').fire("graph-datalet_on-node-out", {"id": $(this).attr("id").split("_")[1]});
+            else
+                document.querySelector('graph-with-clustering-datalet').fire("graph-datalet_on-node-out", {"id": $(this).attr("id").split("_")[1]});
+        }catch(e){}
     });
 });
 

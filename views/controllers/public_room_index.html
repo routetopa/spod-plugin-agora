@@ -2,6 +2,7 @@
 <link rel="import" href="{$components_url}bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="{$components_url}bower_components/paper-material/paper-material.html">
 <link rel="import" href="{$components_url}bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="{$components_url}bower_components/paper-tooltip/paper-tooltip.html">
 <link rel="import" href="{$components_url}bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="{$components_url}bower_components/iron-flex-layout/iron-flex-layout.html">
 
@@ -112,6 +113,15 @@
         color: #ffffff;
         margin-left: 30px;
     }
+
+    paper-dialog {
+        padding : 10px;
+        border: 2px solid;
+        border-color: #2196F3;
+        /*background-color: var(--paper-light-green-50);*/
+        height: 80%;
+        overflow: scroll;
+    }
 </style>
 
 {style}
@@ -122,15 +132,21 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
 
 <paper-header-panel>
     <paper-toolbar class="toolbar-main">
+        <paper-icon-button id="helper" paper-drawer-toggle icon="help-outline" onClick="showHelper()"></paper-icon-button>
         <div class="title"><h4>{$public_room->subject}</h4></div>
         <div id="graphs_buttons_panel">
-            <paper-icon-button id="opinion_graph" paper-drawer-toggle icon="thumbs-up-down" onClick="opinionsGraphShow()"></paper-icon-button>
-            <paper-icon-button id="datalet_graph" paper-drawer-toggle icon="assessment" onClick="dataletGraphShow()"></paper-icon-button>
             <paper-icon-button id="comment_graph" paper-drawer-toggle icon="speaker-notes" onClick="commentGraphShow()"></paper-icon-button>
+            <paper-tooltip for="comment_graph">Comments graph</paper-tooltip>
+            <paper-icon-button id="datalet_graph" paper-drawer-toggle icon="assessment" onClick="dataletGraphShow()"></paper-icon-button>
+            <paper-tooltip for="datalet_graph">Datalets graph</paper-tooltip>
             <paper-icon-button id="user_graph" paper-drawer-toggle icon="account-circle" onClick="usersGraphShow()"></paper-icon-button>
+            <paper-tooltip for="user_graph">Users graph</paper-tooltip>
+            <paper-icon-button id="opinion_graph" paper-drawer-toggle icon="thumbs-up-down" onClick="opinionsGraphShow()"></paper-icon-button>
+            <paper-tooltip for="opinion_graph">Opinions graph</paper-tooltip>
         </div>
         <h5 id="toolbar-graph-title">Comments graph</h5>
-        <paper-icon-button paper-drawer-toggle icon="language" onClick="slideGraphPanel()"></paper-icon-button>
+        <paper-icon-button id="slide_graph_button" paper-drawer-toggle icon="language" onClick="slideGraphPanel()"></paper-icon-button>
+        <paper-tooltip for="slide_graph_button">Open graph panel</paper-tooltip>
     </paper-toolbar>
 </paper-header-panel>
 
@@ -152,6 +168,8 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
         </div>
     </paper-material>
 </div>
+
+{$helper}
 
 <!-- ODE PRIVATE-ROOM -->
 <div>

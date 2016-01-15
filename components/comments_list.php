@@ -168,7 +168,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
             $comment = BOL_CommentService::getInstance()->findComment($entity->entityId);
             $level++;
         }
-        return $level;
+        return $level - 1;
 
     }
 
@@ -214,8 +214,9 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                                      $("#datalet_placeholder_' . $value->getId() . '_comment").toggle(\'fade\',
                                                                                           {direction: \'top\'},
                                                                                           function(){
-                                                                                             if($("#datalet_placeholder_' . $value->getId() . '_comment").css(\'display\') == \'none\')
+                                                                                             if($("#datalet_placeholder_' . $value->getId() . '_comment").css(\'display\') == \'none\'){
                                                                                                 $("#show_datalet_comment_' . $value->getId() . '").css(\'background\', \'#2196F3\');
+                                                                                             }
                                                                                              else
                                                                                                 $("#show_datalet_comment_' . $value->getId() . '").css(\'background\', \'#5B646A\');
                                                                                           },

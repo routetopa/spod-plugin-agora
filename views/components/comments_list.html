@@ -36,7 +36,7 @@
         <div class="ow_nocontent">{text key="base+comment_no_comments"}</div>
         {else}
         {foreach from=$comments item='comment'}
-        <div class="ow_comments_item clearfix" id="comment_{$comment.commentId}">
+        <div class="ow_comments_item clearfix">
             <div class="cnx_action" style="display: none">{$comment.cnxAction}</div>
             <div class="ow_comments_item_picture">
                 {capture assign=csentiment}commentSentiment{$comment.commentId}{/capture}
@@ -51,7 +51,7 @@
                 {/if}
                 {decorator name='avatar_item' data=$comment.avatar}
             </div>
-            <div class="ow_comments_item_info">
+            <div class="ow_comments_item_info" id="comment_{$comment.commentId}">
                 <span class="{if !empty($comment.cnxAction)}ow_comments_date_hover {/if}ow_comments_date ow_nowrap ow_tiny ow_remark">{$comment.date}</span>
                 <div class="ow_comments_item_header"><a href="{$comment.profileUrl}">{$comment.displayName}</a></div>
 

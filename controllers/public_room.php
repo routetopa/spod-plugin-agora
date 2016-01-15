@@ -53,6 +53,9 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
             $commentsParams->level = 0;
             $commentsParams->nodeId = 0;
 
+            $helperCmp = new SPODPUBLIC_CMP_HelperPublicRoom();
+            $this->addComponent('helper', $helperCmp);
+
             $commentCmp = new SPODPUBLIC_CMP_Comments($commentsParams);
             $this->addComponent('comments', $commentCmp);
 

@@ -121,11 +121,10 @@ class SPODPUBLIC_CLASS_Graph
                 $this->linksMap[$node->id."-".$this->usersMap[$father->name]->id]->size += 2;
             }
         }
-        $r = 0;
         for ($i = 0; $i < count($comments); $i++)
-            $r += $this->getUsersGraph($node,
-                $comments[$i],
-                $level + 1);
+            $this->getUsersGraph($node,
+                                 $comments[$i],
+                                 $level + 1);
 
     }
 
@@ -185,7 +184,7 @@ class SPODPUBLIC_CLASS_Graph
             }
         }else{
             //ODE plugin is not active then the datalets graph cannot be created
-            return;
+            return 0;
         }
 
         $r = 0;
@@ -195,7 +194,7 @@ class SPODPUBLIC_CLASS_Graph
                                           $level + 1);
 
         $node->r = MIN_SIZE *((count($comments)==0)? 1 : sqrt($r));
-        return  (count($comments)==0)? 1 : $r + 1;
+        return (count($comments)==0)? 1 : $r + 1;
     }
 
     private function getCommentsGraph($father ,$curr_comment, $level)
@@ -207,9 +206,9 @@ class SPODPUBLIC_CLASS_Graph
 
         $sentiment = SPODPUBLIC_BOL_Service::getInstance()->getCommentSentiment($curr_comment->id);
 
-        @$node->level = $level;
-        @$node->content = $curr_comment->message;
-        @$node->father  = $father;
+        @$node->level     = $level;
+        @$node->content   = $curr_comment->message;
+        @$node->father    = $father;
         switch ($level) {
             case 1:
                 $node->color = L1NODECOLOR;

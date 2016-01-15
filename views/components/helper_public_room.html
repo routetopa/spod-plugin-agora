@@ -1,0 +1,55 @@
+<link rel="import" href="{$components_url}bower_components/paper-dialog/paper-dialog.html">
+
+<style>
+    #scroll_content{
+        position: relative;
+        overflow: auto;
+    }
+    div.cell{
+        padding: 20px;
+    }
+
+    ul.cell-list {
+        list-style-type: circle;
+    }
+
+    li{
+       margin-left: 20px;
+    }
+</style>
+
+<paper-dialog id="helpDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop>
+    <h2>Public room helper</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <div id="scroll_content">
+        <div class="horizontal layout">
+            <div class="vertical layout cell">
+                <img src="{$staticResourcesUrl}/images/pubroom1.gif">
+            </div>
+            <div class="vetical layout cell">
+                <p>Rooms are split vertically, on the left side there is a threaded chat (enabled for the use of open data) meanwhile on the right there is an area, hidden by default, dedicated to Graphs.</p>
+            </div>
+            <div class="vertical layout cell">
+                <img src="{$staticResourcesUrl}/images/pubroom2.gif">
+            </div>
+            <div class="vertical layout cell">
+                <p>The threaded chat has a maximum of three nested level. The number of nested levels is limited to avoid straying too far from the main topic and make less readable the conversation.</p>
+            </div>
+        </div>
+        <div class="horizontal layout">
+            <div class="vertical layout cell">
+                There are four graph:
+                <ul class="cell-list">
+                    <li><b>Comments Graph</b>:  tree of the comments, where the nodes represent the comments and the edges the parent-child relations. The dimension of a node is directly proportional to the magnitude of sub-tree (numbers of nested comments). The node color can be green, red or blue, depending on the comments, respectively in agreement, disagreement or neutral with the
+                        parent comment. On mouse over a node you can read the comment that refers to that node and on click the threaded chat will move to and will highlight the selected comment. </li>
+                    <li><b>Datalets Graph</b>:  graph of datalets, where the nodes represent the datalets, the edges can represent a parent-child relations or the use of the same dataset. The dimension of a node is directly proportional to the magnitude of sub-tree (numbers of nested comments). On mouse over a node you can read the comment that refers to that node and on click the threaded chat will move to and will highlight the selected datalet.</li>
+                    <li><b>Users Graph</b>: graph of users, where the nodes represent the users participating in the discussion, the edges represent the presence of interaction between two users, and the thickness  is  directly proportional to the number of interactions. </li>
+                    <li><b>Opinions Graph</b>: comments graph with the green comments grouped. That's because the sentiments of agreement rowing in the same directions while can not say the same of the sentiments of disagreement which may diverge from each other.</li>
+                </ul>
+            </div>
+            <div class="vertical layout cell">
+                <img src="{$staticResourcesUrl}/images/pubroom3.gif">
+            </div>
+        </div>
+    </div>
+</paper-dialog>
