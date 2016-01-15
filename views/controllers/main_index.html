@@ -190,8 +190,8 @@
                                 room-color="#{$room->color}"
                                 open-data="{$room->opendata}"
                                 comments="{$room->comments}"
-                                room-width="{if $room->opendata > $openDataMedian}400{else}200{/if}"
-                                room-height="{if $room->comments > $commentsMedian}400{else}200{/if}"
+                                room-width="{if $room->opendata > $openDataMedian}grid-item-w40{else}grid-item-w20{/if}"
+                                room-height="{if $room->comments > $commentsMedian}grid-item-h400{else}grid-item-h200{/if}"
                             ></room-controllet>
                         {/foreach}
                     </animated-grid-controllet>
