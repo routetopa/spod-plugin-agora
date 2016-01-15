@@ -161,7 +161,7 @@
 
                     <animated-grid-controllet on-tile-click="_onTileClick">
                         {foreach $rooms as $room}
-                            <div id="{$room->id}" class="grid-item
+                            <!--<div id="{$room->id}" openData="{$room->opendata}" class="grid-item
 
                                     {if $room->opendata > $openDataMedian}
                                         grid-item-w40
@@ -180,7 +180,18 @@
                                 <div class="room-body"><span>{$room->body}</span></div>
                                 <div class="room-subject"><span>{$room->subject}</span></div>
                                 <div class="room-timestamp">{$room->timestamp}</div>
-                            </div>
+                            </div>-->
+                            <room-controllet
+                                id="{$room->id}"
+                                body="{$room->body}"
+                                subject="{$room->subject}"
+                                timestamp="{$room->timestamp}"
+                                color="{$room->color}"
+                                open-data="{$room->opendata}"
+                                comments="{$room->comments}"
+                                room-width="{if $room->opendata > $openDataMedian}40{else}20{/if}"
+                                room-height="{if $room->comments > $commentsMedian}400{else}200{/if}"
+                            ></room-controllet>
                         {/foreach}
                     </animated-grid-controllet>
 
