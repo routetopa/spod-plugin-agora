@@ -190,10 +190,11 @@
                                 subject="{$room->subject}"
                                 timestamp="{$room->timestamp}"
                                 room-color="#{$room->color}"
-                                open-data="{$room->opendata}"
+                                datasets="{$room->opendata}"
                                 comments="{$room->comments}"
                                 room-width={if $room->opendata > $openDataMedian}"grid-item-w40"{else}"grid-item-w20"{/if}
                                 room-height={if $room->comments > $commentsMedian}"grid-item-h400"{else}"grid-item-h200"{/if}
+                                room-views={$room->views}
                             ></room-controllet>
                         {/foreach}
                     </animated-grid-controllet>
