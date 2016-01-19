@@ -32,6 +32,10 @@ class SPODPUBLIC_CTRL_Main extends OW_ActionController
 
         $this->addComponent('main_menu', new BASE_CMP_MainMenu());
         $this->addComponent('console', new BASE_CMP_Console());
+
+        $js = UTIL_JsGenerator::composeJsString('ODE.currentUsername = {$current_username}',
+                array('current_username' => BOL_UserService::getInstance()->getUserName(OW::getUser()->getId())));
+        OW::getDocument()->addOnloadScript($js);
     }
 
     private function setColor($a, $max)

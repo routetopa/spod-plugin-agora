@@ -95,20 +95,20 @@
 
     function createRoom(event)
     {
-        var room = document.createElement('div');
-        room.setAttribute('id', event.id);
-        room.setAttribute('class', 'grid-item grid-item-w20 grid-item-h200 grid-item-c4');
+        var room = document.createElement('room-controllet');
 
-        var roomBody = document.createElement('div');
-        roomBody.setAttribute('class', 'room-body');
-        roomBody.innerHTML = event.body;
-
-        var  roomSubject = document.createElement('div');
-        roomSubject.setAttribute('class', 'room-subject');
-        roomSubject.innerHTML = event.subject;
-
-        room.appendChild(roomBody);
-        room.appendChild(roomSubject);
+        room.setAttribute('room-owner', ODE.currentUsername);
+        room.setAttribute('room-shape', '["few","few","few"]');
+        room.setAttribute('room-id', event.id);
+        room.setAttribute('body', event.body);
+        room.setAttribute('subject', event.subject);
+        room.setAttribute('timestamp', 'Now');
+        room.setAttribute('room-color', '#2C29FF');
+        room.setAttribute('datasets', '0');
+        room.setAttribute('comments', '0');
+        room.setAttribute('room-width', 'grid-item-w20');
+        room.setAttribute('room-height', 'grid-item-h200');
+        room.setAttribute('room-views', '0');
 
         return room;
     }
