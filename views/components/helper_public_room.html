@@ -1,5 +1,4 @@
-<link rel="import" href="{$components_url}bower_components/paper-dialog/paper-dialog.html">
-
+<link rel="import" href="{$components_url}bower_components/paper-fab/paper-fab.html">
 <style>
     #scroll_content{
         position: relative;
@@ -22,77 +21,76 @@
     }
 </style>
 
-<paper-dialog id="helpDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop>
-    <h2>Public room helper</h2>
-    <p>
-        Public room is a place when the users can discuss about previously created topic in the Agor&#224 area.
-    </p>
-    <div id="scroll_content">
-        <div class="horizontal layout">
-            <div class="cell">
-                <img src="{$staticResourcesUrl}images/pubroom1.gif">
-            </div>
-            <div class="cell">
-                <p>Rooms are split vertically, on the left side there is a threaded chat (enabled for the use of open data) meanwhile on the right there is an area, hidden by default, dedicated to Graphs.</p>
-            </div>
-        </div>
-        <div class="horizontal layout">
-            <div class="cell">
-                <img src="{$staticResourcesUrl}images/pubroom2.gif">
-            </div>
-            <div class="vertical layout cell">
-                <p>
-                    The threaded chat has a maximum of three nested level. The number of nested levels is limited to avoid straying too far from the main topic and make less readable the conversation.
-                    Every time you add a new post in the chat, you can express you opinion by selecting from the Opinion Button :
-                    <ul class="cell-list">
-                       <li>
-                           Neutral(<b style="color:#1F77B4">Blue</b> color node in the graph)<paper-fab mini icon="thumbs-up-down" aria-disabled="false" elevation="1" class="opinion-button"></paper-fab>
-                       </li>
-                        <li>
-                           Agree(<b style="color:#2CA02C">Green</b> color node in the graph)<paper-fab mini icon="thumb-up" aria-disabled="false" elevation="1" class="opinion-button"></paper-fab>
-                        </li>
-                        <li>
-                            Desagree(<b style="color:#D62728">Red</b> color node in the graph)<paper-fab mini icon="thumb-down" aria-disabled="false" elevation="1" class="opinion-button"></paper-fab>
-                        </li>
-                    </ul>
 
-                </p>
-            </div>
+<h2>Public room helper</h2>
+<p>
+    Public room is a place when the users can discuss about previously created topic in the Agor&#224 area.
+</p>
+<div id="scroll_content">
+    <div class="horizontal layout">
+        <div class="cell">
+            <img src="{$staticResourcesUrl}images/pubroom1.gif">
         </div>
-        <div class="horizontal layout">
-            <div class="cell">
-                <img src="{$staticResourcesUrl}images/pubroom3.gif">
-            </div>
-            <div class="cell">
-                There are four graph:
-                <ul class="cell-list">
-                    <li><b>Comments Graph</b>:  tree of the comments, where the nodes represent the comments and the edges the parent-child relations. The dimension of a node is directly proportional to the magnitude of sub-tree (numbers of nested comments). The node color can be green, red or blue, depending on the comments, respectively in agreement, disagreement or neutral with the
-                        parent comment. On mouse over a node you can read the comment that refers to that node and on click the threaded chat will move to and will highlight the selected comment. </li>
-                    <li><b>Datalets Graph</b>:  graph of datalets, where the nodes represent the datalets, the edges can represent a parent-child relations or the use of the same dataset. The dimension of a node is directly proportional to the magnitude of sub-tree (numbers of nested comments). On mouse over a node you can read the comment that refers to that node and on click the threaded chat will move to and will highlight the selected datalet.</li>
-                    <li><b>Users Graph</b>: graph of users, where the nodes represent the users participating in the discussion, the edges represent the presence of interaction between two users, and the thickness  is  directly proportional to the number of interactions. </li>
-                    <li><b>Opinions Graph</b>: comments graph with the green comments grouped. That's because the sentiments of agreement rowing in the same directions while can not say the same of the sentiments of disagreement which may diverge from each other.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="horizontal layout">
-            <div class="cell">
-                <img src="{$staticResourcesUrl}images/pubroom4.gif">
-            </div>
-            <div class="cell">
-               <p>The graph is <b>interactive</b> : you can pass with mouse on node to see information related to it. Moreover you can pass with mouse over a comment to see the corresponding node in the graph.
-                   By clicking on a node in graph you can see directly the comment in the threded chat.
-               </p>
-            </div>
-        </div>
-        <div class="horizontal layout">
-            <div class="cell">
-                <img src="{$staticResourcesUrl}images/pubroom5.gif">
-            </div>
-            <div class="cell">
-                <p>
-                    You can use the OpenData share button to create and post a new visualization at every level of the threaded chat.
-                </p>
-            </div>
+        <div class="cell">
+            <p>Rooms are split vertically, on the left side there is a threaded chat (enabled for the use of open data) meanwhile on the right there is an area, hidden by default, dedicated to Graphs.</p>
         </div>
     </div>
-</paper-dialog>
+    <div class="horizontal layout">
+        <div class="cell">
+            <img src="{$staticResourcesUrl}images/pubroom2.gif">
+        </div>
+        <div class="vertical layout cell">
+            <p>
+                The threaded chat has a maximum of three nested level. The number of nested levels is limited to avoid straying too far from the main topic and make less readable the conversation.
+                Every time you add a new post in the chat, you can express you opinion by selecting from the Opinion Button :
+                <ul class="cell-list">
+                   <li>
+                       Neutral(<b style="color:#1F77B4">Blue</b> color node in the graph)<paper-fab mini icon="thumbs-up-down" aria-disabled="false" elevation="1" class="opinion-button"></paper-fab>
+                   </li>
+                    <li>
+                       Agree(<b style="color:#2CA02C">Green</b> color node in the graph)<paper-fab mini icon="thumb-up" aria-disabled="false" elevation="1" class="opinion-button"></paper-fab>
+                    </li>
+                    <li>
+                        Desagree(<b style="color:#D62728">Red</b> color node in the graph)<paper-fab mini icon="thumb-down" aria-disabled="false" elevation="1" class="opinion-button"></paper-fab>
+                    </li>
+                </ul>
+
+            </p>
+        </div>
+    </div>
+    <div class="horizontal layout">
+        <div class="cell">
+            <img src="{$staticResourcesUrl}images/pubroom3.gif">
+        </div>
+        <div class="cell">
+            There are four graph:
+            <ul class="cell-list">
+                <li><b>Comments Graph</b>:  tree of the comments, where the nodes represent the comments and the edges the parent-child relations. The dimension of a node is directly proportional to the magnitude of sub-tree (numbers of nested comments). The node color can be green, red or blue, depending on the comments, respectively in agreement, disagreement or neutral with the
+                    parent comment. On mouse over a node you can read the comment that refers to that node and on click the threaded chat will move to and will highlight the selected comment. </li>
+                <li><b>Datalets Graph</b>:  graph of datalets, where the nodes represent the datalets, the edges can represent a parent-child relations or the use of the same dataset. The dimension of a node is directly proportional to the magnitude of sub-tree (numbers of nested comments). On mouse over a node you can read the comment that refers to that node and on click the threaded chat will move to and will highlight the selected datalet.</li>
+                <li><b>Users Graph</b>: graph of users, where the nodes represent the users participating in the discussion, the edges represent the presence of interaction between two users, and the thickness  is  directly proportional to the number of interactions. </li>
+                <li><b>Opinions Graph</b>: comments graph with the green comments grouped. That's because the sentiments of agreement rowing in the same directions while can not say the same of the sentiments of disagreement which may diverge from each other.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="horizontal layout">
+        <div class="cell">
+            <img src="{$staticResourcesUrl}images/pubroom4.gif">
+        </div>
+        <div class="cell">
+           <p>The graph is <b>interactive</b> : you can pass with mouse on node to see information related to it. Moreover you can pass with mouse over a comment to see the corresponding node in the graph.
+               By clicking on a node in graph you can see directly the comment in the threded chat.
+           </p>
+        </div>
+    </div>
+    <div class="horizontal layout">
+        <div class="cell">
+            <img src="{$staticResourcesUrl}images/pubroom5.gif">
+        </div>
+        <div class="cell">
+            <p>
+                You can use the OpenData share button to create and post a new visualization at every level of the threaded chat.
+            </p>
+        </div>
+    </div>
+</div>

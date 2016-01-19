@@ -1,5 +1,3 @@
-<link rel="import" href="{$components_url}bower_components/paper-dialog/paper-dialog.html">
-
 <style>
     #scroll_content{
         position: relative;
@@ -18,43 +16,54 @@
     }
 </style>
 
-<paper-dialog id="helpDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop>
-    <h2>Agor&#224 helper</h2>
-    <p>Agorà adds to SPOD a new area, where users can create a “public room” to start a new discussion/debate. The discussion is public therefore all users will be able to participate.
-        Once created a room, it can not be removed later. Each room has three “visual” parameters: colour, height and width.
-    </p>
-    <div id="scroll_content">
-        <div class="horizontal layout">
-            <div class="vertical layout cell">
-                <img src="{$staticResourcesUrl}images/agora1.png" style="width: 100%; height: 100%;">
-            </div>
-            <div class="vetical layout cell">
-                <p>When a user creates a Public room, he can create a set of recommended dataset. Recommended datasets are available to other users in the room that can use them if they want.
-                   Once created a room, it can not be removed later (the deletion of a room will be provided in the beta version, according to the role of the user).
-                </p>
-            </div>
+<h2>Agor&#224 helper</h2>
+<p>Agorà adds to SPOD a new area, where users can create a “public room” to start a new discussion/debate. The discussion is public therefore all users will be able to participate.
+    Once created a room, it can not be removed later. Each room has three “visual” parameters: colour, height and width.
+</p>
+<div id="scroll_content">
+    <div class="horizontal layout">
+        <div class="vertical layout cell">
+            <img src="{$staticResourcesUrl}images/agora1.gif" style="width: 60%; height: 60%;">
         </div>
-        <div class="horizontal layout">
-            <div class="vertical layout cell">
-                <img src="{$staticResourcesUrl}images/agora2.png" style="width: 100%; height: 100%;">
-            </div>
-            <div class="vetical layout cell">
-                <p>
-                    Each room is represented using a synthetic visualisation by three kind of graphical metaphors: colour, height and width:
-                    <ul class="cell-list">
-                      <li>
-                          Colour is a shade that goes from blue to red. If the room is little visited by users, it is considered as a cold topic and it will be shown in blue.
-                          The more visit has the room, the more reddish will be its colour. So the colour of the room is picked from a blue-to-red gradient proportionally to the number of visits: the least visited room will be represented in blue; the most visited room will be represented in red.
-                      </li>
-                      <li>Height is picked between two values, so a room can be short or tall (unlike the colour, there are no intermediate values). Short rooms will have fewer comments;
-                          while tall rooms will have a lot of comments.
-                      </li>
-                      <li>Width, just like height, is picked between two values, so a room can be narrow or wide. Narrow room will have fewer datalets used in it; while wide rooms will have a lot of datalets attached.
-                      </li>
-                    </ul>
-                    Height and Width are picked based on simple calculation. The plugin calculates the median of the number of comments per room (for the height) and the median of the number of datalets per room (for the weight). For instance, if a specific room has fewer comments than the median, that room will be short; otherwise it will be tall. Same reasoning applies for the weight and datasets per room.
-                </p>
-            </div>
+        <div class="vetical layout cell">
+            <p>
+                To create a new room just press the Add Room button and instet the subject and body for the room.
+            </p>
         </div>
     </div>
-</paper-dialog>
+
+    <div class="horizontal layout">
+        <div class="vertical layout cell">
+            <img src="{$staticResourcesUrl}images/agora2.gif" style="width: 100%; height: 100%;">
+        </div>
+        <div class="vetical layout cell">
+            <p>When a user creates a Public room, he can create a set of recommended dataset. Recommended datasets are available to other users in the room that can use them if they want.
+               Once created a room, it can not be removed later (the deletion of a room will be provided in the beta version, according to the role of the user).
+            </p>
+        </div>
+    </div>
+
+    <div class="horizontal layout">
+        <div class="vertical layout cell">
+            <img src="{$staticResourcesUrl}images/agora2.png" style="width: 100%; height: 100%;">
+        </div>
+        <div class="vetical layout cell">
+            <p>
+                Each room is represented using a synthetic visualisation by three kind of graphical metaphors: colour, height and width:
+                <ul class="cell-list">
+                  <li>
+                      Colour is a shade that goes from blue to red. If the room is little visited by users, it is considered as a cold topic and it will be shown in blue.
+                      The more visit has the room, the more reddish will be its colour. So the colour of the room is picked from a blue-to-red gradient proportionally to the number of visits: the least visited room will be represented in blue; the most visited room will be represented in red.
+                  </li>
+                  <li>Height is picked between two values, so a room can be short or tall (unlike the colour, there are no intermediate values). Short rooms will have fewer comments;
+                      while tall rooms will have a lot of comments.
+                  </li>
+                  <li>Width, just like height, is picked between two values, so a room can be narrow or wide. Narrow room will have fewer datalets used in it; while wide rooms will have a lot of datalets attached.
+                  </li>
+                </ul>
+                Height and Width are picked based on simple calculation. The plugin calculates the median of the number of comments per room (for the height) and the median of the number of datalets per room (for the weight). For instance, if a specific room has fewer comments than the median, that room will be short; otherwise it will be tall. Same reasoning applies for the weight and datasets per room.
+            </p>
+        </div>
+    </div>
+</div>
+

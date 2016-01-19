@@ -1,4 +1,4 @@
 <?php
-class SPODPUBLIC_CMP_HelperAgora extends SPODPUBLIC_CMP_Helper
+class SPODPUBLIC_CMP_HelperAgora extends ODE_CMP_Helper
 {
 }

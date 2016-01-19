@@ -59,7 +59,7 @@ class SPODPUBLIC_CTRL_Ajax extends OW_ActionController
             "message" => "Problem in graph creation."));
 
         exit;
-
     }
+
 }
 
