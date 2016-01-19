@@ -30,6 +30,12 @@ slideGraphPanel = function(){
     $('#graph_container').toggle('slide', {direction: 'right'}, 300, function(){
         $('#topic_container').css('width' , ($('#graph_container').css('display') == 'none') ? '100%' : '50%');
         $('#graphs_buttons_panel').toggle('slide', {direction: 'right'}, 300);
+        if($('#graph_container').css('display') == 'none'){
+            $("#toolbar-graph-title").html('Graph Panel');
+            selected_graph = null;
+        }else{
+            if(selected_graph == null) commentGraphShow();
+        }
     });
 };
 
@@ -185,6 +191,6 @@ $(document).ready(function () {
 });
 
 $(window).load(function() {
-    commentGraphShow();
+    //commentGraphShow();
     //slideGraphPanel();
 });
