@@ -91,7 +91,22 @@
         previewFloatBox.close();
         var room = createRoom(event);
         $('.grid').prepend(room).masonry('reloadItems').masonry('layout');
+
+        var myPublicRoomMenu = document.getElementById('my-public-room-menu');
+        var paperItem     = document.createElement('paper-item');
+        var paperItemBody = document.createElement('paper-item-body');
+        paperItem.setAttribute("onclick","SPODPUBLICROOM.handleSuggestedDataset("+event.id+")");
+        paperItemBody.setAttribute("two-lines","");
+        paperItemBody.innerHTML = event.subject;
+        paperItem.appendChild(paperItemBody);
+        myPublicRoomMenu.insertBefore(paperItem, myPublicRoomMenu.firstChild);
     }
+
+/*    function addFakeRoom()
+    {
+        var event = {id:"--", body:"--",subject:"--"};
+        addRoom(event);
+    }*/
 
     function createRoom(event)
     {
@@ -124,7 +139,7 @@
         </paper-toolbar>
 
         <app-sidebar drawer>
-            <paper-menu>
+            <paper-menu id="my-public-room-menu">
                 {foreach $userPublicRooms as $userRoom}
                     <paper-item onclick="SPODPUBLICROOM.handleSuggestedDataset({$userRoom->id})">
                         <!--<iron-icon icon="warning"></iron-icon>-->

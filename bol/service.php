@@ -121,6 +121,21 @@ class SPODPUBLIC_BOL_Service
         $pr->status    = 'approved';
         $pr->privacy   = 'everybody';
         SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($pr);
+
+        $event = new OW_Event('feed.action', array(
+            'pluginKey' => 'spodpublic',
+            'entityType' => 'spodpublic_public-room',
+            'entityId' => $pr->id,
+            'userId' => $ownerId
+        ), array(
+            'time' => time(),
+            'string' => $subject
+            /*,'view' => array(
+                'iconClass' => 'ow_ic_add'
+            )*/
+        ));
+        OW::getEventManager()->trigger($event);
+
         return $pr->id;
     }
 
