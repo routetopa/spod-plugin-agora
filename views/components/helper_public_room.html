@@ -25,12 +25,12 @@
 
 <h2>Public room helper</h2>
 <p>
-    Public room is a place when the users can discuss about previously created topic in the Agor&#224 area.
+    Public room is a place when the users can discuss about previously created topic in the Agora area.
 </p>
 <div id="scroll_content">
     <div class="horizontal layout cell">
 
-        <img src="{$staticResourcesUrl}images/pubroom1.gif" style="width: 100%; height: 100%;">
+        <img src="{$staticResourcesUrl}images/public_room_general.gif" style="width: 60%; height: 60%;">
 
         <div class="cell">
             <p>Rooms are split vertically, on the left side there is a threaded chat (enabled for the use of open data) meanwhile on the right there is an area, hidden by default, dedicated to Graphs.</p>
@@ -38,7 +38,7 @@
     </div>
     <div class="horizontal layout">
 
-       <img src="{$staticResourcesUrl}images/pubroom2.gif" style="width: 100%; height: 100%;">
+       <img src="{$staticResourcesUrl}images/public_room_tchat.gif" style="width: 60%; height: 60%;">
 
         <div class="vertical layout cell">
             <p>
@@ -61,36 +61,72 @@
     </div>
     <div class="horizontal layout cell">
 
-        <img src="{$staticResourcesUrl}images/pubroom3.gif" style="width: 100%; height: 100%;">
+        <img src="{$staticResourcesUrl}images/public_room_graph.gif" style="width: 60%; height: 60%;">
 
         <div class="cell">
-            There are four graph:
+            There are four graph:<br>
             <ul class="cell-list">
-                <li><b>Comments Graph</b>:  tree of the comments, where the nodes represent the comments and the edges the parent-child relations. The dimension of a node is directly proportional to the magnitude of sub-tree (numbers of nested comments). The node color can be green, red or blue, depending on the comments, respectively in agreement, disagreement or neutral with the
-                    parent comment. On mouse over a node you can read the comment that refers to that node and on click the threaded chat will move to and will highlight the selected comment. </li>
-                <li><b>Datalets Graph</b>:  graph of datalets, where the nodes represent the datalets, the edges can represent a parent-child relations or the use of the same dataset. The dimension of a node is directly proportional to the magnitude of sub-tree (numbers of nested comments). On mouse over a node you can read the comment that refers to that node and on click the threaded chat will move to and will highlight the selected datalet.</li>
-                <li><b>Users Graph</b>: graph of users, where the nodes represent the users participating in the discussion, the edges represent the presence of interaction between two users, and the thickness  is  directly proportional to the number of interactions. </li>
-                <li><b>Opinions Graph</b>: comments graph with the green comments grouped. That's because the sentiments of agreement rowing in the same directions while can not say the same of the sentiments of disagreement which may diverge from each other.</li>
+                <li>
+                    <b>Comments Graph</b>: tree of the comments, where each node represents a
+                    comment and the edges the parent-child relations. The dimension of a
+                    node is directly proportional to the numbers of nested comments,
+                    rooted in the node. The larger the node, the more comments are present
+                    below it in the discussion. The color can be green, red or blue,
+                    depending on the opinion. If you bring the mouse over a node (no
+                    click) you can read the comment of the node, and if you click the chat
+                    on the left will move and highlight the corresponding  comment.
+                </li>
+                <li>
+                    <b>Datalets Graph</b>: graph of datalets, where each node represents a
+                    datalet, and edges join datalet that uses the same dataset (but
+                    possibly with a different visualization).  The dimension of a node is
+                    directly proportional to the numbers of nested comments, rooted in the
+                    node. The larger the node, the more comments are present below it in
+                    the discussion.  If you bring the mouse over a node (no click) you can
+                    read the comment of the node and if you click the chat on the left
+                    will move and highlight the corresponding  comment.
+                </li>
+                <li>
+                    <b>Users Graph</b>:  graph of users, where each node represents a user that is
+                    participating in the discussion, and an edge joins to users that
+                    interacted (one answered a comment of the other). The thickness of the
+                    edge is directly proportional to the number of interactions.
+                    If you bring the mouse over a node (no click) you can read user's first comment.
+                </li>
+                <li>
+                    <b>Opinions Graph</b>: comments graph with the all the green (agree) adjacent
+                    comments are emphasized and grouped together. In this way, all the
+                    comments that seem to share a position are highlighted.
+                </li>
             </ul>
         </div>
     </div>
     <div class="horizontal layout cell">
 
-        <img src="{$staticResourcesUrl}images/pubroom4.gif" style="width: 100%; height: 100%;">
+        <img src="{$staticResourcesUrl}images/public_room_graphinter.gif" style="width: 60%; height: 60%;">
 
         <div class="cell">
-           <p>The graph is <b>interactive</b> : you can pass with mouse on node to see information related to it. Moreover you can pass with mouse over a comment to see the corresponding node in the graph.
-               By clicking on a node in graph you can see directly the comment in the threded chat.
+           <p>
+               Any graph is interactive: you can adjust the nodes as you like, by
+               clicking and dragging the nodes.
+               Any graph is informative: with mouse over the node, related
+               information is shown on top right.
+               Any graph is synchronized: by clicking on a node in the graph you can
+               see on the left the corresponding content in the threded chat.
            </p>
         </div>
     </div>
     <div class="horizontal layout cell">
 
-        <img src="{$staticResourcesUrl}images/pubroom5.gif" style="width: 100%; height: 100%;">
+        <img src="{$staticResourcesUrl}images/public_room_odpost.gif" style="width: 60%; height: 60%;">
 
         <div class="cell">
             <p>
-                You can use the OpenData share button to create and post a new visualization at every level of the threaded chat.
+                You can use the Datalet button to create and post a new visualization
+                of datasets at every level of the threaded chat. During this step, you
+                can easily select one of the suggested datasets (from the creator) or
+                add a new one.
+
             </p>
         </div>
     </div>
