@@ -128,8 +128,9 @@ class SPODPUBLIC_BOL_Service
             'entityId' => $pr->id,
             'userId' => $ownerId
         ), array(
+
             'time' => time(),
-            'string' => $subject
+            'string' => array('key' => 'spodpublic+create_new_room', 'vars'=>array('roomId' => $pr->id, 'roomSubject' => $subject))
             /*,'view' => array(
                 'iconClass' => 'ow_ic_add'
             )*/
