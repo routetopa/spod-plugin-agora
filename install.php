@@ -43,3 +43,6 @@ $groupName = 'spodpublic';
 $authorization->addGroup($groupName);
 $authorization->addAction($groupName, 'view', true);
 $authorization->addAction($groupName, 'add_comment');
+
+$path = OW::getPluginManager()->getPlugin('spodpublic')->getRootDir() . 'langs.zip';
+BOL_LanguageService::getInstance()->importPrefixFromZip($path, 'spodpublic');
