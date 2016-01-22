@@ -35,7 +35,7 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
 
             /* ODE */
             if(OW::getPluginManager()->isPluginActive('spodpr'))
-                $this->addComponent('private_room', new SPODPR_CMP_PrivateRoomCard('ow_attachment_btn', array('datalet', 'link')));
+                $this->addComponent('private_room', new SPODPR_CMP_PrivateRoomCard('ow_attachment_btn', array('datalet', 'link'),"public-room"));
             /* ODE */
 
             SPODPUBLIC_BOL_Service::getInstance()->addStat($this->public_room->id, 'views');
