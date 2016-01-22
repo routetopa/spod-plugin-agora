@@ -191,6 +191,7 @@ $(document).ready(function () {
 });
 
 $(window).load(function() {
+    ODE.public_room_is_active = true;
     //commentGraphShow();
     //slideGraphPanel();
 });
