@@ -1,12 +1,32 @@
 <link rel="import" href="{$components_url}bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="{$components_url}bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
+<link rel="import" href="{$components_url}bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="{$components_url}bower_components/paper-styles/color.html">
+<link rel="import" href="{$components_url}bower_components/iron-flex-layout/iron-flex-layout.html">
+
 <style>
+    .floatbox_header{
+        display: none;
+    }
+
+    .floatbox_body{
+        font-family: 'Roboto', sans-serif;
+        background-color: #eeeeee;
+        padding : 3px;
+    }
+
+    paper-fab.opinion-button{
+        background:#5B646A;
+        left: 15px;
+    }
+
     #scroll_content{
         position: relative;
-        overflow: auto;
+        overflow: scroll;
     }
     div.cell{
         padding: 20px;
-        margin: 20px;
+        margin-left: 20px;
     }
 
     ul.cell-list {
@@ -14,119 +34,209 @@
     }
 
     li{
-       margin-left: 20px;
+        margin-left: 20px;
     }
 
-    paper-fab.opinion-button{
-        background:#5B646A;
+    paper-scroll-header-panel {
+        /*position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;*/
+        height: 70vh;
+    }
+
+    .tall {
+        background-color: #2196F3;
+    }
+
+    .tall .title {
+        padding: 20px;
+        font-size: 40px;
+        color: #ffffff;
+        /*width: 30%;*/
+        position: relative;
+        float: left;
+    }
+
+    .tall .description{
+        padding: 20px;
+        font-size: 15px;
+        color: #ffffff;
+        /*width: 70%;*/
+        position: relative;
+        float: left;
+    }
+
+    .sect{
+        border: 1px solid #bebebe; padding: 16px; margin: 16px; border-radius: 5px; background-color: #fff; color: #555;
+    }
+
+    .section-number{
+        display: inline-block; height: 64px; width: 64px; border-radius: 50%; background: #ddd; line-height: 64px; font-size: 30px; color: #666; text-align: center;
+    }
+
+    .section-title{
+        font-size: 22px; padding-top: 18px; color: #888;margin-left: 20px;
     }
 </style>
 
+<div class="layout vertical">
 
-<h2>Public room helper</h2>
-<p>
-    Public room is a place when the users can discuss about previously created topic in the Agora area.
-</p>
-<div id="scroll_content">
-    <div class="horizontal layout cell">
-
-        <img src="{$staticResourcesUrl}images/public_room_general.gif" style="width: 60%; height: 60%;">
-
-        <div class="cell">
-            <p>Rooms are split vertically, on the left side there is a threaded chat (enabled for the use of open data) meanwhile on the right there is an area, hidden by default, dedicated to Graphs.</p>
-        </div>
+    <div class="tall">
+       <div class="title">Public room helper</div>
+       <div class="description">
+        Public room is a place when the users can discuss about previously created topic in the Agora area.
+       </div>
     </div>
-    <div class="horizontal layout">
 
-       <img src="{$staticResourcesUrl}images/public_room_tchat.gif" style="width: 60%; height: 60%;">
+    <div class="content" id="scroll_content">
 
-        <div class="vertical layout cell">
-            <p>
-                The threaded chat has a maximum of three nested level. The number of nested levels is limited to avoid straying too far from the main topic and make less readable the conversation.
-                Every time you add a new post in the chat, you can express you opinion by selecting from the Opinion Button :
-                <ul class="cell-list">
-                   <li>
-                       Neutral(<b style="color:#1F77B4">Blue</b> color node in the graph)<paper-fab mini icon="thumbs-up-down" aria-disabled="false" elevation="1" class="opinion-button"></paper-fab>
-                   </li>
-                    <li>
-                       Agree(<b style="color:#2CA02C">Green</b> color node in the graph)<paper-fab mini icon="thumb-up" aria-disabled="false" elevation="1" class="opinion-button"></paper-fab>
-                    </li>
-                    <li>
-                        Desagree(<b style="color:#D62728">Red</b> color node in the graph)<paper-fab mini icon="thumb-down" aria-disabled="false" elevation="1" class="opinion-button"></paper-fab>
-                    </li>
-                </ul>
+        <div class="sect">
+            <div class="horizontal layout cell">
+                <img src="{$staticResourcesUrl}images/public_room_general.gif" style="width: 60%; height: 60%;">
 
-            </p>
+                <div class="cell">
+                    <div class="horizontal layout cell">
+                        <div class="section-number">1</div>
+                        <div class="section-title">About the room</div>
+                    </div>
+                    <div>Rooms are split vertically, on the left side there is a threaded chat (enabled for the use of open data) meanwhile on the right there is an area, hidden by default, dedicated to Graphs.</div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="horizontal layout cell">
 
-        <img src="{$staticResourcesUrl}images/public_room_graph.gif" style="width: 60%; height: 60%;">
+        <div class="sect">
+            <div class="horizontal layout cell">
+                <img src="{$staticResourcesUrl}images/public_room_tchat.gif" style="width: 60%; height: 60%;">
 
-        <div class="cell">
-            There are four graph:<br>
-            <ul class="cell-list">
-                <li>
-                    <b>Comments Graph</b>: tree of the comments, where each node represents a
-                    comment and the edges the parent-child relations. The dimension of a
-                    node is directly proportional to the numbers of nested comments,
-                    rooted in the node. The larger the node, the more comments are present
-                    below it in the discussion. The color can be green, red or blue,
-                    depending on the opinion. If you bring the mouse over a node (no
-                    click) you can read the comment of the node, and if you click the chat
-                    on the left will move and highlight the corresponding  comment.
-                </li>
-                <li>
-                    <b>Datalets Graph</b>: graph of datalets, where each node represents a
-                    datalet, and edges join datalet that uses the same dataset (but
-                    possibly with a different visualization).  The dimension of a node is
-                    directly proportional to the numbers of nested comments, rooted in the
-                    node. The larger the node, the more comments are present below it in
-                    the discussion.  If you bring the mouse over a node (no click) you can
-                    read the comment of the node and if you click the chat on the left
-                    will move and highlight the corresponding  comment.
-                </li>
-                <li>
-                    <b>Users Graph</b>:  graph of users, where each node represents a user that is
-                    participating in the discussion, and an edge joins to users that
-                    interacted (one answered a comment of the other). The thickness of the
-                    edge is directly proportional to the number of interactions.
-                    If you bring the mouse over a node (no click) you can read user's first comment.
-                </li>
-                <li>
-                    <b>Opinions Graph</b>: comments graph with the all the green (agree) adjacent
-                    comments are emphasized and grouped together. In this way, all the
-                    comments that seem to share a position are highlighted.
-                </li>
-            </ul>
+                <div class="cell">
+                    <div class="horizontal layout cell">
+                        <div class="section-number">2</div>
+                        <div class="section-title">Threaded chat</div>
+                    </div>
+                    <div>
+                        <p>
+                            The threaded chat has a maximum of three nested level. The number of nested levels is limited to avoid straying too far from the main topic and make less readable the conversation.
+                            Every time you add a new post in the chat, you can express you opinion by selecting from the Opinion Button :
+                        </p>
+
+                        <ul class="cell-list">
+                            <li>
+                                <div class="layout horizontal">
+                                    <p>Neutral(<b style="color:#1F77B4">Blue</b> color node in the graph)</p>
+                                    <paper-fab mini icon="thumbs-up-down" aria-disabled="false" elevation="1" class="opinion-button" style="position: relative;float:left;bottom: 15px;"></paper-fab>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="layout horizontal">
+                                    <p>Agree(<b style="color:#2CA02C">Green</b> color node in the graph)</p>
+                                    <paper-fab mini icon="thumb-up" aria-disabled="false" elevation="1" class="opinion-button" style="position: relative;float:left;bottom: 15px;"></paper-fab>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="layout horizontal">
+                                    <p>Desagree(<b style="color:#D62728">Red</b> color node in the graph)</p>
+                                    <paper-fab mini icon="thumb-down" aria-disabled="false" elevation="1" class="opinion-button" style="position: relative;float:left;bottom: 15px;"></paper-fab>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="horizontal layout cell">
 
-        <img src="{$staticResourcesUrl}images/public_room_graphinter.gif" style="width: 60%; height: 60%;">
+        <div class="sect">
+            <div class="horizontal layout cell">
+                <img src="{$staticResourcesUrl}images/public_room_graph.gif" style="width: 60%; height: 60%;">
 
-        <div class="cell">
-           <p>
-               Any graph is interactive: you can adjust the nodes as you like, by
-               clicking and dragging the nodes.
-               Any graph is informative: with mouse over the node, related
-               information is shown on top right.
-               Any graph is synchronized: by clicking on a node in the graph you can
-               see on the left the corresponding content in the threded chat.
-           </p>
+                <div class="cell">
+                    <div class="horizontal layout cell">
+                        <div class="section-number">3</div>
+                        <div class="section-title">Graphs</div>
+                    </div>
+                    <div>
+                        There are four graph:<br>
+                        <ul class="cell-list">
+                            <li>
+                                <b>Comments Graph</b>: tree of the comments, where each node represents a
+                                comment and the edges the parent-child relations. The dimension of a
+                                node is directly proportional to the numbers of nested comments,
+                                rooted in the node. The larger the node, the more comments are present
+                                below it in the discussion. The color can be green, red or blue,
+                                depending on the opinion. If you bring the mouse over a node (no
+                                click) you can read the comment of the node, and if you click the chat
+                                on the left will move and highlight the corresponding  comment.
+                            </li>
+                            <li>
+                                <b>Datalets Graph</b>: graph of datalets, where each node represents a
+                                datalet, and edges join datalet that uses the same dataset (but
+                                possibly with a different visualization).  The dimension of a node is
+                                directly proportional to the numbers of nested comments, rooted in the
+                                node. The larger the node, the more comments are present below it in
+                                the discussion.  If you bring the mouse over a node (no click) you can
+                                read the comment of the node and if you click the chat on the left
+                                will move and highlight the corresponding  comment.
+                            </li>
+                            <li>
+                                <b>Users Graph</b>:  graph of users, where each node represents a user that is
+                                participating in the discussion, and an edge joins to users that
+                                interacted (one answered a comment of the other). The thickness of the
+                                edge is directly proportional to the number of interactions.
+                                If you bring the mouse over a node (no click) you can read user's first comment.
+                            </li>
+                            <li>
+                                <b>Opinions Graph</b>: comments graph with the all the green (agree) adjacent
+                                comments are emphasized and grouped together. In this way, all the
+                                comments that seem to share a position are highlighted.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="horizontal layout cell">
 
-        <img src="{$staticResourcesUrl}images/public_room_odpost.gif" style="width: 60%; height: 60%;">
+        <div class="sect">
+            <div class="horizontal layout cell">
+                <img src="{$staticResourcesUrl}images/public_room_graphinter.gif" style="width: 60%; height: 60%;">
 
-        <div class="cell">
-            <p>
-                You can use the Datalet button to create and post a new visualization
-                of datasets at every level of the threaded chat. During this step, you
-                can easily select one of the suggested datasets (from the creator) or
-                add a new one.
-            </p>
+                <div class="cell">
+                    <div class="horizontal layout cell">
+                        <div class="section-number">4</div>
+                        <div class="section-title">Graph are interactive</div>
+                    </div>
+                    <div>
+                        Any graph is interactive: you can adjust the nodes as you like, by
+                        clicking and dragging the nodes.
+                        Any graph is informative: with mouse over the node, related
+                        information is shown on top right.
+                        Any graph is synchronized: by clicking on a node in the graph you can
+                        see on the left the corresponding content in the threded chat.
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <div class="sect">
+            <div class="horizontal layout cell">
+                <img src="{$staticResourcesUrl}images/public_room_odpost.gif" style="width: 60%; height: 60%;">
+
+                <div class="cell">
+                    <div class="horizontal layout cell">
+                        <div class="section-number">5</div>
+                        <div class="section-title">Datalet sharing</div>
+                    </div>
+                    <div>
+                        You can use the Datalet button to create and post a new visualization
+                        of datasets at every level of the threaded chat. During this step, you
+                        can easily select one of the suggested datasets (from the creator) or
+                        add a new one.
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-</div>
+
+ </div>
