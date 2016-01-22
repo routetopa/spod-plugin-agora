@@ -102,11 +102,11 @@
         myPublicRoomMenu.insertBefore(paperItem, myPublicRoomMenu.firstChild);
     }
 
-/*    function addFakeRoom()
-    {
-        var event = {id:"--", body:"--",subject:"--"};
-        addRoom(event);
-    }*/
+    /*    function addFakeRoom()
+     {
+     var event = {id:"--", body:"--",subject:"--"};
+     addRoom(event);
+     }*/
 
     function createRoom(event)
     {
@@ -141,12 +141,12 @@
         <app-sidebar drawer>
             <paper-menu id="my-public-room-menu">
                 {foreach $userPublicRooms as $userRoom}
-                    <paper-item onclick="SPODPUBLICROOM.handleSuggestedDataset({$userRoom->id})">
-                        <!--<iron-icon icon="warning"></iron-icon>-->
-                        <paper-item-body two-lines>
-                            <div>{$userRoom->subject}</div>
-                        </paper-item-body>
-                    </paper-item>
+                <paper-item onclick="SPODPUBLICROOM.handleSuggestedDataset({$userRoom->id})">
+                    <!--<iron-icon icon="warning"></iron-icon>-->
+                    <paper-item-body two-lines>
+                        <div>{$userRoom->subject}</div>
+                    </paper-item-body>
+                </paper-item>
                 {/foreach}
             </paper-menu>
         </app-sidebar>
@@ -178,7 +178,7 @@
                     <animated-grid-controllet on-tile-click="_onTileClick">
                         {foreach $rooms as $room}
 
-                            <room-controllet
+                        <room-controllet
                                 room-owner="{$room->owner}"
                                 room-shape='["{$room->colorStep}",{if $room->comments > $commentsMedian}"many"{else}"few"{/if},{if $room->opendata > $openDataMedian}"many"{else}"few"{/if}]'
                                 room-id="{$room->id}"
@@ -189,8 +189,8 @@
                                 datasets="{$room->opendata}"
                                 comments="{$room->comments}"
                                 room-width={if $room->opendata > $openDataMedian}"grid-item-w40"{else}"grid-item-w20"{/if}
-                                room-height={if $room->comments > $commentsMedian}"grid-item-h400"{else}"grid-item-h200"{/if}
-                                room-views={$room->views}
+                            room-height={if $room->comments > $commentsMedian}"grid-item-h400"{else}"grid-item-h200"{/if}
+                            room-views={$room->views}
                             ></room-controllet>
                         {/foreach}
                     </animated-grid-controllet>
@@ -204,7 +204,7 @@
         </paper-scroll-header-panel>
 
         {literal}
-            <paper-fab id="add_room_button" icon="add" onclick="SPODPUBLICROOM.addRoom()"></paper-fab>
+        <paper-fab id="add_room_button" icon="add" onclick="SPODPUBLICROOM.addRoom()" title="{text key="spodpublic+add_room"}"></paper-fab>
         {/literal}
 
     </div>
