@@ -79,7 +79,7 @@ commentGraphShow = function(){
             }
         }
     );
-}
+};
 
 usersGraphShow = function(){
     selected_graph = "users";
