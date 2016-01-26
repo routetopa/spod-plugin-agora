@@ -1,6 +1,12 @@
 var selected_graph        = null;
 var last_selected_element = null;
 
+refreshOpenedDatalets = function(){
+    $('div[id^="datalet_placeholder_"]').each(function(key, element){
+        $($(element).children()[1])[0].behavior.presentData();
+    });
+};
+
 window.addEventListener('graph-datalet_node-clicked', function(e){
     if(last_selected_element != null){
         last_selected_element.css('border', 'none');
@@ -9,18 +15,25 @@ window.addEventListener('graph-datalet_node-clicked', function(e){
 
     if(e.detail.node.id == 0) return;
 
+    //current comment container
     var curr_element = $("#comment_" + e.detail.node.originalId);
+    //apply border to enphatize it
     $(curr_element).css('border', '1px solid #000000');
     $(curr_element).css('font-weight', 'bold');
-
+    //close all previously opened comments
     $('div[id^="nc_"]').css('display', 'none');
-
+    //close all previously opened datalets
     $('div[id^="datalet_placeholder_"]').css('display', 'none');
+    //open the selected datalet
     $('div[id^="datalet_placeholder_' + e.detail.node.originalId + '"]' ).css('display', 'block');
     $('.show_datalet').css('background', '#2196F3');
-
+    //open recursively all parent of the current comment
     $(curr_element).parents('div[id^="nc_"]').css('display', 'block');
+    //Resize the selected datalet if there is any
+    var datalet = $('div[id^="datalet_placeholder_' + e.detail.node.originalId + '"]' ).children()[1];
+    if(datalet != undefined) $(datalet)[0].behavior.presentData();
 
+    //scoll the view until the selected comment
     $("#topic_container").scrollTop($(curr_element).offset().top - 50);
 
     last_selected_element = curr_element;
@@ -36,6 +49,7 @@ slideGraphPanel = function(){
         }else{
             if(selected_graph == null) commentGraphShow();
         }
+        refreshOpenedDatalets();
     });
 };
 
