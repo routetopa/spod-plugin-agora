@@ -3,7 +3,9 @@ var last_selected_element = null;
 
 refreshOpenedDatalets = function(){
     $('div[id^="datalet_placeholder_"]').each(function(key, element){
-        $($(element).children()[1])[0].behavior.presentData();
+        try{
+            $($(element).children()[1])[0].behavior.presentData();
+        }catch(e){}
     });
 };
 
