@@ -47,9 +47,11 @@ dataletGraphShow = function(){
             type : "datalets"
         },
         function(data, status){
-            data = JSON.parse(data);
+            data = JSON.parse(data.replace(new RegExp("'","g"),"&#39;"));
             if(data.status == "ok"){
-                $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight) +"' graph='" + data.graph + "'></graph-datalet>");
+                $("#graph_content").html("<graph-datalet width='"  + (window.innerWidth / 2) +
+                                                      "' height='" + (window.innerHeight)    +
+                                                      "' graph='"  + data.graph + "'></graph-datalet>");
                 $("#toolbar-graph-title").html('Datalets graph');
                 $("#datalet_graph").css('border-bottom-style','solid');
                 $("#comment_graph").css('border-bottom-style','none');
@@ -68,9 +70,11 @@ commentGraphShow = function(){
             type : "comments"
         },
         function(data, status){
-            data = JSON.parse(data);
+            data = JSON.parse(data.replace(new RegExp("'","g"),"&#39;"));
             if(data.status == "ok"){
-                $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight) +"' graph='" + data.graph + "'></graph-datalet>");
+                $("#graph_content").html("<graph-datalet width='"  + (window.innerWidth / 2) +
+                                                      "' height='" + (window.innerHeight)    +
+                                                      "' graph='" + data.graph + "'></graph-datalet>");
                 $("#toolbar-graph-title").html('Comments graph');
                 $("#comment_graph").css('border-bottom-style','solid');
                 $("#datalet_graph").css('border-bottom-style','none');
@@ -89,9 +93,11 @@ usersGraphShow = function(){
             type : "users"
         },
         function(data, status){
-            data = JSON.parse(data);
+            data = JSON.parse(data.replace(new RegExp("'","g"),"&#39;"));
             if(data.status == "ok"){
-                $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight) +"' graph='" + data.graph + "'></graph-datalet>");
+                $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +
+                                                      "' height='"+ (window.innerHeight)   +
+                                                      "' graph='" + data.graph + "'></graph-datalet>");
                 $("#toolbar-graph-title").html('Users graph');
                 $("#user_graph").css('border-bottom-style','solid');
                 $("#comment_graph").css('border-bottom-style','none');
@@ -110,9 +116,11 @@ opinionsGraphShow = function(){
             type : "comments"
         },
         function(data, status){
-            data = JSON.parse(data);
+            data = JSON.parse(data.replace(new RegExp("'","g"),"&#39;"));
             if(data.status == "ok"){
-                $("#graph_content").html("<graph-with-clustering-datalet width='"+ (window.innerWidth / 2) +"' height='"+ (window.innerHeight) +"' graph='" + data.graph + "'></graph-with-clustering-datalet>");
+                $("#graph_content").html("<graph-with-clustering-datalet width='"+ (window.innerWidth / 2) +
+                                                                      "' height='"+ (window.innerHeight)   +
+                                                                      "' graph='" + data.graph + "'></graph-with-clustering-datalet>");
                 $("#toolbar-graph-title").html('Opinions graph');
                 $("#opinion_graph").css('border-bottom-style','solid');
                 $("#user_graph").css('border-bottom-style','none');
@@ -191,7 +199,6 @@ $(document).ready(function () {
 });
 
 $(window).load(function() {
-    ODE.public_room_is_active = true;
     //commentGraphShow();
     //slideGraphPanel();
 });

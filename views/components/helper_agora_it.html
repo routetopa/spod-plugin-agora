@@ -1,0 +1,170 @@
+<link rel="import" href="{$components_url}bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="{$components_url}bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
+<link rel="import" href="{$components_url}bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="{$components_url}bower_components/paper-styles/color.html">
+<link rel="import" href="{$components_url}bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<style>
+    .floatbox_header{
+        display: none;
+    }
+
+    .floatbox_body{
+        font-family: 'Roboto', sans-serif;
+        background-color: #eeeeee;
+        padding : 3px;
+    }
+
+    paper-fab.opinion-button{
+        background:#5B646A;
+        left: 15px;
+    }
+
+    #scroll_content{
+        position: relative;
+        overflow: scroll;
+    }
+    div.cell{
+        padding: 20px;
+        margin-left: 20px;
+    }
+
+    ul.cell-list {
+        list-style-type: circle;
+    }
+
+    li{
+        margin-left: 20px;
+    }
+
+    paper-scroll-header-panel {
+        /*position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;*/
+        height: 70vh;
+    }
+
+    .tall {
+        background-color: #2196F3;
+    }
+
+    .tall .title {
+        padding: 20px;
+        font-size: 40px;
+        color: #ffffff;
+        /*width: 30%;*/
+        position: relative;
+        float: left;
+    }
+
+    .tall .description{
+        padding: 20px;
+        font-size: 15px;
+        color: #ffffff;
+        /*width: 70%;*/
+        position: relative;
+        float: left;
+    }
+
+    .sect{
+        border: 1px solid #bebebe; padding: 16px; margin: 16px; border-radius: 5px; background-color: #fff; color: #555;
+    }
+
+    .section-number{
+        display: inline-block; height: 64px; width: 64px; border-radius: 50%; background: #ddd; line-height: 64px; font-size: 30px; color: #666; text-align: center;
+    }
+
+    .section-title{
+        font-size: 22px; padding-top: 18px; color: #888;margin-left: 20px;
+    }
+</style>
+
+<div class="layout vertical">
+
+    <div class="tall">
+        <div class="title">Agora helper</div>
+        <div class="description">
+            L'agora &egrave dove ogni utente può creare "Stanze pubbliche" per iniziare nuove discussioni/dibattiti accessibili a tutti gli utenti.
+            In questa versione di SPOD non &egrave possibile cancellare le stanze create. Ogni stanza &egrave rappresentata da una "piastrella" con tre
+            caratteristiche, altezza, larghezza e colore, relazionate alla relativa discussione.
+
+        </div>
+    </div>
+
+    <div class="content" id="scroll_content">
+
+        <div class="sect">
+            <div class="horizontal layout cell">
+                <img src="{$staticResourcesUrl}images/agora_creation.gif" style="width: 60%; height: 60%;">
+
+                <div class="cell">
+                    <div class="horizontal layout cell">
+                        <div class="section-number">1</div>
+                        <div class="section-title">Creazione di una staza</div>
+                    </div>
+                    <div>
+                        Per creare una stanza basta premere sul bottone "+" in blu, posizionato in basso a destra dell'agora. Per completare la
+                        creazione aggiungi il soggetto ed una breve descrizione.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sect">
+            <div class="horizontal layout cell">
+                <img src="{$staticResourcesUrl}images/agora_suggested_datasets.gif" style="width: 60%; height: 60%;">
+
+                <div class="cell">
+                    <div class="horizontal layout cell">
+                        <div class="section-number">2</div>
+                        <div class="section-title">Aggiungere dei datasets suggeriti ad una stanza</div>
+                    </div>
+                    <div>
+                        L'utente che crea una stanza può, inoltre, aggiungere dei dataset raccomandati che saranno facilmente accessibili ai partecipanti
+                        per creare visualizzazioni. Per fare questo &egrave sufficiente aprire il menu a sinistra dell'agora per ottenere la lista delle stanze create.
+                        Una volta selezionata la stanza alla quale si vuole aggiungere un insieme di datasets da suggerire agli utenti(prech&egrave probabilmente attinenti
+                        all’argomento trattato nella stanza), basterà inserire l'url ed una descrizione.
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sect">
+            <div class="horizontal layout cell">
+                <img src="{$staticResourcesUrl}images/agora2.png" style="width: 60%; height: 60%;">
+
+                <div class="cell">
+                    <div class="horizontal layout cell">
+                        <div class="section-number">3</div>
+                        <div class="section-title">La dimensione e il colore delle stanze nell'agora</div>
+                    </div>
+                    <div>
+                        <p>
+                            Ogni piastrella nell'agora rappresenta una stanza e mostra informazioni sintetiche su questa attraverso il colore, l'altezza e la larghezza.
+                            <ul class="cell-list">
+                                <li>
+                                    Il <b>colore</b> varia fra il blu( poche visite quindi un argomento "freddo") ed il
+                                    rosso(molte visite quindi un argomento caldo) seguendo un gradiente proporzionale
+                                    al numero di visite per quella stanza.
+
+                                </li>
+                                <li>
+                                    La <b>larghezza</b> può avere solo due valori, stretta o larga, che dipendono dal numero di datalets differenti utilizzate nella stanza.
+                                </li>
+                                <li>
+                                    <b>L'altezza</b> corrisponde alla mediana sul numero di commenti relativo a tutte le stanza.
+                                    Una stanza sara "alta" se in numero di visite &egrave uguale o sopra la mediana, "bassa" se &egrave al di sotto.
+                                </li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

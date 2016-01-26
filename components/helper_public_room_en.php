@@ -1,5 +1,5 @@
 <?php
-class SPODPUBLIC_CMP_HelperAgora extends ODE_CMP_Helper
+class SPODPUBLIC_CMP_HelperPublicRoomEn extends ODE_CMP_Helper
 {
     public function __construct()
     {

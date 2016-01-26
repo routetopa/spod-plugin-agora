@@ -85,8 +85,7 @@
 
     <div class="tall">
        <div class="title">Public room helper</div>
-       <div class="description">
-        Public room is a place when the users can discuss about previously created topic in the Agora area.
+       <div class="description">La Stanza Pubblica &egrave (il luogo) dove gli utenti possono discutere dei topic precedentemente creati nell'Agora
        </div>
     </div>
 
@@ -99,9 +98,12 @@
                 <div class="cell">
                     <div class="horizontal layout cell">
                         <div class="section-number">1</div>
-                        <div class="section-title">About the room</div>
+                        <div class="section-title">Informazioni sulla stanza</div>
                     </div>
-                    <div>Rooms are split vertically, on the left side there is a threaded chat (enabled for the use of open data) meanwhile on the right there is an area, hidden by default, dedicated to Graphs.</div>
+                    <div>
+                        Le stanze sono divise verticalmente, sul lato sinistro compare la chat annidata (abilitata all'uso degli open data),
+                        mentre sul lato destro troviamo una sezione, nascosta per impostazione predefinita, dedicata ai Grafi.
+                    </div>
                 </div>
             </div>
         </div>
@@ -113,30 +115,32 @@
                 <div class="cell">
                     <div class="horizontal layout cell">
                         <div class="section-number">2</div>
-                        <div class="section-title">Threaded chat</div>
+                        <div class="section-title">Chat annidata</div>
                     </div>
                     <div>
                         <p>
-                            The threaded chat has a maximum of three nested level. The number of nested levels is limited to avoid straying too far from the main topic and make less readable the conversation.
-                            Every time you add a new post in the chat, you can express you opinion by selecting from the Opinion Button :
+                            La chat ha un massimo di tre livelli nidificati tra di loro. Il numero dei livelli nidificati &egrave limitato per evitare che la discussione si allontani
+                            troppo dal topic principale e diventi poco leggibile. Ogni volta che un post viene aggiunto alla chat, &egrave possibile esprimere la propria opinione
+                            selezionando il "Bottone dell'opinione"
+
                         </p>
 
                         <ul class="cell-list">
                             <li>
                                 <div class="layout horizontal">
-                                    <p>Neutral(<b style="color:#1F77B4">Blue</b> color node in the graph)</p>
+                                    <p>Neutrale (<b style="color:#1F77B4">Blu</b> nel nodo del grafo)</p>
                                     <paper-fab mini icon="thumbs-up-down" aria-disabled="false" elevation="1" class="opinion-button" style="position: relative;float:left;bottom: 15px;"></paper-fab>
                                 </div>
                             </li>
                             <li>
                                 <div class="layout horizontal">
-                                    <p>Agree(<b style="color:#2CA02C">Green</b> color node in the graph)</p>
+                                    <p>D'accordo(<b style="color:#2CA02C">Verde</b> nel nodo del grafo)</p>
                                     <paper-fab mini icon="thumb-up" aria-disabled="false" elevation="1" class="opinion-button" style="position: relative;float:left;bottom: 15px;"></paper-fab>
                                 </div>
                             </li>
                             <li>
                                 <div class="layout horizontal">
-                                    <p>Desagree(<b style="color:#D62728">Red</b> color node in the graph)</p>
+                                    <p>Disaccordo (<b style="color:#D62728">Rosso</b> nel nodo del grafo)</p>
                                     <paper-fab mini icon="thumb-down" aria-disabled="false" elevation="1" class="opinion-button" style="position: relative;float:left;bottom: 15px;"></paper-fab>
                                 </div>
                             </li>
@@ -154,42 +158,35 @@
                 <div class="cell">
                     <div class="horizontal layout cell">
                         <div class="section-number">3</div>
-                        <div class="section-title">Graphs</div>
+                        <div class="section-title">Grafi</div>
                     </div>
                     <div>
-                        There are four graph:<br>
+                        Ci sono quattro tipi di grafo:<br>
                         <ul class="cell-list">
                             <li>
-                                <b>Comments Graph</b>: tree of the comments, where each node represents a
-                                comment and the edges the parent-child relations. The dimension of a
-                                node is directly proportional to the numbers of nested comments,
-                                rooted in the node. The larger the node, the more comments are present
-                                below it in the discussion. The color can be green, red or blue,
-                                depending on the opinion. If you bring the mouse over a node (no
-                                click) you can read the comment of the node, and if you click the chat
-                                on the left will move and highlight the corresponding  comment.
+                                <b>Grafo dei comment</b>: &egrave l'albero dei commenti, nel quale ogni nodo rappresenta un commento e,
+                                l'arco la relazione padre-figlio. La dimensione del nodo &egrave direttamente proporzionale al numero
+                                dei commenti nidificati tra di loro, radicati nel nodo. Pi&uacute grande &egrave il nodo, pi&uacute commenti sono presenti nella discussione.
+                                Il colore pu&ograve essere verde, rosso o blu a secondo delle opinioni espresse. Se il mouse viene portato su un nodo (senza cliccare),
+                                &egrave possibile leggere il commento presente e, una volta cliccato, la chat sulla sinistra si muove ed evidenzia il commento corrispondente.
                             </li>
                             <li>
-                                <b>Datalets Graph</b>: graph of datalets, where each node represents a
-                                datalet, and edges join datalet that uses the same dataset (but
-                                possibly with a different visualization).  The dimension of a node is
-                                directly proportional to the numbers of nested comments, rooted in the
-                                node. The larger the node, the more comments are present below it in
-                                the discussion.  If you bring the mouse over a node (no click) you can
-                                read the comment of the node and if you click the chat on the left
-                                will move and highlight the corresponding  comment.
+                                <b>Grafo delle datalet</b>: &egrave; il grafo delle datalet, in cui ogni nodo rappresenta una datalet e,
+                                l&#x2019;arco unisce le datalet che usano lo stesso dataset (ma con una visualizzazione diversa).
+                                La dimensione del nodo &egrave; direttamente proporzionale al numero dei commenti nidificati tra di loro.
+                                Pi&ugrave; grande &egrave; il nodo, pi&ugrave; commenti sono presenti nella discussione. Se il mouse viene portato su un nodo
+                                (senza cliccare), &egrave; possibile leggere il commento presente e, una volta cliccato, la chat sulla sinistra si muove ed evidenzia
+                                il commento corrispondente.
                             </li>
                             <li>
-                                <b>Users Graph</b>:  graph of users, where each node represents a user that is
-                                participating in the discussion, and an edge joins to users that
-                                interacted (one answered a comment of the other). The thickness of the
-                                edge is directly proportional to the number of interactions.
-                                If you bring the mouse over a node (no click) you can read user's first comment.
+                                <b>Grafo degli utenti</b>:  &egrave; il grafo degli utenti, in cui ogni nodo rappresenta un utente che sta partecipando alla discussione
+                                e un arco unisce gli utenti che interagiscono tra di loro (un utente che risponde al commento di un altro utente). Lo spessore dell&#x2019;arco
+                                &egrave; direttamente proporzionale al numero delle interazioni. Se il mouse viene portato su un nodo (senza cliccare), &egrave;
+                                possibile leggere il primo commento dell&#x2019;utente.
                             </li>
                             <li>
-                                <b>Opinions Graph</b>: comments graph with the all the green (agree) adjacent
-                                comments are emphasized and grouped together. In this way, all the
-                                comments that seem to share a position are highlighted.
+                                <b>Grafo delle opinioni</b>: &egrave; il grafo dei commenti in cui sono enfatizzati e raggruppati tutti i commenti &#x2026;&#x2026;. In questo modo,
+                                tutti i commenti che condividono la stessa opinione, vengono evidenziati.
                             </li>
                         </ul>
                     </div>
@@ -204,15 +201,13 @@
                 <div class="cell">
                     <div class="horizontal layout cell">
                         <div class="section-number">4</div>
-                        <div class="section-title">Graph are interactive</div>
+                        <div class="section-title">Grafi interattivi</div>
                     </div>
                     <div>
-                        Any graph is interactive: you can adjust the nodes as you like, by
-                        clicking and dragging the nodes.
-                        Any graph is informative: with mouse over the node, related
-                        information is shown on top right.
-                        Any graph is synchronized: by clicking on a node in the graph you can
-                        see on the left the corresponding content in the threded chat.
+                        Ogni grafo &egrave; interattivo: &egrave; possibile sistemare i nodi nel modo in cui si preferisce, semplicemente cliccando e
+                        trascinando il nodo. Ogni grafo &egrave; informativo: passando il mouse sul nodo, le informazioni relative vengono mostrate in
+                        alto a destra. Ogni grafo &egrave; sincronizzato: cliccando sul nodo, &egrave; possibile vedere sulla sinistra il contenuto corrispondente
+                        della chat annidata.
                     </div>
                 </div>
             </div>
@@ -225,13 +220,12 @@
                 <div class="cell">
                     <div class="horizontal layout cell">
                         <div class="section-number">5</div>
-                        <div class="section-title">Datalet sharing</div>
+                        <div class="section-title">Condivisione di datalet</div>
                     </div>
                     <div>
-                        You can use the Datalet button to create and post a new visualization
-                        of datasets at every level of the threaded chat. During this step, you
-                        can easily select one of the suggested datasets (from the creator) or
-                        add a new one.
+                        Utilizzando il bottone &#x201c;Datalet&#x201d;, &egrave; possibile creare e postare una nuova visualizzazione del dataset
+                        ad ogni livello della chat annidata. Durante questa fase, &egrave; anche possibile selezionare facilmente uno dei dataset
+                        suggeriti (dal creatore) o aggiungerne un nuovo.
                     </div>
                 </div>
             </div>

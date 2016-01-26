@@ -87,7 +87,7 @@ class SPODPUBLIC_CLASS_Graph
 
         @$user = BOL_UserService::getInstance()->getDisplayName($curr_comment->userId);
         $avatar = BOL_AvatarService::getInstance()->getDataForUserAvatars(array($curr_comment->userId));
-        $user_img = $avatar[$curr_comment->userId]['src'];//"http://192.168.164.128/ow_static/themes/rtpa_matter/images/no-avatar-big.png";
+        $user_img = $avatar[$curr_comment->userId]['src'];
 
 
         $node = null;
