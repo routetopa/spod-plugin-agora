@@ -219,7 +219,13 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                                                                                              }
                                                                                              else
                                                                                                 $("#show_datalet_comment_' . $value->getId() . '").css(\'background\', \'#5B646A\');
-                                                                                                $($("#datalet_placeholder_' . $value->getId() . '_comment").children()[1])[0].behavior.presentData();
+
+                                                                                                //resize the datalet when is opened
+                                                                                                var datalet = $($("#datalet_placeholder_' . $value->getId() . '_comment").children()[1])[0];
+                                                                                                if(datalet.refresh != undefined)
+                                                                                                    datalet.refresh();
+                                                                                                else
+                                                                                                    datalet.behavior.presentData();
                                                                                           },
                                                                                           500);
                                      $("#topic_container").scrollTop($(\'#datalet_placeholder_' . $value->getId() . '_comment\').offset().top - 50);

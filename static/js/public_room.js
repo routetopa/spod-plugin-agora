@@ -4,7 +4,10 @@ var last_selected_element = null;
 refreshOpenedDatalets = function(){
     $('div[id^="datalet_placeholder_"]').each(function(key, element){
         try{
-            $($(element).children()[1])[0].behavior.presentData();
+            if($($(element).children()[1])[0].refresh != undefined)
+               $($(element).children()[1])[0].refresh();
+            else
+               $($(element).children()[1])[0].behavior.presentData();
         }catch(e){}
     });
 };
@@ -33,7 +36,13 @@ window.addEventListener('graph-datalet_node-clicked', function(e){
     $(curr_element).parents('div[id^="nc_"]').css('display', 'block');
     //Resize the selected datalet if there is any
     var datalet = $('div[id^="datalet_placeholder_' + e.detail.node.originalId + '"]' ).children()[1];
-    if(datalet != undefined) $(datalet)[0].behavior.presentData();
+    if(datalet != undefined){
+        $(datalet)[0].behavior.presentData();
+        if($(datalet)[0].refresh != undefined)
+            $(datalet)[0].refresh();
+        else
+            $(datalet)[0].behavior.presentData();
+    }
 
     //scoll the view until the selected comment
     $("#topic_container").scrollTop($(curr_element).offset().top - 50);
