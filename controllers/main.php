@@ -6,6 +6,11 @@ class SPODPUBLIC_CTRL_Main extends OW_ActionController
 
     public function index()
     {
+//        if (!OW::getUser()->isAuthenticated())
+//        {
+//            $this->redirect(OW::getRouter()->getBaseUrl() . "openwall");
+//        }
+
         OW::getDocument()->addStyleSheet(OW::getPluginManager()->getPlugin('spodpublic')->getStaticUrl() . 'css/public_room.css');
         OW::getDocument()->getMasterPage()->setTemplate(OW::getPluginManager()->getPlugin('spodpublic')->getRootDir() . 'master_pages/general.html');
 
