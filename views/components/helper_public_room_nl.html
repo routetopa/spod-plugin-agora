@@ -84,8 +84,9 @@
 <div class="layout vertical">
 
     <div class="tall">
-       <div class="title">Public room helper</div>
-       <div class="description">La Stanza Pubblica &egrave (il luogo) dove gli utenti possono discutere dei topic precedentemente creati nell'Agora
+       <div class="title">Publieke ruimte helper</div>
+       <div class="description">
+           Een publieke ruimte is een plaats waar gebruikers kunnen discussieren over een aangemaakt onderwerp in Agora
        </div>
     </div>
 
@@ -98,11 +99,11 @@
                 <div class="cell">
                     <div class="horizontal layout cell">
                         <div class="section-number">1</div>
-                        <div class="section-title">Informazioni sulla stanza</div>
+                        <div class="section-title">Over de kamer</div>
                     </div>
                     <div>
-                        Le stanze sono divise verticalmente, sul lato sinistro compare la chat annidata (abilitata all'uso degli open data),
-                        mentre sul lato destro troviamo una sezione, nascosta per impostazione predefinita, dedicata ai Grafi.
+                        De kamer bestaat uit twee delen. Aan de linkerkant is ruimte voor een lineaire discussie, waarbij open data gebruikt kan worden.
+                        Aan de rechterkant is een ruimte met grafieken over de discussie. Deze ruimte is standaard verborden.
                     </div>
                 </div>
             </div>
@@ -115,32 +116,32 @@
                 <div class="cell">
                     <div class="horizontal layout cell">
                         <div class="section-number">2</div>
-                        <div class="section-title">Chat annidata</div>
+                        <div class="section-title">Lineaire discussie</div>
                     </div>
                     <div>
                         <p>
-                            La chat ha un massimo di tre livelli nidificati tra di loro. Il numero dei livelli nidificati &egrave limitato per evitare che la discussione si allontani
-                            troppo dal topic principale e diventi poco leggibile. Ogni volta che un post viene aggiunto alla chat, &egrave possibile esprimere la propria opinione
-                            selezionando il "Bottone dell'opinione"
+                            De lineaire discussie heeft een maximum van drie niveaus.
 
+                            The number of nested levels is limited to avoid straying too far from the main topic and make less readable the conversation.
+                            Every time you add a new post in the chat, you can express you opinion by selecting from the Opinion Button :
                         </p>
 
                         <ul class="cell-list">
                             <li>
                                 <div class="layout horizontal">
-                                    <p>Neutrale (<b style="color:#1F77B4">Blu</b> nel nodo del grafo)</p>
+                                    <p>Neutraal(<b style="color:#1F77B4">Blue</b> color node in the graph)</p>
                                     <paper-fab mini icon="thumbs-up-down" aria-disabled="false" elevation="1" class="opinion-button" style="position: relative;float:left;bottom: 15px;"></paper-fab>
                                 </div>
                             </li>
                             <li>
                                 <div class="layout horizontal">
-                                    <p>D'accordo(<b style="color:#2CA02C">Verde</b> nel nodo del grafo)</p>
+                                    <p>Mee eens(<b style="color:#2CA02C">Green</b> color node in the graph)</p>
                                     <paper-fab mini icon="thumb-up" aria-disabled="false" elevation="1" class="opinion-button" style="position: relative;float:left;bottom: 15px;"></paper-fab>
                                 </div>
                             </li>
                             <li>
                                 <div class="layout horizontal">
-                                    <p>Disaccordo (<b style="color:#D62728">Rosso</b> nel nodo del grafo)</p>
+                                    <p>Niet mee eens(<b style="color:#D62728">Red</b> color node in the graph)</p>
                                     <paper-fab mini icon="thumb-down" aria-disabled="false" elevation="1" class="opinion-button" style="position: relative;float:left;bottom: 15px;"></paper-fab>
                                 </div>
                             </li>
@@ -158,35 +159,34 @@
                 <div class="cell">
                     <div class="horizontal layout cell">
                         <div class="section-number">3</div>
-                        <div class="section-title">Grafi</div>
+                        <div class="section-title">Grafieken</div>
                     </div>
                     <div>
-                        Ci sono quattro tipi di grafo:<br>
+                        Er zijn vier grafieken:<br>
                         <ul class="cell-list">
                             <li>
-                                <b>Grafo dei comment</b>: &egrave l'albero dei commenti, nel quale ogni nodo rappresenta un commento e,
-                                l'arco la relazione padre-figlio. La dimensione del nodo &egrave direttamente proporzionale al numero
-                                dei commenti nidificati tra di loro, radicati nel nodo. Pi&uacute grande &egrave il nodo, pi&uacute commenti sono presenti nella discussione.
-                                Il colore pu&ograve essere verde, rosso o blu a secondo delle opinioni espresse. Se il mouse viene portato su un nodo (senza cliccare),
-                                &egrave possibile leggere il commento presente e, una volta cliccato, la chat sulla sinistra si muove ed evidenzia il commento corrispondente.
+                                <b>Berichten grafiek</b>:  boomgrafiek van de berichten, waarbij ieder grafiekpunt een bericht representeerd en de lijn
+                                de 'ouder-kind relatie' aangeeft, net als in een stamboom. De dimensie van een grafiekpunt is gekoppeld aan het aantal
+                                bijbehorende berichten, opgenomen in het grafiekpunt. Hoe groter het grafiekpunt, hoe meer opmerkingen er onderdeel zijn
+                                van de bijbehorende discussie. De kleur van de opmerking kan groen, rood of blauw zijn, afhankelijk van de mening.
+                                Als je de muis op een grafiekpunt zet (geen muisklik) dan kun je de opmerking van het grafiekpunt lezen en als je erop
+                                klikt dan verschuift de chat links en markeert deze het corresponderende bericht.
                             </li>
                             <li>
-                                <b>Grafo delle datalet</b>: &egrave; il grafo delle datalet, in cui ogni nodo rappresenta una datalet e,
-                                l&#x2019;arco unisce le datalet che usano lo stesso dataset (ma con una visualizzazione diversa).
-                                La dimensione del nodo &egrave; direttamente proporzionale al numero dei commenti nidificati tra di loro.
-                                Pi&ugrave; grande &egrave; il nodo, pi&ugrave; commenti sono presenti nella discussione. Se il mouse viene portato su un nodo
-                                (senza cliccare), &egrave; possibile leggere il commento presente e, una volta cliccato, la chat sulla sinistra si muove ed evidenzia
-                                il commento corrispondente.
+                                <b>Datalet grafiek</b>: grafiek van datalets, waarbij ieder grafiekpunt een dalalet representeerd en een lijn datalets verbindt
+                                die dezelfde datasets gebruiken (maar mogelijk met een andere visualisering). De dimensie van een grafiekpunt is gekoppeld aan
+                                het aantal bijbehorende berichten, opgenomen in het grafiekpunt. Hoe groter het grafiekpunt, hoe meer opmerkingen er onderdeel
+                                zijn van de bijbehorende discussie. Als je de muis op een grafiekpunt zet (geen muisklik) dan kun je de opmerking in het grafiekpunt
+                                lezen en als je erop klikt dan verschuift de chat links en markeert deze het corresponderende bericht.
                             </li>
                             <li>
-                                <b>Grafo degli utenti</b>:  &egrave; il grafo degli utenti, in cui ogni nodo rappresenta un utente che sta partecipando alla discussione
-                                e un arco unisce gli utenti che interagiscono tra di loro (un utente che risponde al commento di un altro utente). Lo spessore dell&#x2019;arco
-                                &egrave; direttamente proporzionale al numero delle interazioni. Se il mouse viene portato su un nodo (senza cliccare), &egrave;
-                                possibile leggere il primo commento dell&#x2019;utente.
+                                <b>Gebruikers grafiek</b>: grafiek over gebruikers, waarbij ieder grafiekpunt een gebruiker representeerd die deelneemt aan de discussie
+                                en een lijn aangeeft met welke gebruikers deze in contact staat (de een reageert op een opmerking van de ander). De dikte van de lijn is
+                                gekoppeld aan het aantal interacties. Als je de muis op een grafiekpunt zet (geen muisklik) dan kun je het eerste bericht van die gebruiker lezen.
                             </li>
                             <li>
-                                <b>Grafo delle opinioni</b>: &egrave; il grafo dei commenti in cui sono enfatizzati e raggruppati tutti i commenti &#x2026;&#x2026;. In questo modo,
-                                tutti i commenti che condividono la stessa opinione, vengono evidenziati.
+                                <b>Opinie grafiek</b>: opiniegrafieken benadrukt en groepeert alle groene stemmen en opmerkingen (eens), alle opmerkingen die een gedeelde
+                                opvatting lijken te delen worden geaccentueerd.
                             </li>
                         </ul>
                     </div>
@@ -201,13 +201,13 @@
                 <div class="cell">
                     <div class="horizontal layout cell">
                         <div class="section-number">4</div>
-                        <div class="section-title">Grafi interattivi</div>
+                        <div class="section-title">Grafieken zijn interactief</div>
                     </div>
                     <div>
-                        Ogni grafo &egrave; interattivo: &egrave; possibile sistemare i nodi nel modo in cui si preferisce, semplicemente cliccando e
-                        trascinando il nodo. Ogni grafo &egrave; informativo: passando il mouse sul nodo, le informazioni relative vengono mostrate in
-                        alto a destra. Ogni grafo &egrave; sincronizzato: cliccando sul nodo, &egrave; possibile vedere sulla sinistra il contenuto corrispondente
-                        della chat annidata.
+                        Iedere grafiek is interactief: je kunt de grafiekpunten aanpassen zoals jij wil, door op grafiekpunten te
+                        klikken of deze te slepen. Iedere grafiek is informatief: als de muis op een grafiekpunt staat, wordt gerelateerde
+                        informatie rechtsboven weergegeven. Iedere grafiek wordt gesynchroniseerd: door op een grafiekpunt te klikken kun
+                        je links de bijbehorende chat zien.
                     </div>
                 </div>
             </div>
@@ -220,12 +220,11 @@
                 <div class="cell">
                     <div class="horizontal layout cell">
                         <div class="section-number">5</div>
-                        <div class="section-title">Condivisione di datalet</div>
+                        <div class="section-title">Datalet delen</div>
                     </div>
                     <div>
-                        Utilizzando il bottone &#x201c;Datalet&#x201d;, &egrave; possibile creare e postare una nuova visualizzazione del dataset
-                        ad ogni livello della chat annidata. Durante questa fase, &egrave; anche possibile selezionare facilmente uno dei dataset
-                        suggeriti (dal creatore) o aggiungerne un nuovo.
+                        Je kunt het Datalet pictogram gebruiken om een nieuwe visualisering te maken en plaatsen van datasets op ieder niveau van de chat.
+                        Tijdens deze stap, kun je eenvoudig een van de aanbevolen datasets selecteren (van de maker) of een nieuwe toevoegen.
                     </div>
                 </div>
             </div>
