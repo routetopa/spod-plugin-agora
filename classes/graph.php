@@ -91,7 +91,7 @@ class SPODPUBLIC_CLASS_Graph
 
 
         $node = null;
-        if($user != "Deleted user") {
+        if($user != OW::getLanguage()->text('base', 'deleted_user')) {
             if (@$this->usersMap[$user] == null) {
                 $node = new Node(count($this->graph->nodes),
                     $user,
@@ -101,7 +101,7 @@ class SPODPUBLIC_CLASS_Graph
                 $node->userId  = $curr_comment->userId;
                 $node->r        = MIN_SIZE * 4;
                 $node->image    = $user_img;
-                @$node->content  = $curr_comment->message;
+                $node->content  = $curr_comment->message;
                 $node->color    = "#ff1e1e";
                 array_push($this->graph->nodes, $node);
 
