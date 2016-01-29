@@ -136,17 +136,17 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
         <div class="title"><h4>{$public_room->subject}</h4></div>
         <div id="graphs_buttons_panel">
             <paper-icon-button id="comment_graph" paper-drawer-toggle icon="speaker-notes" onClick="commentGraphShow()"></paper-icon-button>
-            <paper-tooltip for="comment_graph">Comments graph</paper-tooltip>
+            <paper-tooltip for="comment_graph">{text key="spodpublic+comments_graph"}</paper-tooltip>
             <paper-icon-button id="datalet_graph" paper-drawer-toggle icon="assessment" onClick="dataletGraphShow()"></paper-icon-button>
-            <paper-tooltip for="datalet_graph">Datalets graph</paper-tooltip>
+            <paper-tooltip for="datalet_graph">{text key="spodpublic+datalets_graph"}</paper-tooltip>
             <paper-icon-button id="user_graph" paper-drawer-toggle icon="account-circle" onClick="usersGraphShow()"></paper-icon-button>
-            <paper-tooltip for="user_graph">Users graph</paper-tooltip>
+            <paper-tooltip for="user_graph">{text key="spodpublic+users_graph"}</paper-tooltip>
             <paper-icon-button id="opinion_graph" paper-drawer-toggle icon="thumbs-up-down" onClick="opinionsGraphShow()"></paper-icon-button>
-            <paper-tooltip for="opinion_graph">Opinions graph</paper-tooltip>
+            <paper-tooltip for="opinion_graph">{text key="spodpublic+opinions_graph"}</paper-tooltip>
         </div>
-        <h5 id="toolbar-graph-title">Graph Panel</h5>
+        <h5 id="toolbar-graph-title">{text key="spodpublic+graph_panel"}</h5>
         <paper-icon-button id="slide_graph_button" paper-drawer-toggle icon="picture-in-picture" onClick="slideGraphPanel()"></paper-icon-button>
-        <paper-tooltip for="slide_graph_button">Open graph panel</paper-tooltip>
+        <paper-tooltip for="slide_graph_button">{text key="spodpublic+open_graph_panel"}</paper-tooltip>
     </paper-toolbar>
 </paper-header-panel>
 

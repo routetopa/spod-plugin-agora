@@ -101,7 +101,7 @@ class SPODPUBLIC_CLASS_Graph
                 $node->userId  = $curr_comment->userId;
                 $node->r        = MIN_SIZE * 4;
                 $node->image    = $user_img;
-                $node->content  = $curr_comment->message;
+                @$node->content  = $curr_comment->message;
                 $node->color    = "#ff1e1e";
                 array_push($this->graph->nodes, $node);
 

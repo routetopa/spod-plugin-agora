@@ -55,7 +55,7 @@ slideGraphPanel = function(){
         $('#topic_container').css('width' , ($('#graph_container').css('display') == 'none') ? '100%' : '50%');
         $('#graphs_buttons_panel').toggle('slide', {direction: 'right'}, 300);
         if($('#graph_container').css('display') == 'none'){
-            $("#toolbar-graph-title").html('Graph Panel');
+            $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'graph_panel'));
             selected_graph = null;
         }else{
             if(selected_graph == null) commentGraphShow();
@@ -77,7 +77,7 @@ dataletGraphShow = function(){
                 $("#graph_content").html("<graph-datalet width='"  + (window.innerWidth / 2) +
                                                       "' height='" + (window.innerHeight)    +
                                                       "' graph='"  + data.graph + "'></graph-datalet>");
-                $("#toolbar-graph-title").html('Datalets graph');
+                $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'datalets_graph'));
                 $("#datalet_graph").css('border-bottom-style','solid');
                 $("#comment_graph").css('border-bottom-style','none');
                 $("#user_graph").css('border-bottom-style','none');
@@ -100,7 +100,7 @@ commentGraphShow = function(){
                 $("#graph_content").html("<graph-datalet width='"  + (window.innerWidth / 2) +
                                                       "' height='" + (window.innerHeight)    +
                                                       "' graph='" + data.graph + "'></graph-datalet>");
-                $("#toolbar-graph-title").html('Comments graph');
+                $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'comments_graph'));
                 $("#comment_graph").css('border-bottom-style','solid');
                 $("#datalet_graph").css('border-bottom-style','none');
                 $("#user_graph").css('border-bottom-style','none');
@@ -123,7 +123,7 @@ usersGraphShow = function(){
                 $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +
                                                       "' height='"+ (window.innerHeight)   +
                                                       "' graph='" + data.graph + "'></graph-datalet>");
-                $("#toolbar-graph-title").html('Users graph');
+                $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'users_graph'));
                 $("#user_graph").css('border-bottom-style','solid');
                 $("#comment_graph").css('border-bottom-style','none');
                 $("#datalet_graph").css('border-bottom-style','none');
@@ -146,7 +146,7 @@ opinionsGraphShow = function(){
                 $("#graph_content").html("<graph-with-clustering-datalet width='"+ (window.innerWidth / 2) +
                                                                       "' height='"+ (window.innerHeight)   +
                                                                       "' graph='" + data.graph + "'></graph-with-clustering-datalet>");
-                $("#toolbar-graph-title").html('Opinions graph');
+                $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'opinions_graph'));
                 $("#opinion_graph").css('border-bottom-style','solid');
                 $("#user_graph").css('border-bottom-style','none');
                 $("#comment_graph").css('border-bottom-style','none');

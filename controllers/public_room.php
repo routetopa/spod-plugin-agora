@@ -24,6 +24,13 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
             OW::getDocument()->addScript(OW::getPluginManager()->getPlugin('spodpublic')->getStaticJsUrl() . 'jquery-ui.min.js');
             OW::getDocument()->addScript(OW::getPluginManager()->getPlugin('spodpublic')->getStaticJsUrl() . 'perfect-scrollbar.jquery.js');
 
+            OW::getLanguage()->addKeyForJs('spodpublic', 'comments_graph');
+            OW::getLanguage()->addKeyForJs('spodpublic', 'datalets_graph');
+            OW::getLanguage()->addKeyForJs('spodpublic', 'users_graph');
+            OW::getLanguage()->addKeyForJs('spodpublic', 'opinions_graph');
+            OW::getLanguage()->addKeyForJs('spodpublic', 'graph_panel');
+            OW::getLanguage()->addKeyForJs('spodpublic', 'open_graph_panel');
+
             SPODPUBLIC_CLASS_EventHandler::getInstance()->init();
 
             //add deep component url
