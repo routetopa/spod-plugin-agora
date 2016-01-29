@@ -84,9 +84,10 @@
 <div class="layout vertical">
 
     <div class="tall">
-       <div class="title">Publieke ruimte helper</div>
+       <div class="title">Assistant de l'espace public</div>
        <div class="description">
-           Een publieke ruimte is een plaats waar gebruikers kunnen discussieren over een aangemaakt onderwerp in Agora
+           L'espace public est un espace o&ugrave; les utilisateurs peuvent &eacute;changer &agrave;
+           propos de sujets pr&eacute;c&eacute;demment cr&eacute;&eacute;s dans l'Agora
        </div>
     </div>
 
@@ -99,11 +100,12 @@
                 <div class="cell">
                     <div class="horizontal layout cell">
                         <div class="section-number">1</div>
-                        <div class="section-title">Over de kamer</div>
+                        <div class="section-title">&agrave; propos de l'espace</div>
                     </div>
                     <div>
-                        De kamer bestaat uit twee delen. Aan de linkerkant is ruimte voor een lineaire discussie, waarbij open data gebruikt kan worden.
-                        Aan de rechterkant is een ruimte met grafieken over de discussie. Deze ruimte is standaard verborden.
+                        Les espaces sont divis&eacute;s verticalement - sur le cot&eacute; droit vous trouverez une messagerie
+                        instantan&eacute;e (disponible pour les utilisateurs de donn&eacute;es ouvertes) - &agrave; droite une zone,
+                        cach&eacute;e par d&eacute;fault, d&eacute;volue aux graphiques
                     </div>
                 </div>
             </div>
@@ -116,32 +118,31 @@
                 <div class="cell">
                     <div class="horizontal layout cell">
                         <div class="section-number">2</div>
-                        <div class="section-title">Lineaire discussie</div>
+                        <div class="section-title">Messagerie instantan&eacute;e</div>
                     </div>
                     <div>
                         <p>
-                            De lineaire discussie heeft een maximum van drie niveaus.
-
-                            Het aantal geneste niveaus beperkt om te voorkomen dwalen te ver van de belangrijkste onderwerp en maak minder leesbaar het gesprek.
-                            Elke keer als je een nieuw bericht toe te voegen in de chat, kun je je mening uiten door te kiezen uit het advies Knop:
+                            La messagerie instantan&eacute;e dispose d'un maximum de trois niveaux. Le nombre de niveaux est limit&eacute;
+                            afin d'&eacute;viter de devier du sujet principal et de perturber les &eacute;changes. A chaque nouveau post dans
+                            l'espace de discussion, vous pouvez exprimer votre opinion en selectionnant le bouton Opinion:
                         </p>
 
                         <ul class="cell-list">
                             <li>
                                 <div class="layout horizontal">
-                                    <p>Neutraal(<b style="color:#1F77B4">Blauwe</b> kleur knoop in de grafiek)</p>
+                                    <p>Neutre (noeud de couleur <b style="color:#1F77B4">bleue</b> sur le graphique)</p>
                                     <paper-fab mini icon="thumbs-up-down" aria-disabled="false" elevation="1" class="opinion-button" style="position: relative;float:left;bottom: 15px;"></paper-fab>
                                 </div>
                             </li>
                             <li>
                                 <div class="layout horizontal">
-                                    <p>Mee eens(<b style="color:#2CA02C">Groen</b> kleur knoop in de grafiek)</p>
+                                    <p>D'accord (noeud de couleur <b style="color:#2CA02C">verte</b> sur le graphique)</p>
                                     <paper-fab mini icon="thumb-up" aria-disabled="false" elevation="1" class="opinion-button" style="position: relative;float:left;bottom: 15px;"></paper-fab>
                                 </div>
                             </li>
                             <li>
                                 <div class="layout horizontal">
-                                    <p>Niet mee eens(<b style="color:#D62728">Rood</b> kleur knoop in de grafiek)</p>
+                                    <p>En d&eacute;saccord (n&#x0153;ud de couleur <b style="color:#D62728">rouge</b> sur le graphique</p>
                                     <paper-fab mini icon="thumb-down" aria-disabled="false" elevation="1" class="opinion-button" style="position: relative;float:left;bottom: 15px;"></paper-fab>
                                 </div>
                             </li>
@@ -159,34 +160,39 @@
                 <div class="cell">
                     <div class="horizontal layout cell">
                         <div class="section-number">3</div>
-                        <div class="section-title">Grafieken</div>
+                        <div class="section-title">Graphique</div>
                     </div>
                     <div>
-                        Er zijn vier grafieken:<br>
+                        il y a quatre graphiques:<br>
                         <ul class="cell-list">
                             <li>
-                                <b>Berichten grafiek</b>:  boomgrafiek van de berichten, waarbij ieder grafiekpunt een bericht representeerd en de lijn
-                                de 'ouder-kind relatie' aangeeft, net als in een stamboom. De dimensie van een grafiekpunt is gekoppeld aan het aantal
-                                bijbehorende berichten, opgenomen in het grafiekpunt. Hoe groter het grafiekpunt, hoe meer opmerkingen er onderdeel zijn
-                                van de bijbehorende discussie. De kleur van de opmerking kan groen, rood of blauw zijn, afhankelijk van de mening.
-                                Als je de muis op een grafiekpunt zet (geen muisklik) dan kun je de opmerking van het grafiekpunt lezen en als je erop
-                                klikt dan verschuift de chat links en markeert deze het corresponderende bericht.
+                                <b>Commentaires des graphiques</b>: il s'agit d'un arbre de commentaires, o&ugrave; chaque n&#x0153;ud
+                                repr&eacute;sente un commentaire et les liens entre ces commentaires. La dimension du n&#x0153;ud
+                                est directement proportionnelle au nombre de commentaires enracin&eacute;s dans les n&#x0153;uds.
+                                Plus larges sont les noeuds, plus de commentaires sont pr&eacute;sent&eacute;s sous la discussion.
+                                La couleur des noeuds peut &ecirc;tre verte, rouge ou bleue, cela d&eacute;pend de l'opinion. Si
+                                vous passez la souris sur un noeud (pas de clique) vous pouvez lire le commentaire du noeud et si
+                                vous cliquez, l'espace de discussion sur la gauche sera d&eacute;plac&eacute; et les commentaires
+                                correspondants seront mis en &eacute;vidence.
                             </li>
                             <li>
-                                <b>Datalet grafiek</b>: grafiek van datalets, waarbij ieder grafiekpunt een dalalet representeerd en een lijn datalets verbindt
-                                die dezelfde datasets gebruiken (maar mogelijk met een andere visualisering). De dimensie van een grafiekpunt is gekoppeld aan
-                                het aantal bijbehorende berichten, opgenomen in het grafiekpunt. Hoe groter het grafiekpunt, hoe meer opmerkingen er onderdeel
-                                zijn van de bijbehorende discussie. Als je de muis op een grafiekpunt zet (geen muisklik) dan kun je de opmerking in het grafiekpunt
-                                lezen en als je erop klikt dan verschuift de chat links en markeert deze het corresponderende bericht.
+                                <b>Graphique datalet</b> : graphique des datalets. Dans ce graphique chaque n&#x0153;ud repr&eacute;sente
+                                un datalet ainsi que les jeux de donn&eacute;es proches de ce datalet (mais s'appuyant possiblement
+                                sur une visualisation diff&eacute;rente). La dimension d'un n&#x0153;ud est directement proportionnelle
+                                au nombre de commentaires, enracin&eacute;s dans le noeud. Plus larges sont les noeuds, plus de commentaires
+                                sont pr&eacute;sent&eacute;s sous la discussion.Si vous passez la souris sur un noeud (pas de clique) vous
+                                pouvez lire le commentaire du noeud et si vous cliquez, l'espace de discussion sur la gauche sera d&eacute;plac&eacute;
+                                et les commentaires correspondants seront mis en &eacute;vidence.
                             </li>
                             <li>
-                                <b>Gebruikers grafiek</b>: grafiek over gebruikers, waarbij ieder grafiekpunt een gebruiker representeerd die deelneemt aan de discussie
-                                en een lijn aangeeft met welke gebruikers deze in contact staat (de een reageert op een opmerking van de ander). De dikte van de lijn is
-                                gekoppeld aan het aantal interacties. Als je de muis op een grafiekpunt zet (geen muisklik) dan kun je het eerste bericht van die gebruiker lezen.
+                                <b>Graphique utilisateur</b>: graphique des utilisateurs. Dans ce graphique chaque n&#x0153;ud repr&eacute;sente un
+                                utilisateur qui participe &agrave; la discussion. Il tient &eacute;galement compte des utilisateurs li&eacute;s
+                                (une r&eacute;ponse &agrave; un commentaire). Le lien est directement proportionnel au nombre d'interactions.
+                                Si vous passez la souris sur un noeud (pas de clique) vous pouvez lire les premiers commentaires des utilisateurs.
                             </li>
                             <li>
-                                <b>Opinie grafiek</b>: opiniegrafieken benadrukt en groepeert alle groene stemmen en opmerkingen (eens), alle opmerkingen die een gedeelde
-                                opvatting lijken te delen worden geaccentueerd.
+                                <b>Graphique d'opinion</b> : commentaires li&eacute;s au graphique int&eacute;grant tous les commentaires favorables (verts) -
+                                mis en &eacute;vidence et regroup&eacute;s. Les commentaires qui semblent partager une position similaire sont mis en emphase.
                             </li>
                         </ul>
                     </div>
@@ -201,13 +207,14 @@
                 <div class="cell">
                     <div class="horizontal layout cell">
                         <div class="section-number">4</div>
-                        <div class="section-title">Grafieken zijn interactief</div>
+                        <div class="section-title">Les graphiques sont interactifs</div>
                     </div>
                     <div>
-                        Iedere grafiek is interactief: je kunt de grafiekpunten aanpassen zoals jij wil, door op grafiekpunten te
-                        klikken of deze te slepen. Iedere grafiek is informatief: als de muis op een grafiekpunt staat, wordt gerelateerde
-                        informatie rechtsboven weergegeven. Iedere grafiek wordt gesynchroniseerd: door op een grafiekpunt te klikken kun
-                        je links de bijbehorende chat zien.
+                        N'importe quel graphique est interactif: vous pouvez ajuster les n&#x0153;uds comme vous le souhaitez,
+                        en cliquant et en d&eacute;pla&ccedil;ant les n&#x0153;uds. Chaque graphique est informatif: en passant
+                        la souris sur le n&#x0153;ud,  les informations relatives sont pr&eacute;sent&eacute;es en haut &agrave; droite.
+                        N'importe quel graphique est synchronis&eacute;: en cliquant sur un noeud sur le graphique, vous pouvez voir, &agrave;
+                        gauche, les commentaires correspondants &agrave; l'espace de discussion
                     </div>
                 </div>
             </div>
@@ -220,11 +227,12 @@
                 <div class="cell">
                     <div class="horizontal layout cell">
                         <div class="section-number">5</div>
-                        <div class="section-title">Datalet delen</div>
+                        <div class="section-title">Echange de datalets</div>
                     </div>
                     <div>
-                        Je kunt het Datalet pictogram gebruiken om een nieuwe visualisering te maken en plaatsen van datasets op ieder niveau van de chat.
-                        Tijdens deze stap, kun je eenvoudig een van de aanbevolen datasets selecteren (van de maker) of een nieuwe toevoegen.
+                        Vous pouvez utiliser le bouton datalet pour cr&eacute;er et poster de nouvelles visualisations de jeux de donn&eacute;es
+                        &agrave; n'importe quel niveau de l'espace de discussion. Durant cette &eacute;tape, vous pouvez facilement s&eacute;l&eacute;
+                        ctionner l'un des jeux de donn&eacute;es sugger&eacute;s (par le cr&eacute;ateur) ou en ajouter un nouveau
                     </div>
                 </div>
             </div>
