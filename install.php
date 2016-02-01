@@ -2,8 +2,7 @@
 
 OW::getNavigation()->addMenuItem(OW_Navigation::MAIN, 'spodpublic.main', 'spodpublic', 'main', OW_Navigation::VISIBLE_FOR_MEMBER);
 
-$sql = 'DROP TABLE IF EXISTS `' . OW_DB_PREFIX . 'spod_public_room`;
-CREATE TABLE `' . OW_DB_PREFIX . 'spod_public_room` (
+$sql = 'CREATE TABLE IF NOT EXISTS `' . OW_DB_PREFIX . 'spod_public_room` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ownerId` int(11) NOT NULL,
   `subject` text,
@@ -17,8 +16,7 @@ CREATE TABLE `' . OW_DB_PREFIX . 'spod_public_room` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
-DROP TABLE IF EXISTS `' . OW_DB_PREFIX . 'spod_public_room_suggestion`;
-CREATE TABLE `' . OW_DB_PREFIX . 'spod_public_room_suggestion` (
+CREATE TABLE IF NOT EXISTS `' . OW_DB_PREFIX . 'spod_public_room_suggestion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ownerId` int(11) NOT NULL,
   `publicRoomId` int(11) NOT NULL,
@@ -27,8 +25,7 @@ CREATE TABLE `' . OW_DB_PREFIX . 'spod_public_room_suggestion` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
-DROP TABLE IF EXISTS `' . OW_DB_PREFIX . 'spod_public_room_comment_sentiment`;
-CREATE TABLE `' . OW_DB_PREFIX . 'spod_public_room_comment_sentiment` (
+CREATE TABLE IF NOT EXISTS `' . OW_DB_PREFIX . 'spod_public_room_comment_sentiment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `publicRoomId` int(11) NOT NULL,
   `sentiment` smallint,
