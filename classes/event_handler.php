@@ -18,8 +18,14 @@ class SPODPUBLIC_CLASS_EventHandler{
     public function init()
     {
         // event raised just before rendering a comment
-        OW::getEventManager()->bind('base.comment_item_process', array($this, 'onCommentItemProcess'), 10000);
+        //OW::getEventManager()->bind('base.comment_item_process', array($this, 'onCommentItemProcess'), 10000);
+        OW::getEventManager()->bind('base_delete_comment', array($this, 'onDeleteComment'));
+
     }
+
+    public function onDeleteComment(BASE_CLASS_EventProcessCommentItem $event){
+        OW::getDocument()->addOnloadScript('selectGraph();');
+   }
 
     // Render comment
     public function onCommentItemProcess(BASE_CLASS_EventProcessCommentItem $event)
