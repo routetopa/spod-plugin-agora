@@ -44,12 +44,12 @@
     {form name='PublicRoomSuggestionForm'}
     <table class="ow_table_1 ow_form">
         <tr class="ow_alt2 ow_tr_first">
-            <td class="ow_label">Dataset</td>
+            <td class="ow_label">{text key="spodpublic+suggestion_dataset"}</td>
             <td class="ow_value">{input name='dataset'}</td>
             <td class="ow_desc ow_small"></td>
         </tr>
         <tr class="ow_alt2 ow_tr_first">
-            <td class="ow_label">Comment</td>
+            <td class="ow_label">{text key="spodpublic+suggestion_comment"}</td>
             <td class="ow_value">{input name='comment'}</td>
             <td class="ow_desc ow_small"></td>
         </tr>
@@ -59,8 +59,8 @@
 
     <table class="ow_table_1" id="suggestion_table">
         <tr>
-            <th>Comment</th>
-            <th>Dataset</th>
+            <th>{text key="spodpublic+suggestion_comment"}</th>
+            <th>{text key="spodpublic+suggestion_dataset"}</th>
         </tr>
         {foreach $suggestions as $suggestion}
         <tr class="ow_alt2 ow_tr_first">

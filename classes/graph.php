@@ -207,7 +207,7 @@ class SPODPUBLIC_CLASS_Graph
         $sentiment = SPODPUBLIC_BOL_Service::getInstance()->getCommentSentiment($curr_comment->id);
 
         @$node->level     = $level;
-        @$node->content   = $curr_comment->message;
+        @$node->content   = htmlspecialchars($curr_comment->message);
         @$node->father    = $father;
         switch ($level) {
             case 1:
