@@ -181,7 +181,7 @@ $(document).ready(function () {
        selectGraph();
     });
 
-    OW.bind('base_delete_comment', function(e){
+    OW.bind('base.comment_delete', function(e){
         selectGraph();
     });
 

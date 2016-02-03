@@ -111,7 +111,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
         $cAction = null;
         $value = $e->getItem();
 
-        if ( $this->isOwnerAuthorized || $this->isModerator || (int) OW::getUser()->getId() === (int) $value->getUserId() )
+        if ( /*$this->isOwnerAuthorized ||*/ $this->isModerator || (int) OW::getUser()->getId() === (int) $value->getUserId() )
         {
             $deleteButton = true;
         }

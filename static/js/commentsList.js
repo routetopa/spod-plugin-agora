@@ -49,8 +49,10 @@ SpodpublicCommentsList.prototype = {
                     function(){
                         if( confirm(self.delConfirmMsg) )
                         {
-                            $(this).closest('div.ow_comments_item').slideUp(300, function(){$(this).remove();});
-
+                            $(this).closest('div.ow_comments_item').slideUp(300, function(){
+                                $(this).remove();
+                                OW.trigger('base.comment_delete', {}, this);
+                            });
                             $.ajax({
                                 type: 'POST',
                                 url: self.delUrl,
