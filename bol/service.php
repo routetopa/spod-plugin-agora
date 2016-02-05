@@ -114,8 +114,8 @@ class SPODPUBLIC_BOL_Service
     {
         $pr = new SPODPUBLIC_BOL_PublicRoom();
         $pr->ownerId   = $ownerId;
-        $pr->subject   = $subject;
-        $pr->body      = $body;
+        $pr->subject   = strip_tags($subject);
+        $pr->body      = strip_tags($body);
         $pr->views     = 0;
         $pr->comments  = 0;
         $pr->opendata  = 0;
