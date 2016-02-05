@@ -251,7 +251,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
 
                 @$this->assign('commentSentiment' . $value->getId(), SPODPUBLIC_BOL_Service::getInstance()->getCommentSentiment($value->getId())->sentiment);
                 $this->assign('commentsCount' . $value->getId(), BOL_CommentService::getInstance()->findCommentCount(SPODPUBLIC_BOL_Service::ENTITY_TYPE_COMMENT, $value->getId()));
-                $this->assign('commentsLevel' . $value->getId(), $this->level);
+                $this->assign('commentsLevel' . $value->getId(), $this->params->level);
             }
 
             /*End adding nasted level*/

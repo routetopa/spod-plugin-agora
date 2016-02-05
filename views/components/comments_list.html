@@ -66,7 +66,7 @@
             </div>
 
             {capture assign=clevel}commentsLevel{$comment.commentId}{/capture}
-            {if ${$clevel} <= 2}
+            {if ${$clevel} < 2}
             <div class="spod_public_bottom_bar" style="margin-left: 60px;">
                 <div class="spod_public_bottom_bar_control" style="padding-left: 20px; height: 27px;">
                     <div class="ow_miniic_control" style="width: 100%;padding-top: 5px;" id="comment_bar_{$comment.commentId}">
