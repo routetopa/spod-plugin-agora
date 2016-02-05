@@ -2,7 +2,8 @@
 
 class SPODPUBLIC_BOL_Service
 {
-    const ENTITY_TYPE = 'spodpublic_topic_entity';
+    const ENTITY_TYPE         = 'spodpublic_topic_entity';
+    const ENTITY_TYPE_COMMENT = 'spodpublic_topic_entity_comment';
 
     /**
      * Singleton instance.

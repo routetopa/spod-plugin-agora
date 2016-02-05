@@ -192,7 +192,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
 
             if($this->params->level <= 2) {
                 //nasted comment
-                $commentsParams = new BASE_CommentsParams('spodpublic', SPODPUBLIC_BOL_Service::ENTITY_TYPE);
+                $commentsParams = new BASE_CommentsParams('spodpublic', SPODPUBLIC_BOL_Service::ENTITY_TYPE_COMMENT);
                 $commentsParams->setEntityId($value->getId());
                 $commentsParams->setDisplayType(BASE_CommentsParams::DISPLAY_TYPE_WITH_LOAD_LIST_MINI);
                 $commentsParams->setCommentCountOnPage(5);
@@ -250,8 +250,8 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                 );
 
                 @$this->assign('commentSentiment' . $value->getId(), SPODPUBLIC_BOL_Service::getInstance()->getCommentSentiment($value->getId())->sentiment);
-                $this->assign('commentsCount' . $value->getId(), BOL_CommentService::getInstance()->findCommentCount(SPODPUBLIC_BOL_Service::ENTITY_TYPE, $value->getId()));
-                $this->assign('commentsLevel' . $value->getId(), $this->params->level);
+                $this->assign('commentsCount' . $value->getId(), BOL_CommentService::getInstance()->findCommentCount(SPODPUBLIC_BOL_Service::ENTITY_TYPE_COMMENT, $value->getId()));
+                $this->assign('commentsLevel' . $value->getId(), $this->level);
             }
 
             /*End adding nasted level*/
