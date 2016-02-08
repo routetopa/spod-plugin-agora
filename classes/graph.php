@@ -83,7 +83,7 @@ class SPODPUBLIC_CLASS_Graph
 
     private function getUsersGraph($father, $curr_comment, $level)
     {
-        $comments = BOL_CommentService::getInstance()->findFullCommentList(SPODPUBLIC_BOL_Service::ENTITY_TYPE_COMMENT, $curr_comment->id);
+        $comments = BOL_CommentService::getInstance()->findFullCommentList(($level == 0 ) ? SPODPUBLIC_BOL_Service::ENTITY_TYPE : SPODPUBLIC_BOL_Service::ENTITY_TYPE_COMMENT, $curr_comment->id);
 
         @$user = BOL_UserService::getInstance()->getDisplayName($curr_comment->userId);
         $avatar = BOL_AvatarService::getInstance()->getDataForUserAvatars(array($curr_comment->userId));
@@ -130,7 +130,7 @@ class SPODPUBLIC_CLASS_Graph
 
     private function getDataletsGraph($father, $curr_comment, $level)
     {
-        $comments = BOL_CommentService::getInstance()->findFullCommentList(SPODPUBLIC_BOL_Service::ENTITY_TYPE_COMMENT, $curr_comment->id);
+        $comments = BOL_CommentService::getInstance()->findFullCommentList(($level == 0 ) ? SPODPUBLIC_BOL_Service::ENTITY_TYPE : SPODPUBLIC_BOL_Service::ENTITY_TYPE_COMMENT, $curr_comment->id);
         $curr_father = $father;
         if (OW::getPluginManager()->isPluginActive('spodpr')) {
             $datalet = ODE_BOL_Service::getInstance()->getDataletByPostId($curr_comment->id, "public-room");
@@ -199,7 +199,7 @@ class SPODPUBLIC_CLASS_Graph
 
     private function getCommentsGraph($father ,$curr_comment, $level)
     {
-        $comments = BOL_CommentService::getInstance()->findFullCommentList(SPODPUBLIC_BOL_Service::ENTITY_TYPE_COMMENT, $curr_comment->id);
+        $comments = BOL_CommentService::getInstance()->findFullCommentList(($level == 0 ) ? SPODPUBLIC_BOL_Service::ENTITY_TYPE : SPODPUBLIC_BOL_Service::ENTITY_TYPE_COMMENT, $curr_comment->id);
         $node = new Node(count($this->graph->nodes),
                          @BOL_UserService::getInstance()->getDisplayName($curr_comment->userId),
                          intval($curr_comment->id));
