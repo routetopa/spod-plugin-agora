@@ -72,11 +72,15 @@ dataletGraphShow = function(){
             type : "datalets"
         },
         function(data, status){
-            data = JSON.parse(data.replace(new RegExp("'","g"),"&#39;"));
+            data = JSON.parse(data);
             if(data.status == "ok"){
-                $("#graph_content").html("<graph-datalet width='"  + (window.innerWidth / 2) +
-                                                      "' height='" + (window.innerHeight)    +
-                                                      "' graph='"  + data.graph + "'></graph-datalet>");
+                $("#graph_content").html("<graph-datalet id='dgraph' width='"  + (window.innerWidth / 2) +
+                                                      "' height='" + (window.innerHeight)    + "'></graph-datalet>");
+                                                      //"' graph='"  + data.graph + "'></graph-datalet>");
+                var g = document.getElementById('dgraph');
+                g.graph = data.graph;
+                g.init();
+
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'datalets_graph'));
                 $("#datalet_graph").css('border-bottom-style','solid');
                 $("#comment_graph").css('border-bottom-style','none');
@@ -95,11 +99,18 @@ commentGraphShow = function(){
             type : "comments"
         },
         function(data, status){
-            data = JSON.parse(data.replace(new RegExp("'","g"),"&#39;"));
+            //data.replace(new RegExp("'","g"),"&#39;");
+            //data.replace(new RegExp('"',"g"),"&#34;");
+            data = JSON.parse(data);
             if(data.status == "ok"){
-                $("#graph_content").html("<graph-datalet width='"  + (window.innerWidth / 2) +
-                                                      "' height='" + (window.innerHeight)    +
-                                                      "' graph='" + data.graph + "'></graph-datalet>");
+                $("#graph_content").html("<graph-datalet id='cgraph' width='"  + (window.innerWidth / 2) +
+                                                      "' height='" + (window.innerHeight) + "'></graph-datalet>");
+                                                     // "' graph='" + JSON.stringify(data.graph) + "'></graph-datalet>");
+
+                var g = document.getElementById('cgraph');
+                g.graph = data.graph;
+                g.init();
+
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'comments_graph'));
                 $("#comment_graph").css('border-bottom-style','solid');
                 $("#datalet_graph").css('border-bottom-style','none');
@@ -118,11 +129,15 @@ usersGraphShow = function(){
             type : "users"
         },
         function(data, status){
-            data = JSON.parse(data.replace(new RegExp("'","g"),"&#39;"));
+            data = JSON.parse(data);
             if(data.status == "ok"){
-                $("#graph_content").html("<graph-datalet width='"+ (window.innerWidth / 2) +
-                                                      "' height='"+ (window.innerHeight)   +
-                                                      "' graph='" + data.graph + "'></graph-datalet>");
+                $("#graph_content").html("<graph-datalet id='ugraph' width='"+ (window.innerWidth / 2) +
+                                                      "' height='"+ (window.innerHeight)   + "'></graph-datalet>");
+                                                      //"' graph='" + data.graph + "'></graph-datalet>");
+                var g = document.getElementById('ugraph');
+                g.graph = data.graph;
+                g.init();
+
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'users_graph'));
                 $("#user_graph").css('border-bottom-style','solid');
                 $("#comment_graph").css('border-bottom-style','none');
@@ -141,11 +156,15 @@ opinionsGraphShow = function(){
             type : "comments"
         },
         function(data, status){
-            data = JSON.parse(data.replace(new RegExp("'","g"),"&#39;"));
+            data = JSON.parse(data);
             if(data.status == "ok"){
-                $("#graph_content").html("<graph-with-clustering-datalet width='"+ (window.innerWidth / 2) +
-                                                                      "' height='"+ (window.innerHeight)   +
-                                                                      "' graph='" + data.graph + "'></graph-with-clustering-datalet>");
+                $("#graph_content").html("<graph-with-clustering-datalet id='ograph' width='"+ (window.innerWidth / 2) +
+                                                                      "' height='"+ (window.innerHeight)   + "'></graph-with-clustering-datalet>");
+                                                                      //"' graph='" + data.graph + "'></graph-with-clustering-datalet>");
+                var g = document.getElementById('ograph');
+                g.graph = data.graph;
+                g.buildGraph();
+
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'opinions_graph'));
                 $("#opinion_graph").css('border-bottom-style','solid');
                 $("#user_graph").css('border-bottom-style','none');

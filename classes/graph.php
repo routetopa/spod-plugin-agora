@@ -101,7 +101,7 @@ class SPODPUBLIC_CLASS_Graph
                 $node->userId  = $curr_comment->userId;
                 $node->r        = MIN_SIZE * 4;
                 $node->image    = $user_img;
-                $node->content  = $curr_comment->message;
+                $node->content  = htmlspecialchars($curr_comment->message);
                 $node->color    = "#ff1e1e";
                 array_push($this->graph->nodes, $node);
 
@@ -152,7 +152,7 @@ class SPODPUBLIC_CLASS_Graph
                                  $nodeName,
                                  intval($curr_comment->id));
 
-                $node->content = strip_tags($curr_comment->message)."<br><br><b>".parse_url($params->{'data-url'})['host']."</b>";
+                $node->content = htmlspecialchars($curr_comment->message)."<br><br><b>".parse_url($params->{'data-url'})['host']."</b>";
 
 
                 if(!empty($sentiment->sentiment)) {
