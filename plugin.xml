@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
     <name>SPOD Public Room</name>
-    <key>spod_plugin_public_room</key>
+    <key>public_room</key>
     <description>SPOD Publilc Room</description>
     <author>ISISLab</author>
     <authorEmail>isislab@routetopa.eu</authorEmail>
