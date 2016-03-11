@@ -17,7 +17,8 @@ class SPODPUBLIC_CTRL_Admin extends ADMIN_CTRL_Abstract
     {
         if ( isset($_REQUEST['id']))
         {
-            SPODPUBLIC_BOL_Service::getInstance()->removeRoom($_REQUEST['id']);
+            $id = $_REQUEST['id'];
+            SPODPUBLIC_BOL_Service::getInstance()->removeRoom($id);
         }
 
         $this->redirect(OW::getRouter()->urlForRoute('public-room-settings'));

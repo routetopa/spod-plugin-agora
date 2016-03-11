@@ -160,7 +160,18 @@ class SPODPUBLIC_BOL_Service
 
     public function removeRoom($roomId)
     {
+        $this->deleteRoomComments($roomId);
         SPODPUBLIC_BOL_PublicRoomDao::getInstance()->deleteById($roomId);
+    }
+
+    public function deleteRoomComments($id, $level=0)
+    {
+        $comments = BOL_CommentService::getInstance()->findFullCommentList(($level == 0 ) ? SPODPUBLIC_BOL_Service::ENTITY_TYPE : SPODPUBLIC_BOL_Service::ENTITY_TYPE_COMMENT, $id);
+
+        for ($i = 0; $i < count($comments); $i++)
+            $this->deleteRoomComments($comments[$i]->id, $level + 1);
+
+        BOL_CommentService::getInstance()->deleteComment($id);
     }
 
 }
