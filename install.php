@@ -43,3 +43,5 @@ $authorization->addAction($groupName, 'add_comment');
 
 $path = OW::getPluginManager()->getPlugin('spodpublic')->getRootDir() . 'langs.zip';
 BOL_LanguageService::getInstance()->importPrefixFromZip($path, 'spodpublic');
+
+OW::getPluginManager()->addPluginSettingsRouteName('spodpublic', 'public-room-settings');

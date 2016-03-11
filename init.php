@@ -10,3 +10,6 @@ OW::getRouter()->addRoute(new OW_Route('spodpublic.deletecomment', 'public-room/
 OW::getRouter()->addRoute(new OW_Route('spodpublic.deletecommentattachment', 'public-room/delete-comment-attachment', "SPODPUBLIC_CTRL_Comments", 'deleteCommentAttachment'));
 OW::getRouter()->addRoute(new OW_Route('spodpublic.getcommentinfofordelete', 'public-room/get-comment-info-for-delete', "SPODPUBLIC_CTRL_Comments", 'getCommentInfoForDelete'));
 
+
+OW::getRouter()->addRoute(new OW_Route('public-room-settings', '/public-room/settings', 'SPODPUBLIC_CTRL_Admin', 'settings'));
+

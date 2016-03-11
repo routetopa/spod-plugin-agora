@@ -1,0 +1,33 @@
+<style>
+    .ow_ic_delete {
+        width:16px;
+        height:16px;
+        display:block;
+        margin:0 auto;
+        background-repeat:no-repeat;
+        background-position: 50% 50%;
+    }
+</style>
+
+<table class="ow_table_1 ow_automargin">
+    <thead>
+    <tr class="ow_alt1">
+        <th class="ow_value"></th>
+        <th class="ow_value">SUBJECT</th>
+        <th class="ow_value">BODY</th>
+        <th class="ow_value"># COMMENTS</th>
+        <th class="ow_value"># OPEN DATA</th>
+        <th class="ow_value">CREATED</th>
+    </tr>
+    </thead>
+    {foreach from=$publicRoom item=ti name=tn key=id}
+    <tr class="{cycle values='ow_alt1,ow_alt2'} {if $smarty.foreach.tn.last}ow_tr_last{/if} {if $smarty.foreach.tn.first}ow_tr_first{/if}">
+        <td><a href="{$deleteUrl}?id={$ti->id}" onclick="return confirm('{text key="base+are_you_sure"}');" style="" class="ow_ic_delete"></a></td>
+        <td>{$ti->subject}</td>
+        <td>{$ti->body}</td>
+        <td>{$ti->comments}</td>
+        <td>{$ti->opendata}</td>
+        <td>{$ti->timestamp}</td>
+    </tr>
+    {/foreach}
+</table>

@@ -158,4 +158,9 @@ class SPODPUBLIC_BOL_Service
         SPODPUBLIC_BOL_PublicRoomCommentSentimentDao::getInstance()->save($sent);
     }
 
+    public function removeRoom($roomId)
+    {
+        SPODPUBLIC_BOL_PublicRoomDao::getInstance()->deleteById($roomId);
+    }
+
 }
