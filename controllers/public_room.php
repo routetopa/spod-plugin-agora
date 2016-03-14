@@ -38,47 +38,55 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
 
             $public_room_id = $params['prId'];
             $this->public_room = SPODPUBLIC_BOL_Service::getInstance()->getPublicRoomById($public_room_id);
-            $this->assign('public_room', $this->public_room);
 
-            /* ODE */
-            if(OW::getPluginManager()->isPluginActive('spodpr'))
-                $this->addComponent('private_room', new SPODPR_CMP_PrivateRoomCard('ow_attachment_btn', array('datalet', 'link'),"public-room"));
-            /* ODE */
+            if($this->public_room != null)
+            {
+                $this->assign('public_room', $this->public_room);
 
-            SPODPUBLIC_BOL_Service::getInstance()->addStat($this->public_room->id, 'views');
+                /* ODE */
+                if (OW::getPluginManager()->isPluginActive('spodpr'))
+                    $this->addComponent('private_room', new SPODPR_CMP_PrivateRoomCard('ow_attachment_btn', array('datalet', 'link'), "public-room"));
+                /* ODE */
 
-            //comment and rate
-            $commentsParams = new BASE_CommentsParams('spodpublic', SPODPUBLIC_BOL_Service::ENTITY_TYPE);
-            $commentsParams->setEntityId($public_room_id);
-            $commentsParams->setDisplayType(BASE_CommentsParams::DISPLAY_TYPE_WITH_LOAD_LIST);
-            $commentsParams->setCommentCountOnPage(5);
-            $commentsParams->setOwnerId((OW::getUser()->getId()));
-            $commentsParams->setAddComment(TRUE);
-            $commentsParams->setWrapInBox(false);
-            $commentsParams->setShowEmptyList(false);
+                SPODPUBLIC_BOL_Service::getInstance()->addStat($this->public_room->id, 'views');
 
-            $commentsParams->level = 0;
-            $commentsParams->nodeId = 0;
+                //comment and rate
+                $commentsParams = new BASE_CommentsParams('spodpublic', SPODPUBLIC_BOL_Service::ENTITY_TYPE);
+                $commentsParams->setEntityId($public_room_id);
+                $commentsParams->setDisplayType(BASE_CommentsParams::DISPLAY_TYPE_WITH_LOAD_LIST);
+                $commentsParams->setCommentCountOnPage(5);
+                $commentsParams->setOwnerId((OW::getUser()->getId()));
+                $commentsParams->setAddComment(TRUE);
+                $commentsParams->setWrapInBox(false);
+                $commentsParams->setShowEmptyList(false);
 
-            //$helperCmp = new SPODPUBLIC_CMP_HelperPublicRoom();
-            //$helperCmp = new SPODPUBLIC_CMP_HelperAgora();
-            //$helperCmp = new SPODPUBLIC_CMP_HelperMySpace();
-            //$this->addComponent('helper', $helperCmp);
+                $commentsParams->level = 0;
+                $commentsParams->nodeId = 0;
 
-            $commentCmp = new SPODPUBLIC_CMP_Comments($commentsParams);
-            $this->addComponent('comments', $commentCmp);
+                //$helperCmp = new SPODPUBLIC_CMP_HelperPublicRoom();
+                //$helperCmp = new SPODPUBLIC_CMP_HelperAgora();
+                //$helperCmp = new SPODPUBLIC_CMP_HelperMySpace();
+                //$this->addComponent('helper', $helperCmp);
 
-            $js = UTIL_JsGenerator::composeJsString('
+                $commentCmp = new SPODPUBLIC_CMP_Comments($commentsParams);
+                $this->addComponent('comments', $commentCmp);
+
+                $js = UTIL_JsGenerator::composeJsString('
                     SPODPUBLICROOM.get_graph_url              = {$get_graph_url};
                     SPODPUBLICROOM.public_room_id             = {$public_room_id};
                     SPODPUBLICROOM.suggested_datasets         = {$suggested_datasets};
                 ', array(
-                'get_graph_url'              => OW::getRouter()->urlFor('SPODPUBLIC_CTRL_Ajax', 'getGraph'),
-                'public_room_id'             => $this->public_room->id,
-                'suggested_datasets'         => SPODPUBLIC_BOL_Service::getInstance()->getJsPublicRoomSuggestionByIdAndOwner($public_room_id,OW::getUser()->getId())
-            ));
+                    'get_graph_url' => OW::getRouter()->urlFor('SPODPUBLIC_CTRL_Ajax', 'getGraph'),
+                    'public_room_id' => $this->public_room->id,
+                    'suggested_datasets' => SPODPUBLIC_BOL_Service::getInstance()->getJsPublicRoomSuggestionByIdAndOwner($public_room_id, OW::getUser()->getId())
+                ));
 
-            OW::getDocument()->addOnloadScript($js);
+                OW::getDocument()->addOnloadScript($js);
+            }
+            else
+            {
+                $this->redirect(OW::getRouter()->urlFor("SPODPUBLIC_CTRL_Room404", "index"));
+            }
         }
     }
 }
