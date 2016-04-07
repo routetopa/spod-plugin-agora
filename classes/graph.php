@@ -76,6 +76,15 @@ class SPODPUBLIC_CLASS_Graph
 
                     $this->getUsersGraph(null, $root, 0);
                     break;
+                case "complete":
+                    $this->normalizedNodeIds = array();
+                    $this->normalizedNodeIds[$node->originalId] = 0;
+
+                    $root =  new Node($id, "", 0);
+                    $root->type = "complete";
+
+                    $node->r = MIN_SIZE  * sqrt($this->getCompleteGraph($node, $root, 0));
+                    break;
             }
 
             return $this->graph;
@@ -263,6 +272,85 @@ class SPODPUBLIC_CLASS_Graph
             $r += $this->getCommentsGraph(($level > 0) ? $node : $father,
                                           $comments[$i],
                                           $level + 1);
+
+        $node->r = MIN_SIZE *((count($comments)==0)? 1 : sqrt($r));
+        return  (count($comments)==0)? 1 : $r + 1;
+    }
+
+    private function getCompleteGraph($father ,$curr_comment, $level)
+    {
+        $comments = BOL_CommentService::getInstance()->findFullCommentList(($level == 0 ) ? SPODPUBLIC_BOL_Service::ENTITY_TYPE : SPODPUBLIC_BOL_Service::ENTITY_TYPE_COMMENT, $curr_comment->id);
+        $node = new Node(count($this->graph->nodes),
+            @BOL_UserService::getInstance()->getDisplayName($curr_comment->userId),
+            intval($curr_comment->id));
+
+        $sentiment = SPODPUBLIC_BOL_Service::getInstance()->getCommentSentiment($curr_comment->id);
+
+        @$node->level     = $level;
+        @$node->content   = htmlspecialchars($curr_comment->message);
+        @$node->father    = $father;
+        switch ($level) {
+            case 1:
+                $node->color = L1NODECOLOR;
+                $node->r = 30;
+                break;
+            case 2:
+                $node->color = L2NODECOLOR;
+                $node->r = 20;
+                break;
+            case 3:
+                $node->color = L3NODECOLOR;
+                $node->r = 10;
+                break;
+        }
+
+        @$link = new Link(intval($father->id), intval($node->id));
+
+        switch ($level) {
+            case 1:
+                $link->value = 20;
+                break;
+            case 2:
+                $link->value = 5;
+                break;
+            case 3:
+                $link->value = 1;
+                break;
+        }
+
+        if(!empty($sentiment->sentiment)) {
+            $node->sentiment = $sentiment->sentiment;
+            switch ($sentiment->sentiment) {
+                case 1:
+                    $link->color = NEUTRALEDGECOLOR;
+                    break;
+                case 2:
+                    $link->color = AGREEEDGECOLOR;
+                    break;
+                case 3:
+                    $link->color = DISAGREEEDGECOLOR;
+                    break;
+            }
+        }
+
+        $datalet = ODE_BOL_Service::getInstance()->getDataletByPostId($curr_comment->id, "public-room");
+        if (count($datalet) > 0) {
+            $node->datalet = $datalet;
+        }
+
+        $node->userId      = $curr_comment->userId;
+        $node->createStamp = $curr_comment->createStamp;
+
+        if($level > 0){
+            array_push($this->graph->nodes, $node);
+            array_push($this->graph->links, $link);
+        }
+
+        $r = 0;
+        for ($i = 0; $i < count($comments); $i++)
+            $r += $this->getCompleteGraph(($level > 0) ? $node : $father,
+                $comments[$i],
+                $level + 1);
 
         $node->r = MIN_SIZE *((count($comments)==0)? 1 : sqrt($r));
         return  (count($comments)==0)? 1 : $r + 1;
