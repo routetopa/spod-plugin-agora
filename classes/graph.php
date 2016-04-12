@@ -335,6 +335,7 @@ class SPODPUBLIC_CLASS_Graph
 
         $datalet = ODE_BOL_Service::getInstance()->getDataletByPostId($curr_comment->id, "public-room");
         if (count($datalet) > 0) {
+            unset($datalet["data"]);
             $node->datalet = $datalet;
         }
 
