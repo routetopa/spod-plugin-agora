@@ -71,7 +71,8 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
                 //$helperCmp = new SPODPUBLIC_CMP_HelperMySpace();
                 //$this->addComponent('helper', $helperCmp);
 
-                $commentCmp = new SPODPUBLIC_CMP_Comments($commentsParams);
+                //$commentCmp = new SPODPUBLIC_CMP_Comments($commentsParams);
+                $commentCmp = new SPODTCHAT_CMP_Comments($commentsParams);
                 $this->addComponent('comments', $commentCmp);
 
                 $js = UTIL_JsGenerator::composeJsString('
