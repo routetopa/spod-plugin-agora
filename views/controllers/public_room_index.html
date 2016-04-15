@@ -102,7 +102,7 @@
     }
 
     .q-comments{
-        padding-left: 30px;
+        padding-left: 4.5%;
         width: 90%;
         font-size: 14px;
     }
@@ -124,6 +124,12 @@
         height: 80%;
         overflow: scroll;
     }
+
+    .public_room_comment_container
+    {
+        background-color: #efefef;
+    }
+
 </style>
 
 {style}
@@ -152,8 +158,8 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
     </paper-toolbar>
 </paper-header-panel>
 
-<div class="layout horizontal">
-    <paper-material id="topic_container" class="layout vertical justified">
+<div class="layout horizontal public_room_comment_container">
+    <paper-material id="topic_container" class="layout justified">
         <paper-material elevation="0" id="pr_body">
             {$public_room->body}
         </paper-material>
