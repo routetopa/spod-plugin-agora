@@ -3,29 +3,12 @@
 
 class SPODPUBLIC_CTRL_Ajax extends OW_ActionController
 {
-    private function validateTextInputVsSqlInjection($input){
-        return !preg_match("/(script)|(&lt;)|(&gt;)|(%3c)|(%3e)".
-            "|(SELECT)|(UPDATE)|(INSERT)|(DELETE)|(GRANT)|(REVOKE)|(UNION)".
-            "|(select)|(update)|(insert)|(delete)|(grant)|(revoke)|(union)|(database)".
-            "|(--)|(;)".
-            "|(&amp;lt;)|(&amp;gt;)/", $input);
-    }
-
     public function addPublicRoomSuggestion()
     {
-        $clean = array();
-        $clean['publicRoomId'] = "";
-        $clean['dataset'] = "";
-        $clean['comment'] = "";
-        if($this->validateTextInputVsSqlInjection($_REQUEST['publicRoomId']) &&
-            $this->validateTextInputVsSqlInjection($_REQUEST['dataset']) &&
-            $this->validateTextInputVsSqlInjection($_REQUEST['comment']))
-        {
-            $clean['publicRoomId'] = strval(intval($_REQUEST['publicRoomId']));
-            $clean['dataset']      = filter_var($_REQUEST['dataset'], FILTER_SANITIZE_STRING);
-            $clean['comment']      = filter_var($_REQUEST['comment'], FILTER_SANITIZE_STRING);
-        }else{
-            echo json_encode(array("status" => "error", "message" => "Insane inputs provided"));
+        $clean = ODE_CLASS_InputFilter::getInstance()->sanitizeInputs($_REQUEST);
+        if ($clean == null){
+            /*echo json_encode(array("status" => "error", "massage" => 'Insane inputs detected'));*/
+            OW::getFeedback()->info(OW::getLanguage()->text('cocreationep', 'insane_user_email_value'));
             exit;
         }
 
@@ -45,11 +28,11 @@ class SPODPUBLIC_CTRL_Ajax extends OW_ActionController
 
     public function removePublicRoomSuggestion()
     {
-        $clean = array();
-        $clean['publicRoomId'] = "";
-        if($this->validateTextInputVsSqlInjection($_REQUEST['publicRoomId']))
-        {
-            $clean['roomId'] = strval(intval($_REQUEST['publicRoomId']));
+        $clean = ODE_CLASS_InputFilter::getInstance()->sanitizeInputs($_REQUEST);
+        if ($clean == null){
+            /*echo json_encode(array("status" => "error", "massage" => 'Insane inputs detected'));*/
+            OW::getFeedback()->info(OW::getLanguage()->text('cocreationep', 'insane_user_email_value'));
+            exit;
         }
 
         SPODPUBLIC_BOL_Service::getInstance()->removePublicRoomSuggestion(
@@ -63,16 +46,10 @@ class SPODPUBLIC_CTRL_Ajax extends OW_ActionController
 
     public function addPublicRoom()
     {
-        $clean = array();
-        $clean['subject'] = "";
-        $clean['body'] = "";
-        if($this->validateTextInputVsSqlInjection($_REQUEST['dataset']) &&
-           $this->validateTextInputVsSqlInjection($_REQUEST['body']))
-        {
-            $clean['subject'] = filter_var($_REQUEST['subject'], FILTER_SANITIZE_STRING);
-            $clean['body']    = filter_var($_REQUEST['body'], FILTER_SANITIZE_STRING);
-        }else{
-            echo json_encode(array("status" => "error", "message" => "Insane inputs provided"));
+        $clean = ODE_CLASS_InputFilter::getInstance()->sanitizeInputs($_REQUEST);
+        if ($clean == null){
+            /*echo json_encode(array("status" => "error", "massage" => 'Insane inputs detected'));*/
+            OW::getFeedback()->info(OW::getLanguage()->text('cocreationep', 'insane_user_email_value'));
             exit;
         }
 
@@ -89,22 +66,16 @@ class SPODPUBLIC_CTRL_Ajax extends OW_ActionController
 
     public function getGraph()
     {
-        $clean = array();
-        $clean['id'] = "";
-        $clean['type'] = "";
-        if($this->validateTextInputVsSqlInjection($_REQUEST['id']) &&
-           $this->validateTextInputVsSqlInjection($_REQUEST['type']))
-        {
-            $clean['id']   = strval(intval($_REQUEST['id']));
-            $clean['type'] = filter_var($_REQUEST['type'], FILTER_SANITIZE_STRING);
-        }else{
-            echo json_encode(array("status" => "error", "message" => "Insane inputs provided"));
+        $clean = ODE_CLASS_InputFilter::getInstance()->sanitizeInputs($_REQUEST);
+        if ($clean == null){
+            /*echo json_encode(array("status" => "error", "massage" => 'Insane inputs detected'));*/
+            OW::getFeedback()->info(OW::getLanguage()->text('cocreationep', 'insane_user_email_value'));
             exit;
         }
 
         echo json_encode(array("status"        => "ok",
             "id"            => $clean['id'],
-            "graph"         => SPODPUBLIC_CLASS_Graph::getInstance()->getGraph($clean['id'], $_REQUEST['type'])));
+            "graph"         => SPODPUBLIC_CLASS_Graph::getInstance()->getGraph($clean['id'], $clean['type'])));
 
         exit;
 
