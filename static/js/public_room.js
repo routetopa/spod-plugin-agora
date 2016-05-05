@@ -196,6 +196,9 @@ $(document).ready(function () {
     $('#topic_container').perfectScrollbar();
     $('#graph_content').perfectScrollbar();
 
+    //Scroll to bottom
+    $("#topic_container").scrollTop( $( "#topic_container" ).prop( "scrollHeight" ) );
+
     OW.bind('base.comment_added', function(e){
        selectGraph();
     });
