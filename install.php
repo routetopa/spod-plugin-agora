@@ -11,8 +11,7 @@ $sql = 'CREATE TABLE IF NOT EXISTS `' . OW_DB_PREFIX . 'spod_public_room` (
   `comments` int(11) DEFAULT 0,
   `opendata` int(11) DEFAULT 0,
   `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `status` enum("approval","approved","blocked") NOT NULL DEFAULT "approved",
-  `privacy` varchar(50) NOT NULL DEFAULT "everybody",
+  `post` varchar(512),
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 

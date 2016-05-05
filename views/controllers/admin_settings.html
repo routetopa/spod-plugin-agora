@@ -7,7 +7,28 @@
         background-repeat:no-repeat;
         background-position: 50% 50%;
     }
+
+    .ow_update {
+        background-image: url(/ow_static/themes/simplicity/images/ic_write.svg);
+        width:16px;
+        height:16px;
+        display:block;
+        margin:0 auto;
+        background-repeat:no-repeat;
+        background-position: 50% 50%;
+        margin-top: 20px;
+    }
 </style>
+
+<script type="text/javascript">
+    function editRoom(em)
+    {
+
+        var href = $(em).attr("href");
+        $(em).attr("href", href + '&title=' + $("#roomTitle").val());
+        return confirm('{text key="base+are_you_sure"}');
+    }
+</script>
 
 <table class="ow_table_1 ow_automargin">
     <thead>
@@ -22,8 +43,11 @@
     </thead>
     {foreach from=$publicRoom item=ti name=tn key=id}
     <tr class="{cycle values='ow_alt1,ow_alt2'} {if $smarty.foreach.tn.last}ow_tr_last{/if} {if $smarty.foreach.tn.first}ow_tr_first{/if}">
-        <td><a href="{$deleteUrl}?id={$ti->id}" onclick="return confirm('{text key="base+are_you_sure"}');" style="" class="ow_ic_delete"></a></td>
-        <td>{$ti->subject}</td>
+        <td>
+            <a title="delete" href="{$deleteUrl}?id={$ti->id}" onclick="return confirm('{text key="base+are_you_sure"}');" style="" class="ow_ic_delete"></a>
+            <a title="edit"   href="{$editUrl}?id={$ti->id}" onclick="editRoom(this)" style="" class="ow_update"></a>
+        </td>
+        <td><input id="roomTitle" type="text" value="{$ti->subject}" /></td>
         <td>{$ti->body}</td>
         <td>{$ti->comments}</td>
         <td>{$ti->opendata}</td>

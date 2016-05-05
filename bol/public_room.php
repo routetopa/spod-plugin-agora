@@ -8,6 +8,5 @@ class SPODPUBLIC_BOL_PublicRoom extends OW_Entity
     public $comments;
     public $opendata;
     public $timestamp;
-    public $status;
-    public $privacy;
+    public $post;
 }

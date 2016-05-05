@@ -119,8 +119,7 @@ class SPODPUBLIC_BOL_Service
         $pr->views     = 0;
         $pr->comments  = 0;
         $pr->opendata  = 0;
-        $pr->status    = 'approved';
-        $pr->privacy   = 'everybody';
+        $pr->post      = json_encode(["timestamp"=>time(), "opendata"=>$pr->opendata, "comments"=>$pr->comments, "views"=>$pr->views]);
         SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($pr);
 
         $event = new OW_Event('feed.action', array(
@@ -146,6 +145,32 @@ class SPODPUBLIC_BOL_Service
         $pr = $this->getPublicRoomById($id);
         $pr->$stat += 1;
         SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($pr);
+
+        $room = SPODPUBLIC_BOL_Service::getInstance()->getPublicRoomById($id);
+        $room->post = json_decode($room->post);
+
+        $delta = $room->$stat - $room->post->$stat;
+        $prctg = ($delta * 100) / ($room->$stat > 0 ? $room->$stat : 1);
+
+        if( $delta > constant('SPODPUBLIC_'.strtoupper($stat).'_THRESHOLD') ||
+            ($prctg > constant('SPODPUBLIC_'.strtoupper($stat).'_PRCTG')
+                                        && 
+             $delta > constant('SPODPUBLIC_'.strtoupper($stat).'_MIN'))
+        )
+        {
+            $room->post->$stat = $room->$stat;
+            $this->addPostStat($room);
+            return $delta;
+        }
+
+        return false;
+    }
+
+    public function addPostStat($room)
+    {
+        $room->timestamp = time();
+        $room->post = json_encode($room->post);
+        SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($room);
     }
 
     public function addCommentSentiment($publicRoom, $commentId, $sentiment)
@@ -173,5 +198,38 @@ class SPODPUBLIC_BOL_Service
 
         BOL_CommentService::getInstance()->deleteComment($id);
     }
+
+    public function getOrderedComments($id, $comment_number)
+    {
+        $comments = array();
+        $this->getFlatComment($id, 0, $comments);
+        usort($comments, array($this, "commentComparator"));
+        $comments = array_slice($comments,count($comments)-$comment_number);
+        return $comments;
+    }
+
+    public function commentComparator($c1, $c2)
+    {
+        if ($c1->createStamp == $c2->createStamp) return 0;
+        return ($c1->createStamp < $c2->createStamp) ? -1 : 1;
+    }
+
+    public function getFlatComment($id, $level=0, &$flat_comment=array())
+    {
+        $comments = BOL_CommentService::getInstance()->findFullCommentList(($level == 0 ) ? SPODPUBLIC_BOL_Service::ENTITY_TYPE : SPODPUBLIC_BOL_Service::ENTITY_TYPE_COMMENT, $id);
+
+        $flat_comment = array_merge($flat_comment, $comments);
+
+        for ($i = 0; $i < count($comments); $i++)
+            $this->getFlatComment($comments[$i]->id, $level + 1, $flat_comment);
+    }
+
+    public function editRoom($roomId, $title)
+    {
+        $pr = $this->getPublicRoomById($roomId);
+        $pr->subject = $title;
+        SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($pr);
+    }
+
 
 }
