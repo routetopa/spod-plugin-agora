@@ -79,5 +79,3 @@ class SPODPUBLIC_CMP_Comments extends BASE_CMP_Comments
     }
 
 }
-
-?>

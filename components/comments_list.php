@@ -7,7 +7,6 @@ error_reporting(-1);
 class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
 {
 	protected $actionArr = array('comments' => array(), 'users' => array(), 'abuses' => array(), 'remove_abuses' => array());
-
 	
 	protected function init()
     {
@@ -201,6 +200,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                 $commentsParams->setWrapInBox(false);
                 $commentsParams->setShowEmptyList(false);
                 $commentsParams->level = $this->params->level + 1;
+                $commentsParams->setCommentPreviewMaxCharCount($this->params->getCommentPreviewMaxCharCount());
 
                 $datalet = ODE_BOL_Service::getInstance()->getDataletByPostIdWhereArray($value->getId(), array("comment", "public-room"));
 
@@ -286,5 +286,3 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
         return (isset($arrayToAssign)) ? $arrayToAssign : array();
     }
 }
-
-?>

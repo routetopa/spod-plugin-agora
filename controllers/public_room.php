@@ -59,6 +59,8 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
                 $commentsParams->setAddComment(TRUE);
                 $commentsParams->setWrapInBox(false);
                 $commentsParams->setShowEmptyList(false);
+                $commentsParams->setCommentPreviewMaxCharCount(5000);
+
 
                 if(isset($_REQUEST["comments_pagination"]) && $_REQUEST["comments_pagination"] == "false")
                     $commentsParams->setInitialCommentsCount(100000000);
