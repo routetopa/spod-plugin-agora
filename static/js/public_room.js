@@ -211,16 +211,16 @@ $(document).ready(function () {
     {
         var id = $(this).attr('id');
         switch($(this).attr('icon')){
-            case "thumbs-up-down":
-                $(this).attr('icon', 'thumb-up');
+            case "face":
+                $(this).attr('icon', 'social:mood');
                 $(this).attr('sentiment', '2');
                 break;
-            case "thumb-up":
-                $(this).attr('icon', 'thumb-down');
+            case "social:mood":
+                $(this).attr('icon', 'social:mood-bad');
                 $(this).attr('sentiment', '3');
                 break;
-            case "thumb-down":
-                $(this).attr('icon', 'thumbs-up-down');
+            case "social:mood-bad":
+                $(this).attr('icon', 'face');
                 $(this).attr('sentiment', '1');
                 break;
         }
