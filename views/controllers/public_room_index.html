@@ -47,12 +47,30 @@
     paper-fab.sentiment-button
     {
         float: left;
-        --paper-fab-background:#5B646A;
+        /*--paper-fab-background:#2196F3;*/
         --iron-icon-height: 16px;
         --iron-icon-width:  16px;
         height: 20px;
         width:  20px;
         left: 2px;
+        background-color: #2196F3;
+
+        box-shadow:none;
+    }
+
+    /*paper-fab.sentiment-button[sentiment="1"]*/
+    /*{*/
+        /*background-color: #2196F3;*/
+    /*}*/
+
+    paper-fab.sentiment-button[sentiment="2"]
+    {
+        background-color: #4CAF50;
+    }
+
+    paper-fab.sentiment-button[sentiment="3"]
+    {
+        background-color: #F44336;
     }
 
     paper-header-panel{
