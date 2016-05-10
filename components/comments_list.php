@@ -206,9 +206,9 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
 
                 if(!empty($datalet)) {
 
-                    OW::getDocument()->addOnloadScript('$("#datalet_placeholder_' . $value->getId() . '_comment").css("display", "none");');
+                    //OW::getDocument()->addOnloadScript('$("#datalet_placeholder_' . $value->getId() . '_comment").css("display", "none");');
 
-                    OW::getDocument()->addOnloadScript('
+                    /*OW::getDocument()->addOnloadScript('
                                $("#comment_bar_' . $value->getId() . '").append("<paper-fab mini class=\'show_datalet\' icon=\'assessment\' style=\'float:left;\' id=\'show_datalet_comment_' . $value->getId() .'\'></paper-fab>");
                                $("#show_datalet_comment_' . $value->getId() .'").click(function(){
                                      $("#datalet_placeholder_' . $value->getId() . '_comment").toggle(\'fade\',
@@ -230,7 +230,10 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                                                                                           500);
                                      $("#topic_container").scrollTop($(\'#datalet_placeholder_' . $value->getId() . '_comment\').offset().top - 50);
                                });
-                    ');
+                    ');*/
+
+                    OW::getDocument()->addOnloadScript('$("#comment_bar_' . $value->getId() . '").append("<paper-fab mini class=\'show_datalet\' icon=\'assessment\' style=\'float:left;\' id=\'show_datalet_comment_' . $value->getId() .'\'></paper-fab>");');
+                    
                 }
 
                 $this->addComponent('nestedComments' . $value->getId(), new SPODPUBLIC_CMP_Comments($commentsParams));
