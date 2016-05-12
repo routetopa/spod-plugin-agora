@@ -168,7 +168,8 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
 
         $(".show_datalet").live("click", function(e){
 
-            var datalet_placeholder = $(e.currentTarget).parents().eq(3).find(".datalet_placeholder");
+            //var datalet_placeholder = $(e.currentTarget).parents().eq(3).find(".datalet_placeholder");
+            var datalet_placeholder = $(e.currentTarget).parent().find(".datalet_placeholder");
 
             datalet_placeholder.toggle('fade',
                 {direction: 'top'},

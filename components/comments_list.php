@@ -232,7 +232,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                                });
                     ');*/
 
-                    OW::getDocument()->addOnloadScript('$("#comment_bar_' . $value->getId() . '").append("<paper-fab mini class=\'show_datalet\' icon=\'assessment\' style=\'float:left;\' id=\'show_datalet_comment_' . $value->getId() .'\'></paper-fab>");');
+                    OW::getDocument()->addOnloadScript('$("#comment_' . $value->getId() . '").append("<paper-fab mini class=\'show_datalet\' icon=\'assessment\' style=\'float:left; margin-top: 5px;\' id=\'show_datalet_comment_' . $value->getId() .'\'></paper-fab>");');
                     
                 }
 
