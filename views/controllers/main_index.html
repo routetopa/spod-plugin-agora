@@ -62,7 +62,7 @@
             this.$['fullsize-card'].color      = event.detail.data.color;
             this.$['fullsize-card'].publicRoom = event.detail.data.id;
             //window.location.hash = '!/' + event.detail.data.id;
-            var hash = window.location.pathname[window.location.pathname.length-1] == '/' ? '#!/' + event.detail.data.id : '/#!/' + event.detail.data.id;
+            var hash = (window.location.pathname[window.location.pathname.length-1] == '/' ? '#!/' : '/#!/') + event.detail.data.id;
             history.pushState({}, "Public Room", 'http://' + window.location.hostname + window.location.pathname + hash);
             ODE.publicRoom = event.detail.data.id;
             this.$.pages.selected = 1;
