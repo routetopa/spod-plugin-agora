@@ -13,9 +13,9 @@ OW::getRouter()->addRoute(new OW_Route('spodpublic.getcommentinfofordelete', 'pu
 
 OW::getRouter()->addRoute(new OW_Route('public-room-settings', '/public-room/settings', 'SPODPUBLIC_CTRL_Admin', 'settings'));
 
-define("SPODPUBLIC_COMMENTS_THRESHOLD", 1);
-define("SPODPUBLIC_COMMENTS_MIN", 1);
-define("SPODPUBLIC_COMMENTS_PRCTG", 1);
+define("SPODPUBLIC_COMMENTS_THRESHOLD", 5);
+define("SPODPUBLIC_COMMENTS_MIN", 5);
+define("SPODPUBLIC_COMMENTS_PRCTG", 5);
 define("SPODPUBLIC_OPENDATA_THRESHOLD", 5);
 define("SPODPUBLIC_OPENDATA_MIN", 5);
 define("SPODPUBLIC_OPENDATA_PRCTG", 5);
