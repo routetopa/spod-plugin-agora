@@ -199,10 +199,10 @@ class SPODPUBLIC_BOL_Service
         BOL_CommentService::getInstance()->deleteComment($id);
     }
 
-    public function getOrderedComments($id, $comment_number)
+    public function getOrderedComments($id, $comment_number, $dataletOnly = false)
     {
         $comments = array();
-        $this->getFlatComment($id, 0, $comments);
+        $this->getFlatComment($id, 0, $comments, $dataletOnly);
         usort($comments, array($this, "commentComparator"));
         $comments = array_slice($comments,count($comments)-$comment_number);
         return $comments;
@@ -214,14 +214,19 @@ class SPODPUBLIC_BOL_Service
         return ($c1->createStamp < $c2->createStamp) ? -1 : 1;
     }
 
-    public function getFlatComment($id, $level=0, &$flat_comment=array())
+    public function getFlatComment($id, $level=0, &$flat_comment=array(), $dataletOnly = false)
     {
         $comments = BOL_CommentService::getInstance()->findFullCommentList(($level == 0 ) ? SPODPUBLIC_BOL_Service::ENTITY_TYPE : SPODPUBLIC_BOL_Service::ENTITY_TYPE_COMMENT, $id);
 
-        $flat_comment = array_merge($flat_comment, $comments);
-
         for ($i = 0; $i < count($comments); $i++)
-            $this->getFlatComment($comments[$i]->id, $level + 1, $flat_comment);
+        {
+            if ($dataletOnly && ODE_BOL_Service::getInstance()->getDataletByPostId($comments[$i]->id, 'public-room') != null)
+                $flat_comment = array_merge($flat_comment, array($comments[$i]));
+            else if(ODE_BOL_Service::getInstance()->getDataletByPostId($comments[$i]->id, 'public-room') == null)
+                $flat_comment = array_merge($flat_comment, array($comments[$i]));
+
+            $this->getFlatComment($comments[$i]->id, $level + 1, $flat_comment, $dataletOnly);
+        }
     }
 
     public function editRoom($roomId, $title)
