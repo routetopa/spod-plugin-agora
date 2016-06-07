@@ -4,6 +4,9 @@ class SPODPUBLIC_CMP_Suggestion extends OW_Component
 {
     public function __construct($publicRoomId)
     {
+        OW::getDocument()->addScript(OW::getPluginManager()->getPlugin('cocreation')->getStaticJsUrl() . 'input-menu.js');
+        OW::getDocument()->addStyleSheet(OW::getPluginManager()->getPlugin('cocreation')->getStaticCssUrl() . 'input-menu.css');
+        
         $form = new Form('PublicRoomSuggestionForm');
 
         $form->setAjax();

@@ -39,38 +39,69 @@
 </script>
 {/literal}
 
-<div class="ow_superwide ow_automargin">
+<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+
+<div class="cocoreation_create_room_container">
+
+    <div class="cocoreation_create_room_header">
+        ADD SUGGESTED DATASET
+    </div>
+
+    <div class="cocoreation_create_room_left_menu">
+        <ul>
+            <li class="step-1 cocoreation_create_room_left_menu_selected">DATASET</li>
+            <li class="step-2">COMMENT</li>
+            <li class="step-3">SUGGESTED DATASET</li>
+        </ul>
+    </div>
 
     {form name='PublicRoomSuggestionForm'}
-    <table class="ow_table_1 ow_form">
-        <tr class="ow_alt2 ow_tr_first">
-            <td class="ow_label">{text key="spodpublic+suggestion_dataset"}</td>
-            <td class="ow_value">{input name='dataset'}</td>
-            <td class="ow_desc ow_small"></td>
-        </tr>
-        <tr class="ow_alt2 ow_tr_first">
-            <td class="ow_label">{text key="spodpublic+suggestion_comment"}</td>
-            <td class="ow_value">{input name='comment'}</td>
-            <td class="ow_desc ow_small"></td>
-        </tr>
-    </table>
-    <div class="clearfix ow_stdmargin"><div class="ow_right">{submit name='submit' class='ow_ic_new'}</div></div>
-    {/form}
+    <div class="cocoreation_create_room_content">
 
-    <table class="ow_table_1" id="suggestion_table">
-        <tr>
-            <th>{text key="spodpublic+suggestion_comment"}</th>
-            <th>{text key="spodpublic+suggestion_dataset"}</th>
-        </tr>
-        {foreach $suggestions as $suggestion}
-        <tr class="ow_alt2 ow_tr_first">
-            <td class="ow_label">{$suggestion->comment}</td>
-            <td class="ow_value">{$suggestion->dataset}</td>
-            <td class="ow_value">
-                <a class="delete" href="javascript://" data-id="" onclick="deleteRow(this, {{$suggestion->id}})"></a>
-            </td>
-        </tr>
-        {/foreach}
-    </table>
+        <!-- ROOM DATASET -->
+        <div class="step in-step-1 in-step-show">
+            <div class="title">
+                <span>{text key="spodpublic+suggestion_dataset"}</span>
+            </div>
+            <div class="input">
+                {input name='dataset'}
+            </div>
+        </div>
+
+        <!-- ROOM COMMENT -->
+        <div class="step in-step-2">
+            <div class="title">
+                <span>{text key="spodpublic+suggestion_comment"}</span>
+            </div>
+            <div class="input">
+                {input name='comment'}
+            </div>
+            <div class="submit_container">
+                {submit name='submit' class='ow_ic_new'}
+            </div>
+        </div>
+        {/form}
+
+
+        <!-- ROOM TABLE -->
+        <div class="step in-step-3">
+            <table class="ow_table_1" id="suggestion_table">
+                <tr>
+                    <th>{text key="spodpublic+suggestion_comment"}</th>
+                    <th>{text key="spodpublic+suggestion_dataset"}</th>
+                </tr>
+                {foreach $suggestions as $suggestion}
+                <tr class="ow_alt2 ow_tr_first">
+                    <td class="ow_label">{$suggestion->comment}</td>
+                    <td class="ow_value">{$suggestion->dataset}</td>
+                    <td class="ow_value">
+                        <a class="delete" href="javascript://" data-id="" onclick="deleteRow(this, {{$suggestion->id}})"></a>
+                    </td>
+                </tr>
+                {/foreach}
+            </table>
+        </div>
+
+    </div>
 
 </div>

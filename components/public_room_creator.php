@@ -4,6 +4,9 @@ class SPODPUBLIC_CMP_PublicRoomCreator extends OW_Component
 {
     public function __construct()
     {
+        OW::getDocument()->addScript(OW::getPluginManager()->getPlugin('cocreation')->getStaticJsUrl() . 'input-menu.js');
+        OW::getDocument()->addStyleSheet(OW::getPluginManager()->getPlugin('cocreation')->getStaticCssUrl() . 'input-menu.css');
+
         $this->assign('components_url', SPODPR_COMPONENTS_URL);
 
         $form = new Form('PublicRoomCreatorForm');
@@ -14,7 +17,7 @@ class SPODPUBLIC_CMP_PublicRoomCreator extends OW_Component
         $subject = new TextField('subject');
         $subject->setRequired(true);
 
-        $body = new WysiwygTextarea('body');
+        $body = new TextField('body');
         $body->setRequired(true);
 
         $submit = new Submit('submit');
