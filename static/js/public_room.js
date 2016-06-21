@@ -247,5 +247,5 @@ $(document).ready(function () {
 
 $(window).load(function() {
     //commentGraphShow();
-    //slideGraphPanel();
+    slideGraphPanel();
 });
