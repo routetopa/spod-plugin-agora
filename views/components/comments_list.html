@@ -38,7 +38,7 @@
         <div class="ow_nocontent">{text key="base+comment_no_comments"}</div>
         {else}
         {foreach from=$comments item='comment'}
-        <div class="ow_comments_item clearfix">
+        <div commentId="{$comment.commentId}" class="ow_comments_item clearfix">
             <div class="cnx_action" style="display: none">{$comment.cnxAction}</div>
             <div class="ow_comments_item_picture">
                 {capture assign=csentiment}commentSentiment{$comment.commentId}{/capture}
