@@ -81,10 +81,12 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
                     SPODPUBLICROOM.get_graph_url              = {$get_graph_url};
                     SPODPUBLICROOM.public_room_id             = {$public_room_id};
                     SPODPUBLICROOM.suggested_datasets         = {$suggested_datasets};
+                    SPODPUBLICROOM.current_user_id            = {$current_user_id};
                 ', array(
-                    'get_graph_url' => OW::getRouter()->urlFor('SPODPUBLIC_CTRL_Ajax', 'getGraph'),
-                    'public_room_id' => $this->public_room->id,
-                    'suggested_datasets' => SPODPUBLIC_BOL_Service::getInstance()->getJsPublicRoomSuggestionByIdAndOwner($public_room_id, OW::getUser()->getId())
+                    'get_graph_url'      => OW::getRouter()->urlFor('SPODPUBLIC_CTRL_Ajax', 'getGraph'),
+                    'public_room_id'     => $this->public_room->id,
+                    'suggested_datasets' => SPODPUBLIC_BOL_Service::getInstance()->getJsPublicRoomSuggestionByIdAndOwner($public_room_id, OW::getUser()->getId()),
+                    'current_user_id'    => OW::getUser()->getId()
                 ));
 
                 OW::getDocument()->addOnloadScript($js);

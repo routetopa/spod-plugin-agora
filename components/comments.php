@@ -6,6 +6,18 @@ error_reporting(-1);
 
 class SPODPUBLIC_CMP_Comments extends BASE_CMP_Comments
 {
+    /**
+     * @var BASE_CommentsParams
+     */
+    public $params;
+    public $batchData;
+    public $staticData;
+    public $id;
+    public $cmpContextId;
+    //protected $formName;
+    public $isAuthorized;
+
+
     public function initForm()
     {
         //OW::getDocument()->addOnloadScript("alert(\"".UTIL_Url::selfUrl()."\");");

@@ -11,11 +11,12 @@ SpodpublicCommentsList.prototype = {
         var self = this;
         $('.ow_comments_item', this.$context).hover(function(){$('.cnx_action', this).show();$('.ow_comments_date_hover', this).hide();}, function(){$('.cnx_action', this).hide();$('.ow_comments_date_hover', this).show();});
         this.$loader.one('click',
-            function(){
+            function(e){
                 self.$loader.addClass('ow_preloader');
                 $('a', self.$loader).hide();
                 self.initialCount += self.loadMoreCount;
                 self.reload();
+                e.stopImmediatePropagation();
             }
         );
 

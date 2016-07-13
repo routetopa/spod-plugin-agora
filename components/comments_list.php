@@ -238,7 +238,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
 
                 $this->addComponent('nestedComments' . $value->getId(), new SPODPUBLIC_CMP_Comments($commentsParams));
 
-                OW::getDocument()->addOnloadScript(
+/*                OW::getDocument()->addOnloadScript(
                     "$(document).ready(function(){
                         $('#spod_public_room_nested_comment_show_" . $value->getId() . "').click(function(){
                               $('#nc_" . $value->getId() . "').toggle('fade', {direction: 'top'}, 500);
@@ -251,6 +251,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                            });
                     });"
                 );
+*/
 
                 @$this->assign('commentSentiment' . $value->getId(), SPODPUBLIC_BOL_Service::getInstance()->getCommentSentiment($value->getId())->sentiment);
                 $this->assign('commentsCount' . $value->getId(), BOL_CommentService::getInstance()->findCommentCount(SPODPUBLIC_BOL_Service::ENTITY_TYPE_COMMENT, $value->getId()));

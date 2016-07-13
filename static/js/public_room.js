@@ -248,4 +248,95 @@ $(document).ready(function () {
 $(window).load(function() {
     //commentGraphShow();
     slideGraphPanel();
+
+    $(document.body).on('click', '.ow_miniic_comment', function(e){
+        $(e.target).parent().parent().next().toggle('fade', {direction: 'top'}, 500);
+        $(e.target).parent().parent().next().css('display');
+    });
+
+    var socket = io("http://172.16.15.77:3000");
+
+    //console.log('realtime_message_' + SPODPUBLICROOM.public_room_id);
+
+    socket.on('realtime_message_' + SPODPUBLICROOM.public_room_id, function(rawData) {
+        if(SPODPUBLICROOM.current_user_id != rawData.user_id)
+        {
+            var contextIdNumber = rawData.contextId.split("_");
+
+            var cloned = $(".ow_comments_item:last").clone();
+
+            cloned.find(".ow_comments_item_info").attr("id", "comment_" + rawData.message_id);
+
+            cloned.find(".ow_comments_content").html(rawData.message +
+                "<div class='datalet_placeholder' id='datalet_placeholder_" + rawData.message_id + "_comment'></div>");
+
+            cloned.find(".ow_comments_item_header a").html(rawData.user_display_name);
+            cloned.find(".ow_avatar img:first").attr("src", rawData.user_avatar);
+
+            cloned.attr("commentid", rawData.message_id);
+            cloned.find(".ow_miniic_control").attr("id", "comment_bar_" + rawData.message_id);
+            cloned.find(".ow_miniic_comment").attr("id", "spod_public_room_nested_comment_show_" + rawData.message_id);
+            cloned.find(".nestedComment").attr("id", "nc_" + rawData.message_id);
+            cloned.find(".ow_comments_mipc").attr("id", rawData.contextId);
+            cloned.find(".comments_list_cont").children().eq(1).attr("id", "comments-list-spodpublic_topic_entity_" + contextIdNumber[contextIdNumber.length-1]);
+            cloned.find(".comments_fake_autoclick").attr("id", rawData.textAreaId);
+            cloned.find(".ow_photo_attachment_preview").attr("id", rawData.attchUid);
+            cloned.find(".ow_photo_attachment_preview").next().attr("id", rawData.attchId);
+            cloned.find(".image").attr("id", "bCcontspodpublic_topic_entity_" + contextIdNumber[contextIdNumber.length-1]);
+
+            switch (rawData.sentiment)
+            {
+                case "1" : cloned.find(".ow_comments_item_picture").find("paper-fab").attr("icon", "face"); break;
+                case "2" : cloned.find(".ow_comments_item_picture").find("paper-fab").attr("icon", "social:mood"); break;
+                case "3" : cloned.find(".ow_comments_item_picture").find("paper-fab").attr("icon", "social:mood-bad"); break;
+            }
+
+            if(rawData.comment_level == 3)
+                cloned.find(".spod_public_bottom_bar").remove();
+
+            if(rawData.parent_id == SPODPUBLICROOM.public_room_id)
+            {
+                $(".ow_comments_list:first").append(cloned);
+                //$(".ow_comments_list:first").append(rawData.render);
+            }
+            else
+            {
+                $("div[commentid='"+rawData.parent_id+"']").find(".ow_comments_list").first().append(cloned);
+                var counter = parseInt($("div[commentid='"+rawData.parent_id+"']").find(".spod_public_bottom_bar_counter_comments").first().html());
+                counter +=1;
+                $("div[commentid='"+rawData.parent_id+"']").find(".spod_public_bottom_bar_counter_comments").first().html(counter);
+                //$("div[commentid='"+rawData.parent_id+"']").find(".ow_comments_list").first().append(rawData.render);
+            }
+
+            new OwComments({"entityId"   :rawData.message_id,
+                "contextId"  : rawData.contextId,
+                "uid"        : "spodpublic_topic_entity_" + contextIdNumber[contextIdNumber.length-1],
+                "textAreaId" : rawData.textAreaId,
+                "attchId"    : rawData.attchId,
+                "attchUid"   : rawData.attchUid,
+
+                "entityType":"spodpublic_topic_entity_comment",
+                "pluginKey":"spodpublic",
+                "addUrl":"http:\/\/172.16.15.77\/spodpublic\/comments\/add-comment\/",
+                "displayType":30,
+                "userAuthorized":true,
+                "customId":null,"ownerId":1,
+                "cCount":5,
+                "initialCount":10,
+                "loadMoreCount":10,
+                "countOnPage":5,
+                "enableSubmit":true,
+                "mediaAllowed":true,
+                "labels":{"emptyCommentMsg":"Empty comment","disabledSubmit":"base+submit_disabled_error_msg","attachmentLoading":"Photo is still uploading"}
+            });
+
+            ODE.loadDatalet(rawData.component,
+                            JSON.parse(rawData.params),
+                            JSON.parse("["+rawData.fields+"]"),
+                            '',
+                            'datalet_placeholder_' + rawData.message_id + '_comment');
+
+            $("#comment_" + rawData.message_id).append("<paper-fab mini class='show_datalet' icon='assessment' style='float:left; margin-top: 5px;' id='show_datalet_comment_'" + rawData.message_id +"></paper-fab>");
+        }
+    });
 });

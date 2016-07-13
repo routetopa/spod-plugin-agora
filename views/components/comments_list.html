@@ -30,9 +30,9 @@
 <div id="{$cmpContext}">
     <div class="ow_comments_list">
         {if !empty($countToLoad) && $countToLoad > 0}
-        <div class="ow_comment_list_loader ow_feed_comments_viewall ow_small">
+            <div class="ow_comment_list_loader ow_feed_comments_viewall ow_small">
             <a href="javascript://">+<span>{$countToLoad}</span> {$loadMoreLabel}</a>
-        </div>
+            </div>
         {/if}
         {if isset($noComments)}
         <div class="ow_nocontent">{text key="base+comment_no_comments"}</div>

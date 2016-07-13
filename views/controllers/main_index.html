@@ -37,12 +37,21 @@
         -webkit-box-shadow: 0 0 20px 5px #999;
     }
 
-    paper-fab
+    paper-fab#add_room_button
     {
         position: absolute;
         bottom: 55px;
         right: 40px;
         --paper-fab-background:#2196F3;
+    }
+
+    search-panel-controllet#search_room
+    {
+        --paper-fab-background:#2196F3;
+        position: absolute;
+        bottom: 60px;
+        right: 100px;
+        --search-box-container-color: #2196F3;
     }
 
     .ow_console_right {
@@ -59,6 +68,7 @@
 
         scope._onTileClick = function(event) {
             $("#add_room_button").hide();
+            $("#search_room").hide();
             this.$['fullsize-card'].color      = event.detail.data.color;
             this.$['fullsize-card'].publicRoom = event.detail.data.id;
             //window.location.hash = '!/' + event.detail.data.id;
@@ -70,6 +80,7 @@
 
         scope._onFullsizeClick = function(event) {
             $("#add_room_button").show();
+            $("#search_room").show();
             this.$['fullsize-card'].publicRoom = undefined;
             this.$.pages.selected = 0;
         };
@@ -80,11 +91,37 @@
             {
                 var roomId = match[0].replace("/","");
                 $("#add_room_button").hide();
+                $("#search_room").hide();
                 $("#fullsize-card")[0].color = $("#"+roomId).css('background-color');
                 $("#fullsize-card")[0].publicRoom = roomId;
                 ODE.publicRoom = roomId;
                 $("#pages")[0].selected = 1;
             }
+        });
+
+        document.addEventListener('search-panel-controllet_content-changed', function (e) {
+            console.log(e.detail.searchKey);
+
+            var rooms = document.querySelectorAll('room-controllet');
+            for(var i=0; i < rooms.length; i++)
+            {
+                var subject = rooms[i].subject;
+                var body    = rooms[i].body;
+
+                var searchFlag = subject.indexOf(e.detail.searchKey) == -1 && body.indexOf(e.detail.searchKey) == -1;
+
+                if(!searchFlag || e.detail.searchKey == "")
+                {
+                    rooms[i].children[0].style.display = "inline-block";
+                }
+                else
+                {
+                    rooms[i].children[0].style.display = "none";
+                }
+            }
+
+            $('.grid').masonry();
+
         });
 
     });
@@ -167,7 +204,9 @@
                 <div class="ow_console_right">
                     {$console}
                 </div>
-                <div class="ow_menu_wrap">{component class='BASE_CMP_MainMenu' responsive=true}</div>
+                <div class="ow_menu_wrap">
+                    {component class='BASE_CMP_MainMenu' responsive=true}
+                </div>
             </div>
             <!--<search-panel-controllet right-direction="true"></search-panel-controllet>-->
             <!--<paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>-->
@@ -206,7 +245,10 @@
 
         </paper-scroll-header-panel>
 
-        <paper-fab id="add_room_button" icon="add" onclick="SPODPUBLICROOM.addRoom()" title='{text key="spodpublic+add_room"}'></paper-fab>
+        {if $isCreationAuthorizated}
+            <paper-fab id="add_room_button" icon="add" onclick="SPODPUBLICROOM.addRoom()" title='{text key="spodpublic+add_room"}'></paper-fab>
+        {/if}
+        <search-panel-controllet id="search_room" paperfab></search-panel-controllet>
 
     </div>
 
