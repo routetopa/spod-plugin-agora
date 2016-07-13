@@ -73,6 +73,8 @@ class SPODPUBLIC_CTRL_Ajax extends OW_ActionController
             exit;
         }
 
+        header("Access-Control-Allow-Origin: *");
+
         echo json_encode(array("status"        => "ok",
             "id"            => $clean['id'],
             "graph"         => SPODPUBLIC_CLASS_Graph::getInstance()->getGraph($clean['id'], $clean['type'])));
