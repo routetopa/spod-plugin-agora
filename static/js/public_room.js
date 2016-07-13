@@ -254,7 +254,7 @@ $(window).load(function() {
         $(e.target).parent().parent().next().css('display');
     });
 
-    var socket = io("http://172.16.15.77:3000");
+    var socket = io(window.location.origin + ":3000");
 
     //console.log('realtime_message_' + SPODPUBLICROOM.public_room_id);
 
