@@ -237,7 +237,7 @@ class SPODPUBLIC_CLASS_Graph
 
         switch ($level) {
             case 1:
-                $link->value = 20;
+                $link->value = 10;
                 break;
             case 2:
                 $link->value = 5;
@@ -308,7 +308,7 @@ class SPODPUBLIC_CLASS_Graph
 
         switch ($level) {
             case 1:
-                $link->value = 20;
+                $link->value = 10;
                 break;
             case 2:
                 $link->value = 5;
