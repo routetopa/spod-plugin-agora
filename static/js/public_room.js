@@ -104,7 +104,7 @@ commentGraphShow = function(){
             data = JSON.parse(data);
             if(data.status == "ok"){
                 $("#graph_content").html("<graph-datalet id='cgraph' width='"  + (window.innerWidth / 2) +
-                                                      "' height='" + (window.innerHeight) + "'></graph-datalet>");
+                                                      "' height='" + (window.innerHeight * 2) + "'></graph-datalet>");
                                                      // "' graph='" + JSON.stringify(data.graph) + "'></graph-datalet>");
 
                 var g = document.getElementById('cgraph');
@@ -132,7 +132,7 @@ usersGraphShow = function(){
             data = JSON.parse(data);
             if(data.status == "ok"){
                 $("#graph_content").html("<graph-datalet id='ugraph' width='"+ (window.innerWidth / 2) +
-                                                      "' height='"+ (window.innerHeight)   + "'></graph-datalet>");
+                                                      "' height='"+ (window.innerHeight * 2)   + "'></graph-datalet>");
                                                       //"' graph='" + data.graph + "'></graph-datalet>");
                 var g = document.getElementById('ugraph');
                 g.graph = data.graph;
@@ -159,7 +159,7 @@ opinionsGraphShow = function(){
             data = JSON.parse(data);
             if(data.status == "ok"){
                 $("#graph_content").html("<graph-with-clustering-datalet id='ograph' width='"+ (window.innerWidth / 2) +
-                                                                      "' height='"+ (window.innerHeight)   + "'></graph-with-clustering-datalet>");
+                                                                      "' height='"+ (window.innerHeight * 2)   + "'></graph-with-clustering-datalet>");
                                                                       //"' graph='" + data.graph + "'></graph-with-clustering-datalet>");
                 var g = document.getElementById('ograph');
                 g.graph = data.graph;
