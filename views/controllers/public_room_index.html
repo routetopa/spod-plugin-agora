@@ -11,9 +11,25 @@
 <link rel="import" href="{$components_url}datalets/graph-datalet/graph-with-clustering-datalet.html">
 <link rel="import" href="{$components_url}bower_components/paper-fab-transitions/paper-fab-speed-dial.html">
 
+<link rel="import" href="{$components_url}bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="{$components_url}bower_components/paper-spinner/paper-spinner-lite.html">
+
 <base target="_parent" />
 
 <style is="custom-style">
+
+    paper-spinner {
+        height: 64px;
+        width: 64px;
+        top: 50%;
+        left: 50%;
+
+        --paper-spinner-stroke-width: 8px;
+        --paper-spinner-layer-1-color: #2196F3;
+        --paper-spinner-layer-2-color: #F44336;;
+        --paper-spinner-layer-3-color: #FFEB3B;;
+        --paper-spinner-layer-4-color: #4CAF50;;
+    }
 
     paper-toolbar.toolbar-main
     {
@@ -154,6 +170,17 @@
         display: none;
     }
 
+    #preloader_container
+    {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+    }
+
 </style>
 
 {style}
@@ -233,6 +260,10 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
         <div id="graph_content">
         </div>
     </paper-material>
+</div>
+
+<div id="preloader_container">
+    <paper-spinner id="datalet_spinner" active></paper-spinner>
 </div>
 
 <!-- ODE PRIVATE-ROOM -->

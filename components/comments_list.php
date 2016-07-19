@@ -7,7 +7,7 @@ error_reporting(-1);
 class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
 {
 	protected $actionArr = array('comments' => array(), 'users' => array(), 'abuses' => array(), 'remove_abuses' => array());
-	
+
 	protected function init()
     {
         SPODPUBLIC_CLASS_EventHandler::getInstance()->init();
@@ -173,7 +173,6 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
 
     protected function processList( $commentList )
     {
-
         /* @var $value BOL_Comment */
         foreach ( $commentList as $value )
         {
@@ -201,6 +200,7 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
                 $commentsParams->setShowEmptyList(false);
                 $commentsParams->level = $this->params->level + 1;
                 $commentsParams->setCommentPreviewMaxCharCount($this->params->getCommentPreviewMaxCharCount());
+                $commentsParams->setInitialCommentsCount($this->params->getInitialCommentsCount());
 
                 $datalet = ODE_BOL_Service::getInstance()->getDataletByPostIdWhereArray($value->getId(), array("comment", "public-room"));
 

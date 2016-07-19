@@ -12,16 +12,13 @@ refreshOpenedDatalets = function(){
     });
 };
 
-window.addEventListener('graph-datalet_node-clicked', function(e){
+selectTChatElement = function(curr_element, element_id)
+{
     if(last_selected_element != null){
         last_selected_element.css('border', 'none');
         last_selected_element.css('font-weight', 'normal');
     }
 
-    if(e.detail.node.id == 0) return;
-
-    //current comment container
-    var curr_element = $("#comment_" + e.detail.node.originalId);
     //apply border to enphatize it
     $(curr_element).css('border', '1px solid #000000');
     $(curr_element).css('font-weight', 'bold');
@@ -30,24 +27,44 @@ window.addEventListener('graph-datalet_node-clicked', function(e){
     //close all previously opened datalets
     $('div[id^="datalet_placeholder_"]').css('display', 'none');
     //open the selected datalet
-    $('div[id^="datalet_placeholder_' + e.detail.node.originalId + '"]' ).css('display', 'block');
+    $('div[id^="datalet_placeholder_' + element_id + '"]').css('display', 'block');
     $('.show_datalet').css('background', '#2196F3');
     //open recursively all parent of the current comment
     $(curr_element).parents('div[id^="nc_"]').css('display', 'block');
     //Resize the selected datalet if there is any
-    var datalet = $('div[id^="datalet_placeholder_' + e.detail.node.originalId + '"]' ).children()[1];
-    if(datalet != undefined){
+    var datalet = $('div[id^="datalet_placeholder_' + element_id + '"]').children()[1];
+
+    if (datalet != undefined) {
         $(datalet)[0].behavior.presentData();
-        if($(datalet)[0].refresh != undefined)
+        if ($(datalet)[0].refresh != undefined)
             $(datalet)[0].refresh();
         else
             $(datalet)[0].behavior.presentData();
     }
 
     //scoll the view until the selected comment
-    $("#topic_container").scrollTop($(curr_element).offset().top - 50);
+    $("#topic_container").scrollTop($("#topic_container").scrollTop() + curr_element.offset().top - 50);
 
     last_selected_element = curr_element;
+};
+
+window.addEventListener('graph-datalet_node-clicked', function(e){
+
+    if(e.detail.node.id == 0) return;
+
+    //current comment container
+    var curr_element = $("#comment_" + e.detail.node.originalId);
+
+    if(curr_element.length > 0)
+    {
+        selectTChatElement(curr_element, e.detail.node.originalId);
+    }
+    else
+    {
+        var elem = $("paper-material .ow_comments_ipc")[0];
+        window.owCommentListCmps.items[elem.id.replace("comments-", "")].loadAll('',  e.detail.node.originalId, selectTChatElement);
+    }
+
 });
 
 slideGraphPanel = function(){

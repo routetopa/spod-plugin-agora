@@ -226,6 +226,46 @@ SpodpublicCommentsList.prototype = {
         });
     },
 
+    loadAll:function(page, nodeId, selectnode)
+    {
+        var self = this;
+        $("#preloader_container").show();
+        $.ajax({
+            type: 'POST',
+            url: self.respondUrl,
+            data: {
+                cid:self.cid,
+                commentCountOnPage:self.commentCountOnPage,
+                ownerId:self.ownerId,
+                pluginKey:self.pluginKey,
+                displayType:self.displayType,
+                entityType:self.entityType,
+                entityId:self.entityId,
+                initialCount:10000,
+                loadMoreCount:self.loadMoreCount,
+                page:page
+            },
+            dataType: 'json',
+            success : function(data){
+                if(data.error){
+                    OW.error(data.error);
+                    return;
+                }
+                self.$loader.removeClass('ow_preloader');
+                $('a', self.$loader).hide();
+                self.$context.replaceWith(data.commentList);
+                OW.addScript(data.onloadScript);
+                var curr_element = $("#comment_" + nodeId);
+                $("#preloader_container").hide();
+                selectnode(curr_element, nodeId);
+            },
+            error : function( XMLHttpRequest, textStatus, errorThrown ){
+                OW.error('Ajax Error: '+textStatus+'!');
+                throw textStatus;
+            }
+        });
+    },
+
     findPageForComment:function (commentId, currentPage, maxPage){
         var self = this;
         $.ajax({
