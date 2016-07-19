@@ -15,13 +15,15 @@ refreshOpenedDatalets = function(){
 selectTChatElement = function(curr_element, element_id)
 {
     if(last_selected_element != null){
-        last_selected_element.css('border', 'none');
-        last_selected_element.css('font-weight', 'normal');
+        //last_selected_element.css('border', 'none');
+        //last_selected_element.css('font-weight', 'normal');
+        last_selected_element.css('background', 'white');
     }
 
     //apply border to enphatize it
-    $(curr_element).css('border', '1px solid #000000');
-    $(curr_element).css('font-weight', 'bold');
+    //$(curr_element).css('border', '1px solid #000000');
+    //$(curr_element).css('font-weight', 'bold');
+    $(curr_element).css('background', '#fff59d');
     //close all previously opened comments
     $('div[id^="nc_"]').css('display', 'none');
     //close all previously opened datalets
