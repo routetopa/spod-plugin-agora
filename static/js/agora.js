@@ -10,6 +10,11 @@ SPODPUBLICROOM.handleSuggestedDataset= function(publicRoomId)
     previewFloatBox = OW.ajaxFloatBox('SPODPUBLIC_CMP_Suggestion', {publicRoom : publicRoomId} , {width:'60%', height:'55vh', iconClass: 'ow_ic_add', title: ''});
 };
 
+SPODPUBLICROOM.addCommnet = function(e)
+{
+    $(e).parents().eq(5).find("textarea").trigger({type:"comment.test", isButton:true});
+};
+
 ODE.addOdeOnComment = function()
 { 
     var ta = $('.ow_comments_input textarea');
