@@ -96,9 +96,18 @@ dataletGraphShow = function(){
                 $("#graph_content").html("<graph-datalet id='dgraph' width='"  + (window.innerWidth) +
                                                       "' height='" + (window.innerHeight)    + "'></graph-datalet>");
                                                       //"' graph='"  + data.graph + "'></graph-datalet>");
-                var g = document.getElementById('dgraph');
-                g.graph = data.graph;
-                g.init();
+
+                var delay = 0;
+                //check if is Chrome
+                if(!(!!window.chrome && !!window.chrome.webstore)){
+                    delay = 3000 * 2 ^ 1;//:=)
+                }
+
+                setTimeout(function(){
+                    var g = document.getElementById('dgraph');
+                    g.graph = data.graph;
+                    g.init();
+                }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'datalets_graph'));
                 $("#datalet_graph").css('border-bottom-style','solid');
@@ -124,11 +133,19 @@ commentGraphShow = function(){
             if(data.status == "ok"){
                 $("#graph_content").html("<graph-datalet id='cgraph' width='"  + (window.innerWidth) +
                                                       "' height='" + (window.innerHeight * 2) + "'></graph-datalet>");
-                                                     // "' graph='" + JSON.stringify(data.graph) + "'></graph-datalet>");
 
-                var g = document.getElementById('cgraph');
-                g.graph = data.graph;
-                g.init();
+                                                     // "' graph='" + JSON.stringify(data.graph) + "'></graph-datalet>");
+                var delay = 0;
+                //check if is Chrome
+                if(!(!!window.chrome && !!window.chrome.webstore)){
+                    delay = 3000 * 2 ^ 1;//:=)
+                }
+
+                setTimeout(function(){
+                    var g = document.getElementById('cgraph');
+                    g.graph = data.graph;
+                    g.init();
+                }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'comments_graph'));
                 $("#comment_graph").css('border-bottom-style','solid');
@@ -153,9 +170,17 @@ usersGraphShow = function(){
                 $("#graph_content").html("<graph-datalet id='ugraph' width='"+ (window.innerWidth) +
                                                       "' height='"+ (window.innerHeight * 2)   + "'></graph-datalet>");
                                                       //"' graph='" + data.graph + "'></graph-datalet>");
-                var g = document.getElementById('ugraph');
-                g.graph = data.graph;
-                g.init();
+                var delay = 0;
+                //check if is Chrome
+                if(!(!!window.chrome && !!window.chrome.webstore)){
+                    delay = 3000 * 2 ^ 1;//:=)
+                }
+
+                setTimeout(function(){
+                    var g = document.getElementById('ugraph');
+                    g.graph = data.graph;
+                    g.init();
+                }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'users_graph'));
                 $("#user_graph").css('border-bottom-style','solid');
@@ -180,9 +205,17 @@ opinionsGraphShow = function(){
                 $("#graph_content").html("<graph-with-clustering-datalet id='ograph' width='"+ (window.innerWidth) +
                                                                       "' height='"+ (window.innerHeight * 2)   + "'></graph-with-clustering-datalet>");
                                                                       //"' graph='" + data.graph + "'></graph-with-clustering-datalet>");
-                var g = document.getElementById('ograph');
-                g.graph = data.graph;
-                g.buildGraph();
+                var delay = 0;
+                //check if is Chrome
+                if(!(!!window.chrome && !!window.chrome.webstore)){
+                    delay = 3000 * 2 ^ 1;//:=)
+                }
+
+                setTimeout(function(){
+                    var g = document.getElementById('ograph');
+                    g.graph = data.graph;
+                    g.buildGraph();
+                }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'opinions_graph'));
                 $("#opinion_graph").css('border-bottom-style','solid');
