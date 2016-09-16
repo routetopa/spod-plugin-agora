@@ -25,7 +25,7 @@
     {
 
         var href = $(em).attr("href");
-        $(em).attr("href", href + '&title=' + $("#roomTitle").val());
+        $(em).attr("href", href + '&title=' + $(em).parent().parent().find("input").val());
         return confirm('{text key="base+are_you_sure"}');
     }
 </script>
@@ -47,7 +47,7 @@
             <a title="delete" href="{$deleteUrl}?id={$ti->id}" onclick="return confirm('{text key="base+are_you_sure"}');" style="" class="ow_ic_delete"></a>
             <a title="edit"   href="{$editUrl}?id={$ti->id}" onclick="editRoom(this)" style="" class="ow_update"></a>
         </td>
-        <td><input id="roomTitle" type="text" value="{$ti->subject}" /></td>
+        <td><input type="text" value="{$ti->subject}" /></td>
         <td>{$ti->body}</td>
         <td>{$ti->comments}</td>
         <td>{$ti->opendata}</td>
