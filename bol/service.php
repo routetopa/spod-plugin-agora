@@ -120,6 +120,7 @@ class SPODPUBLIC_BOL_Service
         $pr->comments  = 0;
         $pr->opendata  = 0;
         $pr->post      = json_encode(["timestamp"=>time(), "opendata"=>$pr->opendata, "comments"=>$pr->comments, "views"=>$pr->views]);
+        $pr->timestamp = date('Y-m-d H:i:s',time());
         SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($pr);
 
         $event = new OW_Event('feed.action', array(

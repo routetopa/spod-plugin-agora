@@ -44,14 +44,14 @@
 <div class="cocoreation_create_room_container">
 
     <div class="cocoreation_create_room_header">
-        ADD SUGGESTED DATASET
+        {text key="spodpublic+add_suggested_dataset"}
     </div>
 
     <div class="cocoreation_create_room_left_menu">
         <ul>
-            <li class="step-1 cocoreation_create_room_left_menu_selected">DATASET</li>
-            <li class="step-2">COMMENT</li>
-            <li class="step-3">SUGGESTED DATASET</li>
+            <li class="step-1 cocoreation_create_room_left_menu_selected">{text key="spodpublic+suggested_dataset"}</li>
+            <li class="step-2">{text key="spodpublic+suggested_comment"}</li>
+            <li class="step-3">{text key="spodpublic+associated_suggested_dataset"}</li>
         </ul>
     </div>
 
@@ -61,7 +61,7 @@
         <!-- ROOM DATASET -->
         <div class="step in-step-1 in-step-show">
             <div class="title">
-                <span>{text key="spodpublic+suggestion_dataset"}</span>
+                <span>{text key="spodpublic+suggested_dataset"}</span>
             </div>
             <div class="input">
                 {input name='dataset'}
@@ -71,7 +71,7 @@
         <!-- ROOM COMMENT -->
         <div class="step in-step-2">
             <div class="title">
-                <span>{text key="spodpublic+suggestion_comment"}</span>
+                <span>{text key="spodpublic+suggested_comment"}</span>
             </div>
             <div class="input">
                 {input name='comment'}
@@ -87,8 +87,8 @@
         <div class="step in-step-3">
             <table class="ow_table_1" id="suggestion_table">
                 <tr>
-                    <th>{text key="spodpublic+suggestion_comment"}</th>
-                    <th>{text key="spodpublic+suggestion_dataset"}</th>
+                    <th>{text key="spodpublic+suggested_comment"}</th>
+                    <th>{text key="spodpublic+suggested_dataset"}</th>
                 </tr>
                 {foreach $suggestions as $suggestion}
                 <tr class="ow_alt2 ow_tr_first">
