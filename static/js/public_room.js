@@ -1,4 +1,5 @@
 var selected_graph        = null;
+var pending_laod          = null;
 var last_selected_element = null;
 
 refreshOpenedDatalets = function(){
@@ -84,6 +85,9 @@ slideGraphPanel = function(){
 };
 
 dataletGraphShow = function(){
+    if(selected_graph == "datalet") return;
+    clearTimeout(pending_laod);
+
     selected_graph = "datalet";
     $.post( SPODPUBLICROOM.get_graph_url,
         {
@@ -93,7 +97,7 @@ dataletGraphShow = function(){
         function(data, status){
             data = JSON.parse(data);
             if(data.status == "ok"){
-                $("#graph_content").html("<graph-datalet id='dgraph' width='"  + (window.innerWidth) +
+                $("#graph_content").html("<paper-spinner id='datalet_spinner' active></paper-spinner><graph-datalet id='dgraph' width='"  + (window.innerWidth) +
                                                       "' height='" + (window.innerHeight)    + "'></graph-datalet>");
                                                       //"' graph='"  + data.graph + "'></graph-datalet>");
 
@@ -103,10 +107,11 @@ dataletGraphShow = function(){
                     delay = 3000 * 2 ^ 1;//:=)
                 }
 
-                setTimeout(function(){
+                pending_laod = setTimeout(function(){
                     var g = document.getElementById('dgraph');
                     g.graph = data.graph;
                     g.init();
+                    $("#datalet_spinner").hide();
                 }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'datalets_graph'));
@@ -120,6 +125,9 @@ dataletGraphShow = function(){
 };
 
 commentGraphShow = function(){
+    if(selected_graph == "comment") return;
+    clearTimeout(pending_laod);
+
     selected_graph = "comment";
     $.post( SPODPUBLICROOM.get_graph_url,
         {
@@ -131,7 +139,7 @@ commentGraphShow = function(){
             //data.replace(new RegExp('"',"g"),"&#34;");
             data = JSON.parse(data);
             if(data.status == "ok"){
-                $("#graph_content").html("<graph-datalet id='cgraph' width='"  + (window.innerWidth) +
+                $("#graph_content").html("<paper-spinner id='datalet_spinner' active></paper-spinner><graph-datalet id='cgraph' width='"  + (window.innerWidth) +
                                                       "' height='" + (window.innerHeight * 2) + "'></graph-datalet>");
 
                                                      // "' graph='" + JSON.stringify(data.graph) + "'></graph-datalet>");
@@ -141,10 +149,11 @@ commentGraphShow = function(){
                     delay = 3000 * 2 ^ 1;//:=)
                 }
 
-                setTimeout(function(){
+                pending_laod = setTimeout(function(){
                     var g = document.getElementById('cgraph');
                     g.graph = data.graph;
                     g.init();
+                    $("#datalet_spinner").hide();
                 }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'comments_graph'));
@@ -158,6 +167,9 @@ commentGraphShow = function(){
 };
 
 usersGraphShow = function(){
+    if(selected_graph == "user") return;
+    clearTimeout(pending_laod);
+
     selected_graph = "users";
     $.post( SPODPUBLICROOM.get_graph_url,
         {
@@ -167,7 +179,7 @@ usersGraphShow = function(){
         function(data, status){
             data = JSON.parse(data);
             if(data.status == "ok"){
-                $("#graph_content").html("<graph-datalet id='ugraph' width='"+ (window.innerWidth) +
+                $("#graph_content").html("<paper-spinner id='datalet_spinner' active></paper-spinner><graph-datalet id='ugraph' width='"+ (window.innerWidth) +
                                                       "' height='"+ (window.innerHeight * 2)   + "'></graph-datalet>");
                                                       //"' graph='" + data.graph + "'></graph-datalet>");
                 var delay = 0;
@@ -176,10 +188,11 @@ usersGraphShow = function(){
                     delay = 3000 * 2 ^ 1;//:=)
                 }
 
-                setTimeout(function(){
+                pending_laod = setTimeout(function(){
                     var g = document.getElementById('ugraph');
                     g.graph = data.graph;
                     g.init();
+                    $("#datalet_spinner").hide();
                 }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'users_graph'));
@@ -193,6 +206,9 @@ usersGraphShow = function(){
 };
 
 opinionsGraphShow = function(){
+    if(selected_graph == "opinions") return;
+    clearTimeout(pending_laod);
+
     selected_graph = "opinions";
     $.post( SPODPUBLICROOM.get_graph_url,
         {
@@ -202,7 +218,7 @@ opinionsGraphShow = function(){
         function(data, status){
             data = JSON.parse(data);
             if(data.status == "ok"){
-                $("#graph_content").html("<graph-with-clustering-datalet id='ograph' width='"+ (window.innerWidth) +
+                $("#graph_content").html("<paper-spinner id='datalet_spinner' active></paper-spinner><graph-with-clustering-datalet id='ograph' width='"+ (window.innerWidth) +
                                                                       "' height='"+ (window.innerHeight * 2)   + "'></graph-with-clustering-datalet>");
                                                                       //"' graph='" + data.graph + "'></graph-with-clustering-datalet>");
                 var delay = 0;
@@ -211,10 +227,11 @@ opinionsGraphShow = function(){
                     delay = 3000 * 2 ^ 1;//:=)
                 }
 
-                setTimeout(function(){
+                pending_laod = setTimeout(function(){
                     var g = document.getElementById('ograph');
                     g.graph = data.graph;
                     g.buildGraph();
+                    $("#datalet_spinner").hide();
                 }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'opinions_graph'));
