@@ -111,7 +111,7 @@ dataletGraphShow = function(){
                     var g = document.getElementById('dgraph');
                     g.graph = data.graph;
                     g.init();
-                    $("#datalet_spinner").hide();
+                    $("#datalet_spinner").css("visibility", "hidden");
                 }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'datalets_graph'));
@@ -153,7 +153,7 @@ commentGraphShow = function(){
                     var g = document.getElementById('cgraph');
                     g.graph = data.graph;
                     g.init();
-                    $("#datalet_spinner").hide();
+                    $("#datalet_spinner").css("visibility", "hidden");
                 }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'comments_graph'));
@@ -192,7 +192,7 @@ usersGraphShow = function(){
                     var g = document.getElementById('ugraph');
                     g.graph = data.graph;
                     g.init();
-                    $("#datalet_spinner").hide();
+                    $("#datalet_spinner").css("visibility", "hidden");
                 }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'users_graph'));
@@ -231,7 +231,7 @@ opinionsGraphShow = function(){
                     var g = document.getElementById('ograph');
                     g.graph = data.graph;
                     g.buildGraph();
-                    $("#datalet_spinner").hide();
+                    $("#datalet_spinner").css("visibility", "hidden");
                 }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'opinions_graph'));
