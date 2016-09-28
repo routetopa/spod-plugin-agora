@@ -97,7 +97,7 @@ dataletGraphShow = function(){
         function(data, status){
             data = JSON.parse(data);
             if(data.status == "ok"){
-                $("#graph_content").html("<paper-spinner id='datalet_spinner' active></paper-spinner><graph-datalet id='dgraph' width='"  + (window.innerWidth) +
+                $("#graph_content").html("<img class='loader_spinner' id='base_datalet_spin' src='"+ SPODPUBLICROOM.staticResourceUrl + "images/spinner.svg'><graph-datalet id='dgraph' width='"  + (window.innerWidth) +
                                                       "' height='" + (window.innerHeight)    + "'></graph-datalet>");
                                                       //"' graph='"  + data.graph + "'></graph-datalet>");
 
@@ -111,7 +111,7 @@ dataletGraphShow = function(){
                     var g = document.getElementById('dgraph');
                     g.graph = data.graph;
                     g.init();
-                    $("#datalet_spinner").css("visibility", "hidden");
+                    $("#base_datalet_spin").hide();
                 }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'datalets_graph'));
@@ -139,7 +139,7 @@ commentGraphShow = function(){
             //data.replace(new RegExp('"',"g"),"&#34;");
             data = JSON.parse(data);
             if(data.status == "ok"){
-                $("#graph_content").html("<paper-spinner id='datalet_spinner' active></paper-spinner><graph-datalet id='cgraph' width='"  + (window.innerWidth) +
+                $("#graph_content").html("<img class='loader_spinner' id='base_datalet_spin' src='"+ SPODPUBLICROOM.staticResourceUrl + "images/spinner.svg'><graph-datalet id='cgraph' width='"  + (window.innerWidth) +
                                                       "' height='" + (window.innerHeight * 2) + "'></graph-datalet>");
 
                                                      // "' graph='" + JSON.stringify(data.graph) + "'></graph-datalet>");
@@ -153,7 +153,7 @@ commentGraphShow = function(){
                     var g = document.getElementById('cgraph');
                     g.graph = data.graph;
                     g.init();
-                    $("#datalet_spinner").css("visibility", "hidden");
+                    $("#base_datalet_spin").hide();
                 }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'comments_graph'));
@@ -179,7 +179,7 @@ usersGraphShow = function(){
         function(data, status){
             data = JSON.parse(data);
             if(data.status == "ok"){
-                $("#graph_content").html("<paper-spinner id='datalet_spinner' active></paper-spinner><graph-datalet id='ugraph' width='"+ (window.innerWidth) +
+                $("#graph_content").html("<img class='loader_spinner' id='base_datalet_spin' src='"+ SPODPUBLICROOM.staticResourceUrl + "images/spinner.svg'><graph-datalet id='ugraph' width='"+ (window.innerWidth) +
                                                       "' height='"+ (window.innerHeight * 2)   + "'></graph-datalet>");
                                                       //"' graph='" + data.graph + "'></graph-datalet>");
                 var delay = 0;
@@ -192,7 +192,7 @@ usersGraphShow = function(){
                     var g = document.getElementById('ugraph');
                     g.graph = data.graph;
                     g.init();
-                    $("#datalet_spinner").css("visibility", "hidden");
+                    $("#base_datalet_spin").hide();
                 }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'users_graph'));
@@ -218,7 +218,7 @@ opinionsGraphShow = function(){
         function(data, status){
             data = JSON.parse(data);
             if(data.status == "ok"){
-                $("#graph_content").html("<paper-spinner id='datalet_spinner' active></paper-spinner><graph-with-clustering-datalet id='ograph' width='"+ (window.innerWidth) +
+                $("#graph_content").html("<img class='loader_spinner' id='base_datalet_spin' src='"+ SPODPUBLICROOM.staticResourceUrl + "images/spinner.svg'><graph-with-clustering-datalet id='ograph' width='"+ (window.innerWidth) +
                                                                       "' height='"+ (window.innerHeight * 2)   + "'></graph-with-clustering-datalet>");
                                                                       //"' graph='" + data.graph + "'></graph-with-clustering-datalet>");
                 var delay = 0;
@@ -231,7 +231,7 @@ opinionsGraphShow = function(){
                     var g = document.getElementById('ograph');
                     g.graph = data.graph;
                     g.buildGraph();
-                    $("#datalet_spinner").css("visibility", "hidden");
+                    $("#base_datalet_spin").hide();
                 }, delay);
 
                 $("#toolbar-graph-title").html(OW.getLanguageText('spodpublic', 'opinions_graph'));
