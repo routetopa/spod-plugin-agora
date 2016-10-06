@@ -42,5 +42,6 @@ In the *Agora admin panel* the admin user can delete or modify the rooms.
 To install *Agora* plugin:
 
 * Clone this project by following the github instruction on *SPOD_INSTALLATION_DIR/ow_plugins*
+* Install the plugin on SPOD by *admin plugins panel*
 
      
