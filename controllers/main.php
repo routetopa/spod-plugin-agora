@@ -52,7 +52,7 @@ class SPODPUBLIC_CTRL_Main extends OW_ActionController
             $step = floor(((100*$item->views)/$max)/5);
             $item->color      = $this->getColor($step);
             $item->colorStep  = ($step > 19) ? "many" : "few";
-            $item->timestamp  = date('j F Y h:i',strtotime($item->timestamp));
+            $item->timestamp  = date('j F Y H:i',strtotime($item->timestamp));
         }
 
         return $a;
