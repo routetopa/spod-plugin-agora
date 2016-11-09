@@ -143,11 +143,11 @@ class SPODPUBLIC_BOL_Service
 
     public function addStat($id, $stat)
     {
-        $pr = $this->getPublicRoomById($id);
-        $pr->$stat += 1;
-        SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($pr);
+        $room = $this->getPublicRoomById($id);
+        $room->$stat += 1;
+        SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($room);
 
-        $room = SPODPUBLIC_BOL_Service::getInstance()->getPublicRoomById($id);
+        //$room = SPODPUBLIC_BOL_Service::getInstance()->getPublicRoomById($id);
         $room->post = json_decode($room->post);
 
         $delta = $room->$stat - $room->post->$stat;
@@ -169,7 +169,7 @@ class SPODPUBLIC_BOL_Service
 
     public function addPostStat($room)
     {
-        $room->timestamp = time();
+        $room->post->timestamp = time();
         $room->post = json_encode($room->post);
         SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($room);
     }
