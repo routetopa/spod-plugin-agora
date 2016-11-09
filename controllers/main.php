@@ -16,7 +16,7 @@ class SPODPUBLIC_CTRL_Main extends OW_ActionController
         }
         else
         {
-            if(!OW::getUser()->isAuthenticated())
+            if(!OW::getUser()->isAuthenticated() && OW::getPluginManager()->isPluginActive('openidconnect'))
             {
                 $this->addComponent('authentication_component', new SPODPUBLIC_CMP_AuthenticationComponent());
             }
