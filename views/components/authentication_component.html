@@ -1,6 +1,23 @@
-<form method="post" action="{$url_openid_login}" class="openid_login">
+<style>
+    #authentication_component {
+        position: fixed;
+        right: 100px;
+        bottom: 120px;
+        background-color: #fff;
+        padding: 16px;
+        box-shadow: 2px 2px 2px #ccc;
+        border: 1px solid #ccc;
+        width: 375px;
+    }
+</style>
+
+<form id="authentication_component" method="post" action="{$url_openid_login}" class="openid_login">
     <input type="hidden" name="redirect_success" value="{$url_redirect_success}">
     <input type="hidden" name="redirect_failure" value="{$url_redirect_failure}">
+    <p>
+        Per partecipare alle discussioni su SPOD, accedi con le tue credenziali, o
+        clicca sul collegamento in basso per iscriverti.
+    </p>
     <table>
         <tr>
             <th><label for="openid_url">{text key='openwall+oid_email'}:</label></th>
