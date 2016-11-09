@@ -14,6 +14,13 @@ class SPODPUBLIC_CTRL_Main extends OW_ActionController
         {
             throw new AuthenticateException();
         }
+        else
+        {
+            if(!OW::getUser()->isAuthenticated())
+            {
+                $this->addComponent('authentication_component', new SPODPUBLIC_CMP_AuthenticationComponent());
+            }
+        }
 
         OW::getDocument()->addStyleSheet(OW::getPluginManager()->getPlugin('spodpublic')->getStaticUrl() . 'css/public_room.css');
         OW::getDocument()->getMasterPage()->setTemplate(OW::getPluginManager()->getPlugin('spodpublic')->getRootDir() . 'master_pages/general.html');
