@@ -22,10 +22,10 @@ class SPODPUBLIC_CTRL_PublicRoom extends OW_ActionController
         }
         else
         {
-            if(!OW::getUser()->isAuthenticated() && OW::getPluginManager()->isPluginActive('openidconnect'))
+            /*if(!OW::getUser()->isAuthenticated() && OW::getPluginManager()->isPluginActive('openidconnect'))
             {
                 $this->addComponent('authentication_component', new SPODPUBLIC_CMP_AuthenticationComponent());
-            }
+            }*/
         }
 
         OW::getDocument()->getMasterPage()->setTemplate(OW::getPluginManager()->getPlugin('spodpublic')->getRootDir() . 'master_pages/empty.html');
