@@ -2,12 +2,12 @@ SPODPUBLICROOM = {};
 
 SPODPUBLICROOM.addRoom = function()
 {
-    previewFloatBox = OW.ajaxFloatBox('SPODPUBLIC_CMP_PublicRoomCreator', {} , {width:'60%', height:'55vh', iconClass: 'ow_ic_add', title: ''});
+    previewFloatBox = OW.ajaxFloatBox('SPODPUBLIC_CMP_PublicRoomCreator', {} , {top: '60px', width:'60%', height:'480px', iconClass: 'ow_ic_add', title: ''});
 };
 
 SPODPUBLICROOM.handleSuggestedDataset= function(publicRoomId)
 {
-    previewFloatBox = OW.ajaxFloatBox('SPODPUBLIC_CMP_Suggestion', {publicRoom : publicRoomId} , {width:'60%', height:'55vh', iconClass: 'ow_ic_add', title: ''});
+    previewFloatBox = OW.ajaxFloatBox('SPODPUBLIC_CMP_Suggestion', {publicRoom : publicRoomId} , {top: '60px', width:'60%', height:'480px', iconClass: 'ow_ic_add', title: ''});
 };
 
 SPODPUBLICROOM.addCommnet = function(e)

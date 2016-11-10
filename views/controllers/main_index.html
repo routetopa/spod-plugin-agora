@@ -24,6 +24,9 @@
 <link rel="import" href="{$components_url}bower_components/paper-styles/paper-styles.html">
 <link rel="import" href="{$components_url}bower_components/neon-animation/neon-animations.html">
 
+<link rel="import" href="{$components_url}bower_components/paper-toast/paper-toast.html">
+
+
 <link rel="import" href="{$components_url}bower_components/polymer-element-catalog/app/elements/app-sidebar/app-sidebar.html">
 
 
@@ -56,7 +59,47 @@
 
     .ow_console_right {
         position: absolute;
-        right: 0px;
+        right: 0;
+    }
+
+    paper-toast {
+        opacity: 0.8;
+        background: #000000;
+    }
+
+    #infoToast br {
+        display: block;
+        margin-top: 8px;
+        content: " ";
+    }
+
+    #infoToast p {
+        margin: 0;
+        padding: 0;
+
+        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    #infoToast p .title{
+        font-size: 24px;
+        /*font-weight: 700;*/
+        color: #2196F3;
+    }
+
+    #card_container p .description{
+    }
+
+    paper-icon-button.clear {
+        /*width: 24px;*/
+        /*height: 24px;*/
+        /*padding: 0px 4px;*/
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #F44336;
+        --paper-icon-button-ink-color: #FFFFFF;
     }
 
 </style>
@@ -124,7 +167,14 @@
 
         });
 
+//        window.addEventListener("DOMContentLoaded", function () {
+        setTimeout( function () {
+            $("#infoToast")[0].show();
+        }, 500);
+
     });
+
+
 
     function addRoom(event)
     {
@@ -241,6 +291,23 @@
                     </fullsize-page-with-card-controllet>
 
                 </neon-animated-pages>
+
+                <paper-toast id="infoToast" duration="10000">
+                    <p>
+                        <span class="title">SPOD PRIVACY</span>
+                        <br>
+                        <span class="description">Le stanze dell'Agora sono pubbliche. Le discussioni saranno visibili anche all'esterno di SPOD.</span>
+                    </p>
+                    <paper-icon-button class="clear" suffix onclick="infoToast.toggle()" icon="clear"></paper-icon-button>
+                    <!--<div class="layout horizontal">-->
+                        <!--<h5>SPOD PRIVACY</h5>-->
+                        <!--<paper-button onclick="infoToast.toggle()" class="blue-button"><b>x</b></paper-button>-->
+                    <!--</div>-->
+                    <!--<div class="layout vertical">-->
+                        <!--<p></p>-->
+                    <!--</div>-->
+                </paper-toast>
+
             </template>
 
         </paper-scroll-header-panel>
