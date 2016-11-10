@@ -1,3 +1,78 @@
+{literal}
+<style is="custom-style">
+    paper-fab.sentiment-button
+    {
+        float: left;
+        --paper-fab-background:#5B646A;
+        --iron-icon-height: 15px;
+        --iron-icon-width:  15px;
+        height: 20px;
+        width:  20px;
+        left: 5px;
+        padding:0px;
+    }
+
+    .ow_attachment_icons{
+        width:100%;
+    }
+
+    {/literal}
+    .ow_attachments a.attach:hover {
+        background: url({$theme_image_url}wysiwyg.png) no-repeat scroll -242px -26px #2196f3;
+    }
+
+    .ow_file_attachment_close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 22px;
+        height: 22px;
+        background-image: url({$theme_image_url}tag_close_btn.png);
+        background-repeat: no-repeat;
+        background-position: center center;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+    {literal}
+
+    .ow_comments_input .ow_attachment_icons {
+        position: absolute;
+        bottom: 3px;
+        right: 4px;
+    }
+
+    .ow_comments_input textarea.comments_fake_autoclick {
+        padding-bottom: 28px;
+        height: 40px;
+    }
+    .ow_attachments{
+        float:right;
+    }
+
+    .ow_file_attachment_preview {
+        /*margin-top: 0px;
+        margin-bottom: 0px;*/
+        font-weight:bolder;
+        display:none;
+        float:left;
+        position:relative;
+        max-width: 38%;
+        padding-bottom: 0px;
+    }
+
+    .ow_file_attachment_block1, .ow_file_attachment_block2 {
+        float: left;
+        width: 100%;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+         margin: 0;
+    }
+
+</style>
+{/literal}
+
 <div id="{$cmpContext}" class="{if $mini}ow_comments_mipc{else}ow_comments_ipc{/if}{if $bottomList} ow_comments_form_top{/if}{if empty($formCmp)} ow_comments_no_form{/if}">
     {capture name='comments'}
     {if $topList}
@@ -12,24 +87,21 @@
             <div class="ow_comments_item_picture">{decorator name='avatar_item' data=$currentUserInfo}</div>
             <div class="ow_comments_item_info clearfix"><span class="comment_add_arr"></span>
                 <div class="ow_comments_input">
+                    <textarea id="{$taId}" class="comments_fake_autoclick invitation">{text key='base+comment_form_element_invitation_text'}</textarea>
                     <span class="ow_attachment_icons">
+                        <div id="ow_file_attachment_preview_{$temp_attach_uid}" class="ow_file_attachment_preview"></div>
                         <div class="ow_attachments clearfix">
-                            {if !empty($attch)}<a href="javascript://" class="image" id="{$buttonContId}">{/if}
-                        </a>
-
-                        <paper-fab title="{text key='spodpublic+sentiment'}" mini icon="face" class="sentiment-button" id="comment_sentiment_{$commentId}" sentiment="1"></paper-fab>
-                        <span class="">
-                            <span class=""><input class="comment_send_button" type="button" value="{text key='spodpublic+send_button'}" name="save" onclick="SPODPUBLICROOM.addCommnet(this)"></span>
-                        </span>
-
+                            <paper-fab title="{text key='spodpublic+sentiment'}" mini icon="face" class="sentiment-button" id="comment_sentiment_{$commentId}" sentiment="1"></paper-fab>
+                            {if !empty($file_attch)}{$file_attch}{/if}
+                            <span class="">
+                                <span class=""><input class="comment_send_button" type="button" value="{text key='spodpublic+send_button'}" name="save" onclick="SPODPUBLICROOM.addCommnet(this)"></span>
+                            </span>
                         </div>
                     </span>
-                    <textarea id="{$taId}" class="comments_fake_autoclick invitation">{text key='base+comment_form_element_invitation_text'}</textarea>
-
                 </div>
             </div>
         </div>
-        {if !empty($attch)}{$attch}{/if}
+        <!--{if !empty($attch)}{$attch}{/if}-->
         <div id="{$attchId}"></div>
 
         <div class="clearfix comments_hidden_btn" style="display:none;">
