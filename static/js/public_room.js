@@ -85,7 +85,7 @@ slideGraphPanel = function(){
 };
 
 dataletGraphShow = function(){
-    if(selected_graph == "datalet") return;
+    //if(selected_graph == "datalet") return;
     clearTimeout(pending_laod);
 
     selected_graph = "datalet";
@@ -125,7 +125,7 @@ dataletGraphShow = function(){
 };
 
 commentGraphShow = function(){
-    if(selected_graph == "comment") return;
+    //if(selected_graph == "comment") return;
     clearTimeout(pending_laod);
 
     selected_graph = "comment";
@@ -167,7 +167,7 @@ commentGraphShow = function(){
 };
 
 usersGraphShow = function(){
-    if(selected_graph == "user") return;
+    //if(selected_graph == "user") return;
     clearTimeout(pending_laod);
 
     selected_graph = "users";
@@ -206,7 +206,7 @@ usersGraphShow = function(){
 };
 
 opinionsGraphShow = function(){
-    if(selected_graph == "opinions") return;
+    //if(selected_graph == "opinions") return;
     clearTimeout(pending_laod);
 
     selected_graph = "opinions";

@@ -275,7 +275,8 @@ class SPODPUBLIC_CMP_CommentsList extends BASE_CMP_CommentsList
 
             if ( $value->getAttachment() !== null )
             {
-                $tempCmp = new BASE_CMP_OembedAttachment((array) json_decode($value->getAttachment()), $this->isOwnerAuthorized);
+                //$tempCmp = new BASE_CMP_OembedAttachment((array) json_decode($value->getAttachment()), $this->isOwnerAuthorized);
+                $tempCmp = new SPODTCHAT_CMP_TchatOembedAttachment((array) json_decode($value->getAttachment()), $this->isOwnerAuthorized);
                 $contentAdd .= '<div class="ow_attachment ow_small" id="att' . $value->getId() . '">' . $tempCmp->render() . '</div>';
             }
 

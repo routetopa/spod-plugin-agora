@@ -20,8 +20,6 @@ class SPODPUBLIC_CMP_Comments extends BASE_CMP_Comments
 
     public function initForm()
     {
-        //OW::getDocument()->addOnloadScript("alert(\"".UTIL_Url::selfUrl()."\");");
-
         $jsParams = array(
             'entityType'     => $this->params->getEntityType(),
             'entityId'       => $this->params->getEntityId(),
@@ -72,6 +70,7 @@ class SPODPUBLIC_CMP_Comments extends BASE_CMP_Comments
             if ( BOL_TextFormatService::getInstance()->isCommentsRichMediaAllowed() )
             {
                 $this->addComponent('attch', new BASE_CLASS_Attachment($this->params->getPluginKey(), $attchUid, $buttonContId));
+                //$this->addComponent('file_attch', new SPODTCHAT_CLASS_FileAttachment($this->params->getPluginKey(), $attchUid, $buttonContId));
             }
 
             $this->assign('buttonContId', $buttonContId);
@@ -80,6 +79,9 @@ class SPODPUBLIC_CMP_Comments extends BASE_CMP_Comments
             $this->assign('taId', $taId);
             $this->assign('attchId', $attchId);
             $this->assign('commentId', $this->params->getEntityId());
+
+            $this->assign("temp_attach_uid", $attchUid);
+            $this->assign('theme_image_url', OW::getThemeManager()->getInstance()->getThemeImagesUrl());
         }
 
         OW::getDocument()->addOnloadScript("new OwComments(" . json_encode($jsParams) . ");");
