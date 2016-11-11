@@ -13,7 +13,7 @@ class SPODPUBLIC_CMP_AuthenticationComponent extends BASE_CMP_Comments
 
         if ($plugin_oic = $router->getRoute('openidconnect_login')) {
             $this->assign("openid_enabled", "enabled");
-            $this->assign("url_redirect_success", $base_url . $plugin_oic->generateUri() .'&back-uri=' . $room_url);
+            $this->assign("url_redirect_success", $base_url . $plugin_oic->generateUri() .'?back-uri=' . $room_url);
             $this->assign("url_redirect_failure", "{$base_url}openid/index.php/password_reset");
             $this->assign("url_openid_login", "{$base_url}openid/index.php/login");
             $this->assign("url_openid_signup", "{$base_url}openid/index.php/signin");
