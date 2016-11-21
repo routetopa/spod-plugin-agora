@@ -4,8 +4,8 @@ class SPODPUBLIC_CTRL_Admin extends ADMIN_CTRL_Abstract
 {
     public function settings($params)
     {
-        $this->setPageTitle(OW::getLanguage()->text('spodpublic', 'admin_title'));
-        $this->setPageHeading(OW::getLanguage()->text('spodpublic', 'admin_heading'));
+        $this->setPageTitle("SPOD PUBLIC");
+        $this->setPageHeading("SPOD PUBLIC");
 
         $this->assign('publicRoom', SPODPUBLIC_BOL_Service::getInstance()->getAgora());
 
@@ -65,7 +65,8 @@ class SPODPUBLIC_CTRL_Admin extends ADMIN_CTRL_Abstract
         {
             $id = $_REQUEST['id'];
             $title = $_REQUEST['title'];
-            SPODPUBLIC_BOL_Service::getInstance()->editRoom($id, $title);
+            $body = $_REQUEST['body'];
+            SPODPUBLIC_BOL_Service::getInstance()->editRoom($id, $title, $body);
         }
 
         $this->redirect(OW::getRouter()->urlForRoute('public-room-settings'));
