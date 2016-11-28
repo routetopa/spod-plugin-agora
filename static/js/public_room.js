@@ -95,6 +95,7 @@ dataletGraphShow = function(){
             type : "datalets"
         },
         function(data, status){
+            data = $("<textarea/>").html(data).text();
             data = JSON.parse(data);
             if(data.status == "ok"){
                 $("#graph_content").html("<img class='loader_spinner' id='base_datalet_spin' src='"+ SPODPUBLICROOM.staticResourceUrl + "images/spinner.svg'><graph-datalet id='dgraph' width='"  + (window.innerWidth) +
@@ -135,8 +136,7 @@ commentGraphShow = function(){
             type : "comments"
         },
         function(data, status){
-            //data.replace(new RegExp("'","g"),"&#39;");
-            //data.replace(new RegExp('"',"g"),"&#34;");
+            data = $("<textarea/>").html(data).text();
             data = JSON.parse(data);
             if(data.status == "ok"){
                 $("#graph_content").html("<img class='loader_spinner' id='base_datalet_spin' src='"+ SPODPUBLICROOM.staticResourceUrl + "images/spinner.svg'><graph-datalet id='cgraph' width='"  + (window.innerWidth) +
@@ -177,6 +177,7 @@ usersGraphShow = function(){
             type : "users"
         },
         function(data, status){
+            data = $("<textarea/>").html(data).text();
             data = JSON.parse(data);
             if(data.status == "ok"){
                 $("#graph_content").html("<img class='loader_spinner' id='base_datalet_spin' src='"+ SPODPUBLICROOM.staticResourceUrl + "images/spinner.svg'><graph-datalet id='ugraph' width='"+ (window.innerWidth) +
@@ -216,6 +217,7 @@ opinionsGraphShow = function(){
             type : "comments"
         },
         function(data, status){
+            data = $("<textarea/>").html(data).text();
             data = JSON.parse(data);
             if(data.status == "ok"){
                 $("#graph_content").html("<img class='loader_spinner' id='base_datalet_spin' src='"+ SPODPUBLICROOM.staticResourceUrl + "images/spinner.svg'><graph-with-clustering-datalet id='ograph' width='"+ (window.innerWidth) +

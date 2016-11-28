@@ -60,10 +60,6 @@
         padding: 0px;
     }
 
-    paper-fab-speed-dial{
-
-    }
-
     paper-fab.sentiment-button
     {
         float: left;
@@ -78,11 +74,6 @@
         box-shadow:none;
     }
 
-    /*paper-fab.sentiment-button[sentiment="1"]*/
-    /*{*/
-        /*background-color: #2196F3;*/
-    /*}*/
-
     paper-fab.sentiment-button[sentiment="2"]
     {
         background-color: #4CAF50;
@@ -93,12 +84,12 @@
         background-color: #F44336;
     }
 
-    paper-header-panel{
-        /*height: 8vh;;*/
-    }
-
-    .title h4{
+    #topBar div.title {
         color: #ffffff;
+        margin: 0 0px 0px 26px;
+        height: 24px;
+        line-height: 24px;
+        text-overflow: ellipsis;
     }
 
     #graph_container{
@@ -234,7 +225,7 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
 <paper-header-panel>
     <paper-toolbar class="toolbar-main">
         <!--<paper-icon-button id="helper" paper-drawer-toggle icon="help-outline" onClick="ODE.showHelper()"></paper-icon-button>-->
-        <div class="title"><h4>{$public_room->subject}</h4></div>
+        <div class="title" title="{$public_room->subject}">{$public_room->subject}</div>
         <div id="graphs_buttons_panel">
             <paper-icon-button id="comment_graph" paper-drawer-toggle icon="speaker-notes" onClick="commentGraphShow()"></paper-icon-button>
             <paper-tooltip for="comment_graph">{text key="spodpublic+comments_graph"}</paper-tooltip>
