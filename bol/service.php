@@ -67,9 +67,12 @@ class SPODPUBLIC_BOL_Service
 
         foreach($s as $suggestion)
         {
-            array_push($a, array("resource_name" => $suggestion->comment,
-                "url" => $suggestion->dataset,
-                "metas" => json_encode(["description" => ""])));
+            array_push($a, array(
+                "name" => $suggestion->comment,
+                "p" => "suggested",
+                "url" => $suggestion->dataset
+//                "metas" => json_encode(["description" => ""])
+            ));
         }
 
         return json_encode($a);
