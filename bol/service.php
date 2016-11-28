@@ -233,10 +233,11 @@ class SPODPUBLIC_BOL_Service
         }
     }
 
-    public function editRoom($roomId, $title)
+    public function editRoom($roomId, $title, $body)
     {
         $pr = $this->getPublicRoomById($roomId);
         $pr->subject = $title;
+        $pr->body = $body;
         SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($pr);
     }
 
