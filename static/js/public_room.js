@@ -401,13 +401,21 @@ $(window).load(function() {
                 "labels":{"emptyCommentMsg":"Empty comment","disabledSubmit":"base+submit_disabled_error_msg","attachmentLoading":"Photo is still uploading"}
             });
 
-            ODE.loadDatalet(rawData.component,
-                            JSON.parse(rawData.params),
-                            JSON.parse("["+rawData.fields+"]"),
-                            '',
-                            'datalet_placeholder_' + rawData.message_id + '_comment');
+            if(rawData.component)
+            {
+                ODE.loadDatalet(rawData.component,
+                    JSON.parse(rawData.params),
+                    JSON.parse("[" + rawData.fields + "]"),
+                    '',
+                    'datalet_placeholder_' + rawData.message_id + '_comment');
 
-            $("#comment_" + rawData.message_id).append("<paper-fab mini class='show_datalet' icon='assessment' style='float:left; margin-top: 5px;' id='show_datalet_comment_'" + rawData.message_id +"></paper-fab>");
+                if($("#comment_" + rawData.message_id).find("paper-fab").length == 0)
+                    $("#comment_" + rawData.message_id).append("<paper-fab mini class='show_datalet' icon='assessment' style='float:left; margin-top: 5px;' id='show_datalet_comment_'" + rawData.message_id + "></paper-fab>");
+            }
+            else
+            {
+                $("#comment_" + rawData.message_id).find("paper-fab").remove();
+            }
         }
     });
 });
