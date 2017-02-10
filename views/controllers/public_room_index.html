@@ -188,6 +188,88 @@
         width: 100%;
     }
 
+    /**** SWITCH ****/
+
+    .notification {
+        height: 34px;
+        margin: 3px 64px 3px 0;
+        /*line-height: 34px !important;*/
+        /*font-size: 16px !important;*/
+
+        display: flex;
+        flex-direction: row;
+    }
+
+    .notification .text_agora {
+        padding-right: 8px;
+        /*background-color: red;*/
+        /*color: green;*/
+        height: 34px !important;
+        font-size: 16px !important;
+        line-height: 34px !important;
+    }
+
+
+    .agora_switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    /* Hide default HTML checkbox */
+    .agora_switch input {
+        display:none;
+    }
+
+    /* The slider */
+    .agora_slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #BDBDBD;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .agora_slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked + .agora_slider {
+        background-color: #4CAF50;
+    }
+
+    input:focus + .agora_slider {
+        box-shadow: 0 0 1px #4CAF50;
+    }
+
+    input:checked + .agora_slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .agora_slider.round {
+        border-radius: 34px;
+    }
+
+    .agora_slider.round:before {
+        border-radius: 50%;
+    }
+
 </style>
 
 {style}
@@ -234,7 +316,16 @@ body .floatbox_canvas .floatbox_container{ margin-top:10px; }
 <paper-header-panel>
     <paper-toolbar class="toolbar-main">
         <!--<paper-icon-button id="helper" paper-drawer-toggle icon="help-outline" onClick="ODE.showHelper()"></paper-icon-button>-->
-        <div class="title"><h4>{$public_room->subject}</h4></div>
+        <div class="title"><h4>{$public_room->subject}</h4>
+
+        </div>
+        <div class="notification">
+            <div class="text_agora">{text key="spodpublic+notification"}</div>
+            <label class="agora_switch">
+                <input type="checkbox">
+                <div class="agora_slider round"></div>
+            </label>
+        </div>
         <div id="graphs_buttons_panel">
             <paper-icon-button id="comment_graph" paper-drawer-toggle icon="speaker-notes" onClick="commentGraphShow()"></paper-icon-button>
             <paper-tooltip for="comment_graph">{text key="spodpublic+comments_graph"}</paper-tooltip>
