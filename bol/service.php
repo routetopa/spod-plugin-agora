@@ -241,5 +241,33 @@ class SPODPUBLIC_BOL_Service
         SPODPUBLIC_BOL_PublicRoomDao::getInstance()->save($pr);
     }
 
+    public function addUserNotification($roomId, $userId)
+    {
+        $prun = new SPODPUBLIC_BOL_PublicRoomUserNotification();
+        $prun->userId = $userId;
+        $prun->roomId = $roomId;
+
+        return SPODPUBLIC_BOL_PublicRoomUserNotificationDao::getInstance()->save($prun);
+    }
+
+    public function removeUserNotification($roomId, $userId)
+    {
+        $ex = new OW_Example();
+        $ex->andFieldEqual('userId',$userId);
+        $ex->andFieldEqual('roomId',$roomId);
+
+        return SPODPUBLIC_BOL_PublicRoomUserNotificationDao::getInstance()->deleteByExample($ex);
+    }
+
+    public function getUserNotification($roomId, $userId)
+    {
+        $ex = new OW_Example();
+        $ex->andFieldEqual('userId',$userId);
+        $ex->andFieldEqual('roomId',$roomId);
+
+        $a = SPODPUBLIC_BOL_PublicRoomUserNotificationDao::getInstance()->findObjectByExample($ex);
+        return $a;
+    }
+
 
 }

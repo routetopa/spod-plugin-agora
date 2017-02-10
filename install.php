@@ -30,7 +30,14 @@ CREATE TABLE IF NOT EXISTS `' . OW_DB_PREFIX . 'spod_public_room_comment_sentime
   `sentiment` smallint,
   `commentId` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;';
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE IF NOT EXISTS `' . OW_DB_PREFIX . 'spod_public_room_user_notification` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `userId` INT NOT NULL,
+  `roomId` INT NOT NULL,
+  PRIMARY KEY (`id`)
+)  ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;';
 
 OW::getDbo()->query($sql);
 

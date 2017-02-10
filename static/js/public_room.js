@@ -265,6 +265,21 @@ $(document).ready(function () {
     $('#topic_container').perfectScrollbar();
     $('#graph_content').perfectScrollbar();
 
+
+    $("#user_notification_switch").on('click', function(e){
+        $.ajax({
+            type: 'POST',
+            url : SPODPUBLICROOM.user_notification_url,
+            data: {roomId:SPODPUBLICROOM.public_room_id,
+                   userId:SPODPUBLICROOM.current_user_id,
+                   addUserNotification:$(e.currentTarget).is(':checked')},
+            dataType : 'JSON',
+            success : function (data) {
+
+            }
+        });
+    });
+
     //Scroll to bottom
     $("#topic_container").scrollTop( $( "#topic_container" ).prop( "scrollHeight" ) );
 

@@ -86,5 +86,22 @@ class SPODPUBLIC_CTRL_Ajax extends OW_ActionController
         exit;*/
     }
 
+    public function handleUserNotification()
+    {
+        $clean = ODE_CLASS_InputFilter::getInstance()->sanitizeInputs($_REQUEST);
+        if ($clean == null){
+            echo json_encode(array("status" => "error", "massage" => 'Insane inputs detected'));
+            exit;
+        }
+
+        if($clean['addUserNotification'] == "true")
+            SPODPUBLIC_BOL_Service::getInstance()->addUserNotification($clean['roomId'], $clean['userId']);
+        else
+            SPODPUBLIC_BOL_Service::getInstance()->removeUserNotification($clean['roomId'], $clean['userId']);
+
+        echo json_encode(array("status"  => "ok"));
+        exit;
+    }
+
 }
 
