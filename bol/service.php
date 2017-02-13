@@ -269,5 +269,12 @@ class SPODPUBLIC_BOL_Service
         return $a;
     }
 
+    public function getSubscribedNotificationUsersForRoom($roomId){
+        $ex = new OW_Example();
+        $ex->andFieldEqual('roomId',$roomId);
+        $results = SPODPUBLIC_BOL_PublicRoomUserNotificationDao::getInstance()->findListByExample($ex);
+        return $results;
+    }
+
 
 }
